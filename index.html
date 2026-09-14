@@ -1,4 +1,12 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#05060C"><title>Tuner</title><style>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#05060C">
+<title>Tuner</title>
+<style>
   :root{
     --void:#05060C; --deep:#080B14; --panel:#0C1020; --mod:#0A0E1A;
     --edge:rgba(140,170,255,.13); --edge2:rgba(140,170,255,.24);
@@ -254,7 +262,6 @@
             transition:all .22s var(--e);cursor:pointer}
   .row .del:hover{color:#FF3D9E;transform:scale(1.15);background:rgba(255,61,158,.12)}
 
-  /* ===== EQ STRIP : pleine largeur, 2 groupes G/D ===== */
   .eq-strip{
     display:flex;
     gap:24px;
@@ -287,18 +294,12 @@
   .veq-band.active .vlbl,.veq-band.active .vval{
     color:var(--c,var(--cyan));text-shadow:0 0 10px var(--c,var(--cyan))}
 
-  /* ===== Slider vertical : rotation d'un slider horizontal =====
-     - Le conteneur est élargi à 60px pour laisser déborder les graduations.
-     - Les graduations sont dessinées par ::before (56px de large, couleur de la bande).
-     - La marque 0 dB est dessinée par ::after (64px, plus épaisse et lumineuse).
-     - L'input reste au-dessus (z-index 2) pour capter les interactions. */
   .veq-band .vslider-wrap{
     position:relative;
     width:60px;
     height:190px;
     flex:none;
   }
-  /* Graduations : 56px de large (plus large que la boule de 40px), teintées --c */
   .veq-band .vslider-wrap::before{
     content:'';
     position:absolute;
@@ -312,13 +313,12 @@
       color-mix(in srgb, var(--c, var(--cyan)) 70%, transparent) 0,
       color-mix(in srgb, var(--c, var(--cyan)) 70%, transparent) 1.5px,
       transparent 1.5px,
-      transparent 10%           /* → 10 graduations régulières */
+      transparent 10%
     );
     opacity:.5;
     pointer-events:none;
     z-index:0;
   }
-  /* Marque 0 dB : 64px de large, plus lumineuse, par-dessus les graduations */
   .veq-band .vslider-wrap::after{
     content:'';
     position:absolute;
@@ -336,8 +336,8 @@
   .veq-band input[type=range].vslider{
     position:absolute;
     top:50%; left:50%;
-    width:190px;          /* longueur de la piste (devient hauteur visuelle) */
-    height:60px;          /* largeur tactile (devient largeur visuelle) */
+    width:190px;
+    height:60px;
     transform:translate(-50%,-50%) rotate(-90deg);
     transform-origin:center center;
     margin:0;
@@ -349,7 +349,6 @@
     touch-action:none;
     z-index:2;
   }
-  /* Piste : ligne continue + remplissage coloré (les graduations sont derrière, sur ::before) */
   .veq-band input[type=range].vslider::-webkit-slider-runnable-track{
     height:6px;
     border-radius:3px;
@@ -357,7 +356,6 @@
       var(--c, var(--cyan)) var(--p, 50%),
       rgba(234,241,255,.08) var(--p, 50%));
   }
-  /* Bandes EQ : remplissage centré sur 0 dB, comme la Balance */
   .veq-band input[type=range].vslider[data-center]::-webkit-slider-runnable-track{
     height:6px;
     border-radius:3px;
@@ -372,7 +370,7 @@
     width:40px;
     height:40px;
     border-radius:50%;
-    margin-top:-17px;   /* (40 - 6) / 2 = 17 : centre la boule sur la piste 6px */
+    margin-top:-17px;
     cursor:pointer;
     border:2px solid var(--c, var(--cyan));
     background:
@@ -384,7 +382,6 @@
     transition:transform .16s var(--e);
   }
   .veq-band input[type=range].vslider:active::-webkit-slider-thumb{transform:scale(1.12)}
-  /* Firefox */
   .veq-band input[type=range].vslider::-moz-range-track{
     height:6px;
     border-radius:3px;
@@ -418,10 +415,6 @@
     .veq-group{width:100%}
   }
 
-  /* ===== HSLIDER : même design que le vslider de l'EQ, mais horizontal
-     (pas besoin de rotation, un input range est déjà horizontal nativement).
-     ::before = graduations, ::after = marque de référence (position via --markpos),
-     boule ovale colorée avec fente lumineuse, comme le vslider. ===== */
   .hslider-wrap{
     position:relative;
     width:100%;
@@ -481,8 +474,6 @@
       var(--c, var(--cyan)) var(--p, 50%),
       rgba(234,241,255,.08) var(--p, 50%));
   }
-  /* Curseurs "centrés" (ex: Balance) : le remplissage part du centre (0)
-     vers la valeur actuelle, dans un sens ou dans l'autre, pas depuis le bord. */
   input[type=range].hslider[data-center]::-webkit-slider-runnable-track{
     height:6px;
     border-radius:3px;
@@ -594,25 +585,105 @@
 .fx-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:0 14px 16px}.fx-card .fader{margin:7px 0}.fx-card .hslider-wrap{margin:2px 0 9px}.cut-label .val{color:var(--c,#2fe7ff);font-weight:700;text-shadow:0 0 8px color-mix(in srgb,var(--c,#2fe7ff) 55%,transparent);margin-left:4px}.cut-label{font-size:11px;color:#9fb5c8;margin-bottom:3px}.onoff{position:absolute;right:12px;top:10px;border:1px solid var(--c,#2fe7ff);background:rgba(8,19,42,.9);color:#fff;border-radius:999px;padding:5px 10px;font-weight:800;font-size:11px;letter-spacing:.08em;box-shadow:0 0 10px color-mix(in srgb,var(--c,#2fe7ff) 45%,transparent);cursor:pointer}.onoff.off{opacity:.45;filter:saturate(.3)}
 .fx-card[data-color="pink"]{--c:#ff3d9e}.fx-card[data-color="gold"]{--c:#ffc24b}.fx-card[data-color="green"]{--c:#b9ff45}.fx-card[data-color="cyan"]{--c:#2fe7ff}.control-card[data-color="pink"]{--c:#ff3d9e}.control-card[data-color="gold"]{--c:#ffc24b}.control-card[data-color="green"]{--c:#b9ff45}.control-card[data-color="cyan"]{--c:#2fe7ff}
 @media(max-width:850px){.eq-wrap,.control-row,.fx-row{grid-template-columns:1fr!important}.eq-wrap{padding:10px!important}.control-row,.fx-row{padding-left:10px;padding-right:10px}.control-card,.fx-card{min-height:110px}}
-
-</style></head><body><div class="app"><div class="card topbar"><div class="tb-txt"><div class="eyebrow" id="eyebrow">RADIO</div><div class="now" id="npName">Rien en lecture</div><div class="track" id="npTrack"></div><div class="sub" id="npState">Ouvre les stations pour choisir</div></div><div class="wave" id="wave"></div><div class="tb-btns"><button class="pill" id="power">Écouter</button><button class="pill ghost" id="engineSwitch">🌙 SCREEN OFF</button><button class="pill ghost" id="openFile">Ouvrir un morceau</button><button class="pill ghost" id="openDrawer">Stations</button></div></div><div class="card top5" id="top5Card" style="display:none"><div class="scope-head"><h2>TOP 5 FAVORIS</h2></div><div class="top5-list" id="top5List"></div></div><div class="card scope-card"><div class="scope-head"><h2>OSCILLOSCOPE - 3 BANDES</h2><div class="legend"><span><i style="background:#FF3D9E;box-shadow:0 0 10px #FF3D9E"></i>Bass</span><span><i style="background:#2FE7FF;box-shadow:0 0 10px #2FE7FF"></i>Medium</span><span><i style="background:#B9FF45;box-shadow:0 0 10px #B9FF45"></i>High</span></div></div><canvas id="scope"></canvas><div class="eq-strip" id="eqStrip"></div><div class="buffer-info"><span id="bufferStatus">Buffer: --</span><div class="buffer-bar"><div class="buffer-fill" id="bufferFill"></div></div></div></div><div class="grip" id="grip" title="Glisser pour partager l'espace"><i></i></div><div class="card console" id="console"></div></div><div class="scrim" id="scrim"></div><aside class="drawer" id="drawer"><div class="dhead"><h2>STATIONS</h2><button id="closeDrawer">✕</button></div><input type="text" class="txtin" id="search" placeholder="Chercher un genre ou une station"
-         autocapitalize="off" autocorrect="off" style="border-radius:100px;min-height:50px;margin-bottom:10px"><div class="tabs" id="tabs"></div><div class="listwrap"><div id="list"></div><div class="pager" id="pager"></div><div class="addrow" style="display:grid;gap:8px"><input type="text" class="txtin" id="customName" autocapitalize="words"
-             autocorrect="off" placeholder="Nom de la radio (facultatif)"><input type="text" class="txtin" id="url" inputmode="url" autocapitalize="off"
-             autocorrect="off" placeholder="Coller le lien direct du flux radio"><button class="pill" id="addUrl">＋ Ajouter cette radio</button></div><div class="msg" id="listMsg"></div><p class="foot">SomaFM, FIP et Radio Paradise vivent des dons de leurs auditeurs ou du service public :
-      aucune coupure publicitaire. Les stations de la bibliothèque ne sont pas filtrées.</p></div></aside><div class="bar"><div class="bar-in"><div class="txt"><b id="barName">Tuner</b><span id="barSub">En veille</span></div><button class="icon" id="fav" aria-label="Favori">★</button><button class="pill" id="power2">▶</button></div></div>
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="card topbar">
+    <div class="tb-txt">
+      <div class="eyebrow" id="eyebrow">RADIO</div>
+      <div class="now" id="npName">Rien en lecture</div>
+      <div class="track" id="npTrack"></div>
+      <div class="sub" id="npState">Ouvre les stations pour choisir</div>
+    </div>
+    <div class="wave" id="wave"></div>
+    <div class="tb-btns">
+      <button class="pill" id="power">Écouter</button>
+      <button class="pill ghost" id="engineSwitch">🌙 SCREEN OFF</button>
+      <button class="pill ghost" id="openFile">Ouvrir un morceau</button>
+      <button class="pill ghost" id="openDrawer">Stations</button>
+    </div>
+  </div>
+  <div class="card top5" id="top5Card" style="display:none">
+    <div class="scope-head"><h2>TOP 5 FAVORIS</h2></div>
+    <div class="top5-list" id="top5List"></div>
+  </div>
+  <div class="card scope-card">
+    <div class="scope-head">
+      <h2>OSCILLOSCOPE - 3 BANDES</h2>
+      <div class="legend">
+        <span><i style="background:#FF3D9E;box-shadow:0 0 10px #FF3D9E"></i>Bass</span>
+        <span><i style="background:#2FE7FF;box-shadow:0 0 10px #2FE7FF"></i>Medium</span>
+        <span><i style="background:#B9FF45;box-shadow:0 0 10px #B9FF45"></i>High</span>
+      </div>
+    </div>
+    <canvas id="scope"></canvas>
+    <div class="eq-strip" id="eqStrip"></div>
+    <div class="buffer-info">
+      <span id="bufferStatus">Buffer: --</span>
+      <div class="buffer-bar"><div class="buffer-fill" id="bufferFill"></div></div>
+    </div>
+  </div>
+  <div class="grip" id="grip" title="Glisser pour partager l'espace"><i></i></div>
+  <div class="card console" id="console"></div>
+</div>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer">
+  <div class="dhead">
+    <h2>STATIONS</h2>
+    <button id="closeDrawer">✕</button>
+  </div>
+  <input type="text" class="txtin" id="search" placeholder="Chercher un genre ou une station"
+         autocapitalize="off" autocorrect="off" style="border-radius:100px;min-height:50px;margin-bottom:10px">
+  <div class="tabs" id="tabs"></div>
+  <div class="listwrap">
+    <div id="list"></div>
+    <div class="pager" id="pager"></div>
+    <div class="addrow" style="display:grid;gap:8px">
+      <input type="text" class="txtin" id="customName" autocapitalize="words"
+             autocorrect="off" placeholder="Nom de la radio (facultatif)">
+      <input type="text" class="txtin" id="url" inputmode="url" autocapitalize="off"
+             autocorrect="off" placeholder="Coller le lien direct du flux radio">
+      <button class="pill" id="addUrl">＋ Ajouter cette radio</button>
+    </div>
+    <div class="msg" id="listMsg"></div>
+    <p class="foot">SomaFM, FIP et Radio Paradise vivent des dons de leurs auditeurs ou du service public :
+      aucune coupure publicitaire. Les stations de la bibliothèque ne sont pas filtrées.</p>
+  </div>
+</aside>
+<div class="bar">
+  <div class="bar-in">
+    <div class="txt">
+      <b id="barName">Tuner</b>
+      <span id="barSub">En veille</span>
+    </div>
+    <button class="icon" id="fav" aria-label="Favori">★</button>
+    <button class="pill" id="power2">▶</button>
+  </div>
+</div>
 <script>
 (function(){
 "use strict";
+
+/* =========================================================
+   CONFIGURATION
+   ========================================================= */
 const CHUNK_SIZE = 384 * 1024;
 const MAX_BUFFER_DURATION = 6.0;
 const MIN_BUFFER_DURATION = 2.5;
 const FADE_DURATION = 0.04;
+const RETRY_BASE_DELAY = 800;
+const RETRY_MAX_DELAY = 20000;
+const GOOD_PLAYBACK_MS = 15000;
+const SHOUTCAST_PROXY = 'https://soft-brook-0e52.stefikare.workers.dev/?url=';
+
+/* =========================================================
+   ÉTAT GLOBAL
+   ========================================================= */
 let audioCtx = null;
 let gainNode = null;
 let pannerNode = null;
 let analyserNode = null;
-let scopeAnimationId = null;
-let abortController = null;
 let isPlaying = false;
 let chunksDecoded = 0;
 let nextStartTime = 0;
@@ -620,33 +691,24 @@ let firstChunkScheduled = false;
 let pendingChunks = [];
 let isProcessing = false;
 let currentStation = null;
-const SHOUTCAST_PROXY = 'https://soft-brook-0e52.stefikare.workers.dev/?url=';
+let sessionId = 0;
+let abortController = null;
 
-let eqSplitter = null;
-let eqMerger = null;
-let leftEQFilters = [];
-let rightEQFilters = [];
-let lowpassFilter = null;
-let highpassFilter = null;
-let bandpassFilter = null;
-let delayNode = null;
-let feedbackGain = null;
-let convolverNode = null;
-let dryGain = null;
-let wetGain = null;
-let limiterNode = null;
-let channelsSwapped = false;
-let cfSplitter = null;
-let cfMerger = null;
-let cfGainLL = null;
-let cfGainLR = null;
-let cfGainRL = null;
-let cfGainRR = null;
-let bassAnalyser = null;
-let midAnalyser = null;
-let highAnalyser = null;
+let eqSplitter=null, eqMerger=null, leftEQFilters=[], rightEQFilters=[];
+let lowpassFilter=null, highpassFilter=null, bandpassFilter=null;
+let delayNode=null, feedbackGain=null, convolverNode=null;
+let dryGain=null, wetGain=null, limiterNode=null;
+let channelsSwapped=false;
+let cfSplitter=null, cfMerger=null;
+let cfGainLL=null, cfGainLR=null, cfGainRL=null, cfGainRR=null;
+let bassAnalyser=null, midAnalyser=null, highAnalyser=null;
+
 const bufferFill = document.getElementById('bufferFill');
 const bufferStatus = document.getElementById('bufferStatus');
+
+/* =========================================================
+   UTILITAIRES AUDIO
+   ========================================================= */
 function findFrameSync(bytes, fromIndex) {
   for (let i = fromIndex; i < bytes.length - 1; i++) {
     if (bytes[i] === 0xFF && (bytes[i + 1] & 0xE0) === 0xE0) return i;
@@ -655,21 +717,16 @@ function findFrameSync(bytes, fromIndex) {
 }
 function concatUint8(a, b) {
   const out = new Uint8Array(a.length + b.length);
-  out.set(a, 0);
-  out.set(b, a.length);
-  return out;
+  out.set(a, 0); out.set(b, a.length); return out;
 }
 function updateCrossfeed() {
-  const s = document.getElementById('crossfeed');
-  if (!s) return;
+  const s = document.getElementById('crossfeed'); if (!s) return;
   const amt = parseFloat(s.value);
   const val = document.getElementById('crossfeedVal');
   if (val) val.textContent = Math.round(amt * 100) + '%';
   if (!cfGainLL || !cfGainLR || !cfGainRL || !cfGainRR) return;
-  cfGainLL.gain.value = 1 - amt;
-  cfGainRR.gain.value = 1 - amt;
-  cfGainLR.gain.value = amt;
-  cfGainRL.gain.value = amt;
+  cfGainLL.gain.value = 1 - amt; cfGainRR.gain.value = 1 - amt;
+  cfGainLR.gain.value = amt; cfGainRL.gain.value = amt;
 }
 function createReverbImpulse(ctx, duration, decay) {
   const rate = ctx.sampleRate;
@@ -683,8 +740,12 @@ function createReverbImpulse(ctx, duration, decay) {
   }
   return impulse;
 }
-function scheduleBuffer(audioBuffer) {
-  if (!audioCtx) return;
+
+/* =========================================================
+   LECTURE D'UN BUFFER
+   ========================================================= */
+function scheduleBuffer(audioBuffer, mySession) {
+  if (!audioCtx || sessionId !== mySession) return false;
   try {
     const source = audioCtx.createBufferSource();
     source.buffer = audioBuffer;
@@ -696,8 +757,8 @@ function scheduleBuffer(audioBuffer) {
     gainNode.connect(eqSplitter);
     eqSplitter.connect(leftEQFilters[0], 0);
     eqSplitter.connect(rightEQFilters[0], 1);
-    leftEQFilters[leftEQFilters.length - 1].connect(eqMerger, 0, 0);
-    rightEQFilters[rightEQFilters.length - 1].connect(eqMerger, 0, 1);
+    leftEQFilters[leftEQFilters.length-1].connect(eqMerger, 0, 0);
+    rightEQFilters[rightEQFilters.length-1].connect(eqMerger, 0, 1);
     eqMerger.connect(lowpassFilter);
     lowpassFilter.connect(highpassFilter);
     highpassFilter.connect(bandpassFilter);
@@ -711,24 +772,24 @@ function scheduleBuffer(audioBuffer) {
     wetGain.connect(limiterNode);
     limiterNode.connect(analyserNode);
     analyserNode.connect(audioCtx.destination);
+
     const now = audioCtx.currentTime;
     let startTime;
-    if (!firstChunkScheduled) {
-      startTime = now + 0.05;
-      firstChunkScheduled = true;
-    } else {
-      startTime = Math.max(nextStartTime, now + 0.01);
-    }
+    if (!firstChunkScheduled) { startTime = now + 0.05; firstChunkScheduled = true; }
+    else { startTime = Math.max(nextStartTime, now + 0.01); }
+
     const duration = audioBuffer.duration;
     const fadeDuration = Math.min(FADE_DURATION, duration / 4);
     fadeGain.gain.setValueAtTime(0, startTime);
     fadeGain.gain.linearRampToValueAtTime(1, startTime + fadeDuration);
     fadeGain.gain.setValueAtTime(1, startTime + duration - fadeDuration);
     fadeGain.gain.linearRampToValueAtTime(0, startTime + duration);
+
     source.start(startTime);
     source.stop(startTime + duration);
     nextStartTime = startTime + duration;
     chunksDecoded++;
+
     const bufferedDuration = Math.max(0, nextStartTime - audioCtx.currentTime);
     const pct = Math.min(bufferedDuration / MAX_BUFFER_DURATION, 1);
     bufferFill.style.width = (pct * 100) + '%';
@@ -737,294 +798,290 @@ function scheduleBuffer(audioBuffer) {
       bufferStatus.textContent = '⚠️ Buffer bas: ' + bufferedDuration.toFixed(1) + 's';
     }
     return true;
-  } catch (e) {
-    console.warn('Schedule error:', e);
-    return false;
-  }
+  } catch (e) { console.warn('Schedule error:', e); return false; }
 }
-async function decodeAndSchedule(chunk) {
-  if (isProcessing || !audioCtx) return false;
+
+async function decodeAndSchedule(chunk, mySession) {
+  if (isProcessing || !audioCtx || sessionId !== mySession) return false;
   try {
     isProcessing = true;
     const arrayBuf = chunk.buffer.slice(chunk.byteOffset, chunk.byteOffset + chunk.byteLength);
     const audioBuffer = await audioCtx.decodeAudioData(arrayBuf);
-    scheduleBuffer(audioBuffer);
+    if (sessionId !== mySession) { isProcessing = false; return false; }
+    scheduleBuffer(audioBuffer, mySession);
     isProcessing = false;
     return true;
-  } catch (e) {
-    console.warn('Decode error:', e);
-    isProcessing = false;
-    return false;
-  }
+  } catch (e) { console.warn('Decode error:', e); isProcessing = false; return false; }
 }
+
+/* =========================================================
+   CRÉATION DU GRAPHE AUDIO
+   ========================================================= */
 function createAudioContext() {
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  pannerNode = audioCtx.createStereoPanner();
-  pannerNode.pan.value = 0;
-  gainNode = audioCtx.createGain();
-  gainNode.gain.value = 1;
+  pannerNode = audioCtx.createStereoPanner(); pannerNode.pan.value = 0;
+  gainNode = audioCtx.createGain(); gainNode.gain.value = 1;
   eqSplitter = audioCtx.createChannelSplitter(2);
   eqMerger = audioCtx.createChannelMerger(2);
-  leftEQFilters = [];
-  rightEQFilters = [];
+  leftEQFilters = []; rightEQFilters = [];
   const eqFreqs = [60, 250, 1000, 4000, 12000];
   eqFreqs.forEach(function(freq) {
     const l = audioCtx.createBiquadFilter();
-    l.type = 'peaking';
-    l.frequency.value = freq;
-    l.Q.value = 1;
-    l.gain.value = 0;
+    l.type='peaking'; l.frequency.value=freq; l.Q.value=1; l.gain.value=0;
     leftEQFilters.push(l);
-
     const r = audioCtx.createBiquadFilter();
-    r.type = 'peaking';
-    r.frequency.value = freq;
-    r.Q.value = 1;
-    r.gain.value = 0;
+    r.type='peaking'; r.frequency.value=freq; r.Q.value=1; r.gain.value=0;
     rightEQFilters.push(r);
   });
-  for (let i = 0; i < leftEQFilters.length - 1; i++) leftEQFilters[i].connect(leftEQFilters[i + 1]);
-  for (let i = 0; i < rightEQFilters.length - 1; i++) rightEQFilters[i].connect(rightEQFilters[i + 1]);
+  for (let i=0; i<leftEQFilters.length-1; i++) leftEQFilters[i].connect(leftEQFilters[i+1]);
+  for (let i=0; i<rightEQFilters.length-1; i++) rightEQFilters[i].connect(rightEQFilters[i+1]);
   lowpassFilter = audioCtx.createBiquadFilter();
-  lowpassFilter.type = 'allpass';
-  lowpassFilter.frequency.value = 20000;
-  lowpassFilter.Q.value = 0.71;
+  lowpassFilter.type='allpass'; lowpassFilter.frequency.value=20000; lowpassFilter.Q.value=0.71;
   highpassFilter = audioCtx.createBiquadFilter();
-  highpassFilter.type = 'allpass';
-  highpassFilter.frequency.value = 20;
-  highpassFilter.Q.value = 0.71;
+  highpassFilter.type='allpass'; highpassFilter.frequency.value=20; highpassFilter.Q.value=0.71;
   bandpassFilter = audioCtx.createBiquadFilter();
-  bandpassFilter.type = 'allpass';
-  bandpassFilter.frequency.value = 1000;
-  bandpassFilter.Q.value = 0.05;
-  delayNode = audioCtx.createDelay(2.0);
-  delayNode.delayTime.value = 0.35;
-  feedbackGain = audioCtx.createGain();
-  feedbackGain.gain.value = 0;
+  bandpassFilter.type='allpass'; bandpassFilter.frequency.value=1000; bandpassFilter.Q.value=0.05;
+  delayNode = audioCtx.createDelay(2.0); delayNode.delayTime.value = 0.35;
+  feedbackGain = audioCtx.createGain(); feedbackGain.gain.value = 0;
   convolverNode = audioCtx.createConvolver();
   convolverNode.buffer = createReverbImpulse(audioCtx, 2.5, 2.5);
-  dryGain = audioCtx.createGain();
-  dryGain.gain.value = 1;
-  wetGain = audioCtx.createGain();
-  wetGain.gain.value = 0;
+  dryGain = audioCtx.createGain(); dryGain.gain.value = 1;
+  wetGain = audioCtx.createGain(); wetGain.gain.value = 0;
   limiterNode = audioCtx.createDynamicsCompressor();
-  limiterNode.threshold.value = -6;
-  limiterNode.knee.value = 0;
-  limiterNode.ratio.value = 20;
-  limiterNode.attack.value = 0.003;
-  limiterNode.release.value = 0.1;
+  limiterNode.threshold.value = -6; limiterNode.knee.value = 0;
+  limiterNode.ratio.value = 20; limiterNode.attack.value = 0.003; limiterNode.release.value = 0.1;
   cfSplitter = audioCtx.createChannelSplitter(2);
   cfMerger = audioCtx.createChannelMerger(2);
-  cfGainLL = audioCtx.createGain();
-  cfGainLR = audioCtx.createGain();
-  cfGainRL = audioCtx.createGain();
-  cfGainRR = audioCtx.createGain();
-  cfSplitter.connect(cfGainLL, 0);
-  cfSplitter.connect(cfGainLR, 0);
-  cfSplitter.connect(cfGainRL, 1);
-  cfSplitter.connect(cfGainRR, 1);
-  cfGainLL.connect(cfMerger, 0, 0);
-  cfGainRL.connect(cfMerger, 0, 0);
-  cfGainLR.connect(cfMerger, 0, 1);
-  cfGainRR.connect(cfMerger, 0, 1);
+  cfGainLL = audioCtx.createGain(); cfGainLR = audioCtx.createGain();
+  cfGainRL = audioCtx.createGain(); cfGainRR = audioCtx.createGain();
+  cfSplitter.connect(cfGainLL, 0); cfSplitter.connect(cfGainLR, 0);
+  cfSplitter.connect(cfGainRL, 1); cfSplitter.connect(cfGainRR, 1);
+  cfGainLL.connect(cfMerger, 0, 0); cfGainRL.connect(cfMerger, 0, 0);
+  cfGainLR.connect(cfMerger, 0, 1); cfGainRR.connect(cfMerger, 0, 1);
   updateCrossfeed();
-  analyserNode = audioCtx.createAnalyser();
-  analyserNode.fftSize = 2048;
-  bassAnalyser = audioCtx.createAnalyser();
-  bassAnalyser.fftSize = 2048;
-  bassAnalyser.smoothingTimeConstant = 0.3;
-  midAnalyser = audioCtx.createAnalyser();
-  midAnalyser.fftSize = 2048;
-  midAnalyser.smoothingTimeConstant = 0.3;
-  highAnalyser = audioCtx.createAnalyser();
-  highAnalyser.fftSize = 2048;
-  highAnalyser.smoothingTimeConstant = 0.3;
-  const bassSplit = audioCtx.createBiquadFilter();
-  bassSplit.type = 'lowpass';
-  bassSplit.frequency.value = 250;
-  const midSplit = audioCtx.createBiquadFilter();
-  midSplit.type = 'bandpass';
-  midSplit.frequency.value = 1000;
-  midSplit.Q.value = 0.7;
-  const highSplit = audioCtx.createBiquadFilter();
-  highSplit.type = 'highpass';
-  highSplit.frequency.value = 4000;
-  eqMerger.connect(bassSplit);
-  bassSplit.connect(bassAnalyser);
-  eqMerger.connect(midSplit);
-  midSplit.connect(midAnalyser);
-  eqMerger.connect(highSplit);
-  highSplit.connect(highAnalyser);
+  analyserNode = audioCtx.createAnalyser(); analyserNode.fftSize = 2048;
+  bassAnalyser = audioCtx.createAnalyser(); bassAnalyser.fftSize=2048; bassAnalyser.smoothingTimeConstant=0.3;
+  midAnalyser = audioCtx.createAnalyser(); midAnalyser.fftSize=2048; midAnalyser.smoothingTimeConstant=0.3;
+  highAnalyser = audioCtx.createAnalyser(); highAnalyser.fftSize=2048; highAnalyser.smoothingTimeConstant=0.3;
+  const bassSplit = audioCtx.createBiquadFilter(); bassSplit.type='lowpass'; bassSplit.frequency.value=250;
+  const midSplit = audioCtx.createBiquadFilter(); midSplit.type='bandpass'; midSplit.frequency.value=1000; midSplit.Q.value=0.7;
+  const highSplit = audioCtx.createBiquadFilter(); highSplit.type='highpass'; highSplit.frequency.value=4000;
+  eqMerger.connect(bassSplit); bassSplit.connect(bassAnalyser);
+  eqMerger.connect(midSplit); midSplit.connect(midAnalyser);
+  eqMerger.connect(highSplit); highSplit.connect(highAnalyser);
   return audioCtx;
 }
+
 async function closeAudioContext() {
   if (abortController) {
     try { abortController.abort(); } catch (e) {}
+    abortController = null;
   }
   if (audioCtx && audioCtx.state !== 'closed') {
     try { await audioCtx.close(); } catch (e) {}
   }
-  audioCtx = null;
-  pannerNode = null;
-  gainNode = null;
-  eqSplitter = null;
-  eqMerger = null;
-  leftEQFilters = [];
-  rightEQFilters = [];
-  analyserNode = null;
-  bassAnalyser = null;
-  midAnalyser = null;
-  highAnalyser = null;
-  lowpassFilter = null;
-  highpassFilter = null;
-  bandpassFilter = null;
-  delayNode = null;
-  feedbackGain = null;
-  convolverNode = null;
-  dryGain = null;
-  wetGain = null;
-  limiterNode = null;
-  cfSplitter = null;
-  cfMerger = null;
-  cfGainLL = null;
-  cfGainLR = null;
-  cfGainRL = null;
-  cfGainRR = null;
-}
-async function startStream(url, station) {
-  const ctx = createAudioContext();
-  const handleVisibilityChange = async () => {
-    if (!document.hidden && ctx && ctx.state === 'suspended') {
-      await ctx.resume();
-    }
-  };
-  document.addEventListener('visibilitychange', handleVisibilityChange);
-  if (ctx.state === 'suspended') {
-    await ctx.resume();
-  }
-  updateVolume();
-  updateBalance();
-  updateCrossfeed();
-  updateEQ();
-  updateLowpass();
-  updateHighpass();
-  updateBandpass();
-  updateFeedback();
-  updateDryWet();
-  updateLimiter();
-  nextStartTime = ctx.currentTime + 0.1;
-  chunksDecoded = 0;
+  audioCtx = null; pannerNode = null; gainNode = null;
+  eqSplitter = null; eqMerger = null;
+  leftEQFilters = []; rightEQFilters = [];
+  analyserNode = null; bassAnalyser = null; midAnalyser = null; highAnalyser = null;
+  lowpassFilter = null; highpassFilter = null; bandpassFilter = null;
+  delayNode = null; feedbackGain = null; convolverNode = null;
+  dryGain = null; wetGain = null; limiterNode = null;
+  cfSplitter = null; cfMerger = null;
+  cfGainLL = null; cfGainLR = null; cfGainRL = null; cfGainRR = null;
   pendingChunks = [];
   isProcessing = false;
   firstChunkScheduled = false;
-  abortController = new AbortController();
-  setStatus('⏳ Connexion...');
-  const response = await fetch(url, { signal: abortController.signal });
-  if (!response.body) throw new Error("Le flux ne supporte pas le streaming.");
-  const reader = response.body.getReader();
-  let accumulated = new Uint8Array(0);
+}
+
+/* =========================================================
+   UNE TENTATIVE DE CONNEXION
+   ========================================================= */
+async function streamOnce(url, station, mySession) {
+  let playStartedAt = 0;
   let bytesReceived = 0;
-  let processedCount = 0;
-  setStatus('📥 Téléchargement...');
-  let processingActive = false;
-
-  let lastDataTime = Date.now();
   let stalled = false;
-  const watchdogInterval = setInterval(() => {
-    if (Date.now() - lastDataTime > 4000) {
-      stalled = true;
-      try { abortController.abort(); } catch (e) {}
-    }
-  }, 250);
+  let lastDataTime = Date.now();
+  let gotAnyData = false;
 
-  const processQueue = async () => {
-    if (processingActive || !audioCtx) return;
-    processingActive = true;
-    while (pendingChunks.length > 0) {
-      const chunk = pendingChunks.shift();
-      await decodeAndSchedule(chunk);
-      const bufferedDuration = Math.max(0, nextStartTime - audioCtx.currentTime);
-      if (bufferedDuration > MAX_BUFFER_DURATION * 0.7) {
-        break;
+  try {
+    const ctx = createAudioContext();
+    const handleVisibilityChange = async () => {
+      if (!document.hidden && ctx && ctx.state === 'suspended') {
+        await ctx.resume();
       }
-    }
-    processingActive = false;
-  };
-  const processInterval = setInterval(processQueue, 30);
-  while (true) {
-    let result;
-    try {
-      result = await reader.read();
-    } catch (e) {
-      break;
-    }
-    const { done, value } = result;
-    if (done) break;
-    lastDataTime = Date.now();
-    accumulated = concatUint8(accumulated, value);
-    bytesReceived += value.length;
-    while (accumulated.length >= CHUNK_SIZE) {
-      const syncIndex = findFrameSync(accumulated, 0);
-      if (syncIndex === -1) {
-        if (accumulated.length > CHUNK_SIZE * 2) {
-          accumulated = accumulated.slice(CHUNK_SIZE);
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    if (ctx.state === 'suspended') await ctx.resume();
+
+    updateVolume(); updateBalance(); updateCrossfeed(); updateEQ();
+    updateLowpass(); updateHighpass(); updateBandpass();
+    updateFeedback(); updateDryWet(); updateLimiter();
+
+    nextStartTime = ctx.currentTime + 0.1;
+    chunksDecoded = 0;
+    pendingChunks = [];
+    isProcessing = false;
+    firstChunkScheduled = false;
+
+    abortController = new AbortController();
+    setStatus('⏳ Connexion...');
+
+    const response = await fetch(url, {
+      signal: abortController.signal,
+      cache: 'no-store'
+    });
+
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    if (!response.body) throw new Error("Flux sans body readable");
+
+    const reader = response.body.getReader();
+    let accumulated = new Uint8Array(0);
+    let processedCount = 0;
+
+    setStatus('📥 Téléchargement...');
+
+    let processingActive = false;
+    const processQueue = async () => {
+      if (processingActive || !audioCtx || sessionId !== mySession) return;
+      processingActive = true;
+      while (pendingChunks.length > 0 && sessionId === mySession) {
+        const chunk = pendingChunks.shift();
+        await decodeAndSchedule(chunk, mySession);
+        const bufferedDuration = Math.max(0, nextStartTime - audioCtx.currentTime);
+        if (bufferedDuration > MAX_BUFFER_DURATION * 0.7) break;
+      }
+      processingActive = false;
+    };
+    const processInterval = setInterval(processQueue, 30);
+
+    const watchdogInterval = setInterval(() => {
+      if (sessionId !== mySession) return;
+      const idleMs = Date.now() - lastDataTime;
+      const timeout = gotAnyData ? 6000 : 8000;
+      if (idleMs > timeout) {
+        stalled = true;
+        try { abortController.abort(); } catch (e) {}
+      }
+    }, 300);
+
+    while (isPlaying && sessionId === mySession) {
+      let result;
+      try { result = await reader.read(); }
+      catch (e) { break; }
+      const { done, value } = result;
+      if (done) break;
+
+      lastDataTime = Date.now();
+      if (!gotAnyData && value && value.length > 0) gotAnyData = true;
+      accumulated = concatUint8(accumulated, value);
+      bytesReceived += value.length;
+
+      while (accumulated.length >= CHUNK_SIZE) {
+        const syncIndex = findFrameSync(accumulated, 0);
+        if (syncIndex === -1) {
+          if (accumulated.length > CHUNK_SIZE * 2) accumulated = accumulated.slice(CHUNK_SIZE);
+          break;
         }
-        break;
-      }
-      const chunkEnd = Math.min(syncIndex + CHUNK_SIZE, accumulated.length);
-      const chunk = accumulated.slice(syncIndex, chunkEnd);
-      if (chunkEnd < accumulated.length) {
-        accumulated = accumulated.slice(chunkEnd);
-      } else {
-        accumulated = new Uint8Array(0);
-      }
-      pendingChunks.push(chunk);
-      if (pendingChunks.length > 8) {
-        pendingChunks.shift();
-      }
-      processedCount++;
-      if (processedCount <= 5) {
-        await processQueue();
-      }
-    }
-    if (bytesReceived > 1024 * 1024) {
-      setStatus('📦 ' + (bytesReceived / 1024 / 1024).toFixed(1) + 'MB reçus');
-    }
-  }
-  clearInterval(watchdogInterval);
-  clearInterval(processInterval);
-  document.removeEventListener('visibilitychange', handleVisibilityChange);
-  while (pendingChunks.length > 0 || isProcessing) {
-    await new Promise(resolve => setTimeout(resolve, 100));
-  }
+        const chunkEnd = Math.min(syncIndex + CHUNK_SIZE, accumulated.length);
+        const chunk = accumulated.slice(syncIndex, chunkEnd);
+        if (chunkEnd < accumulated.length) accumulated = accumulated.slice(chunkEnd);
+        else accumulated = new Uint8Array(0);
 
-  if (stalled && isPlaying) {
-    setStatus('🔄 Flux perdu, reconnexion...');
-    await closeAudioContext();
-    await new Promise(resolve => setTimeout(resolve, 500));
-    if (isPlaying) {
-      return startStream(url, station);
+        pendingChunks.push(chunk);
+        if (pendingChunks.length > 8) pendingChunks.shift();
+        processedCount++;
+
+        if (!playStartedAt && firstChunkScheduled) playStartedAt = Date.now();
+
+        if (processedCount <= 5) await processQueue();
+      }
+
+      if (bytesReceived > 1024 * 1024) {
+        setStatus('📦 ' + (bytesReceived / 1024 / 1024).toFixed(1) + 'MB reçus');
+      }
     }
+
+    clearInterval(watchdogInterval);
+    clearInterval(processInterval);
+    document.removeEventListener('visibilitychange', handleVisibilityChange);
+
+    let waitGuard = 0;
+    while ((pendingChunks.length > 0 || isProcessing) && sessionId === mySession && waitGuard < 50) {
+      await new Promise(resolve => setTimeout(resolve, 100));
+      waitGuard++;
+    }
+
+    return {
+      playedFor: playStartedAt ? Date.now() - playStartedAt : 0,
+      chunks: chunksDecoded,
+      bytes: bytesReceived,
+      reason: stalled ? 'stalled' : 'ended'
+    };
+
+  } catch (e) {
+    return {
+      playedFor: playStartedAt ? Date.now() - playStartedAt : 0,
+      chunks: chunksDecoded,
+      bytes: bytesReceived,
+      reason: e.name || 'error',
+      error: e
+    };
   }
 }
+
+/* =========================================================
+   BOUCLE DE RECONNEXION AUTOMATIQUE
+   ========================================================= */
+async function streamSession(station, mySession) {
+  const urls = [station.u].concat(station.alts || []).filter(Boolean);
+  let attempt = 0;
+  let urlIdx = 0;
+
+  while (isPlaying && sessionId === mySession) {
+    const url = urls[urlIdx % urls.length];
+    const result = await streamOnce(url, station, mySession);
+
+    if (!isPlaying || sessionId !== mySession) return;
+
+    const isGoodSession = result.playedFor >= GOOD_PLAYBACK_MS && result.chunks >= 4;
+
+    if (isGoodSession) {
+      attempt = 0;
+      urlIdx = 0;
+      setStatus('🔄 Flux interrompu. Reconnexion...');
+    } else {
+      attempt++;
+      urlIdx++;
+      const reason = result.reason || 'échec';
+      setStatus('🔄 Tentative ' + attempt + ' (' + reason + ')...');
+      console.warn('[Tuner] Échec flux:', reason, result);
+    }
+
+    await closeAudioContext();
+    if (!isPlaying || sessionId !== mySession) return;
+
+    const exp = Math.min(RETRY_BASE_DELAY * Math.pow(1.6, Math.max(0, attempt - 1)), RETRY_MAX_DELAY);
+    const jitter = Math.random() * 700;
+    const delay = exp + jitter;
+    setStatus('🔄 Reconnexion ' + attempt + ' dans ' + (delay/1000).toFixed(1) + 's...');
+    await new Promise(r => setTimeout(r, delay));
+  }
+}
+
+/* =========================================================
+   MISE À JOUR DES PARAMÈTRES
+   ========================================================= */
 function updateVolume() {
-  const volSlider = document.getElementById('volume');
-  if (!volSlider) return;
+  const volSlider = document.getElementById('volume'); if (!volSlider) return;
   const v = parseFloat(volSlider.value);
   const val = document.querySelector('[data-val="gain"]');
-  if (val) {
-    val.textContent = (v > 0 ? '+' : '') + v.toFixed(1) + ' dB';
-  }
-  if (gainNode) {
-    gainNode.gain.value = Math.pow(10, v / 20);
-  }
-  if (audioEngine === 'screenoff') {
-    updateNativeVolume();
-  }
+  if (val) val.textContent = (v > 0 ? '+' : '') + v.toFixed(1) + ' dB';
+  if (gainNode) gainNode.gain.value = Math.pow(10, v / 20);
+  if (audioEngine === 'screenoff') updateNativeVolume();
 }
 function updateBalance() {
-  const balSlider = document.getElementById('balance');
-  if (!balSlider) return;
+  const balSlider = document.getElementById('balance'); if (!balSlider) return;
   let v = parseFloat(balSlider.value);
   if (channelsSwapped) v = -v;
   const val = document.getElementById('balanceVal');
@@ -1063,97 +1120,70 @@ function updateEQ() {
   }
 }
 function updateLowpass() {
-  const s = document.getElementById('lowpass');
-  const qs = document.getElementById('lowpassQ');
-  if (!s) return;
+  const s = document.getElementById('lowpass'); if (!s) return;
   const v = parseFloat(s.value);
-  const q = qs ? parseFloat(qs.value) : 0.71;
   const val = document.getElementById('lowpassVal');
   if (val) val.textContent = v + ' Hz' + (v >= 20000 ? ' (off)' : '');
-  if (lowpassFilter) {
-    lowpassFilter.frequency.value = v;
-    lowpassFilter.Q.value = q;
-  }
+  if (lowpassFilter) lowpassFilter.frequency.value = v;
 }
 function updateHighpass() {
-  const s = document.getElementById('highpass');
-  const qs = document.getElementById('highpassQ');
-  if (!s) return;
+  const s = document.getElementById('highpass'); if (!s) return;
   const v = parseFloat(s.value);
-  const q = qs ? parseFloat(qs.value) : 0.71;
   const val = document.getElementById('highpassVal');
   if (val) val.textContent = v + ' Hz' + (v <= 20 ? ' (off)' : '');
-  if (highpassFilter) {
-    highpassFilter.frequency.value = v;
-    highpassFilter.Q.value = q;
-  }
+  if (highpassFilter) highpassFilter.frequency.value = v;
 }
 function updateBandpass() {
-  const fs = document.getElementById('bandpassFreq');
-  const qs = document.getElementById('bandpassQ');
-  if (!fs || !qs) return;
+  const fs = document.getElementById('bandpassFreq'); if (!fs) return;
   const f = parseFloat(fs.value);
-  const q = parseFloat(qs.value);
   const val = document.getElementById('bandpassVal');
-  if (val) val.textContent = f + ' Hz' + (q <= 0.05 ? ' (off)' : ' · Q ' + q.toFixed(1));
-  if (bandpassFilter) {
-    bandpassFilter.frequency.value = f;
-    bandpassFilter.Q.value = q;
-  }
+  if (val) val.textContent = f + ' Hz' + (bandpassFilter && bandpassFilter.type === 'allpass' ? ' (off)' : '');
+  if (bandpassFilter) bandpassFilter.frequency.value = f;
 }
 function updateFeedback() {
-  const s = document.getElementById('feedback');
-  if (!s) return;
+  const s = document.getElementById('feedback'); if (!s) return;
   const v = parseFloat(s.value);
   const val = document.getElementById('feedbackVal');
   if (val) val.textContent = Math.round(v * 100) + '%';
   if (feedbackGain) feedbackGain.gain.value = v;
 }
 function updateDryWet() {
-  const mixSlider = document.getElementById('drywet');
-  const reverbSlider = document.getElementById('reverb');
-  if (!mixSlider || !reverbSlider) return;
+  const mixSlider = document.getElementById('drywet'); if (!mixSlider) return;
   const mix = parseFloat(mixSlider.value);
-  const reverbAmount = parseFloat(reverbSlider.value);
   if (dryGain) dryGain.gain.value = 1 - mix;
-  if (wetGain) wetGain.gain.value = mix * (0.3 + reverbAmount * 0.7);
+  if (wetGain) wetGain.gain.value = mix;
   const val = document.getElementById('drywetVal');
   if (val) {
     val.textContent = mix === 0 ? '100% dry' : mix === 1 ? '100% wet' :
-      Math.round((1 - mix) * 100) + '% dry / ' + Math.round(mix * 100) + '% wet';
+      Math.round((1-mix)*100) + '% dry / ' + Math.round(mix*100) + '% wet';
   }
-  const rval = document.getElementById('reverbVal');
-  if (rval) rval.textContent = Math.round(reverbAmount * 100) + '%';
 }
 function updateLimiter() {
-  const s = document.getElementById('limiter');
-  if (!s) return;
+  const s = document.getElementById('limiter'); if (!s) return;
   const v = parseFloat(s.value);
   const val = document.getElementById('limiterVal');
   if (val) val.textContent = v + ' dB';
   if (limiterNode) limiterNode.threshold.value = v;
 }
+
+/* =========================================================
+   MOTEUR NATIF (SCREEN OFF)
+   ========================================================= */
 let audioEngine = 'studio';
 const nativeAudio = new Audio();
-nativeAudio.preload = 'none';
-nativeAudio.playsInline = true;
-nativeAudio.crossOrigin = 'anonymous';
+nativeAudio.preload = 'none'; nativeAudio.playsInline = true; nativeAudio.crossOrigin = 'anonymous';
+
 function updateEngineButton() {
-  const b = document.getElementById('engineSwitch');
-  if (!b) return;
+  const b = document.getElementById('engineSwitch'); if (!b) return;
   b.textContent = audioEngine === 'studio' ? '🌙 SCREEN OFF' : '🎛️ STUDIO';
 }
 function updateNativeVolume() {
-  const volSlider = document.getElementById('volume');
-  if (!volSlider) return;
+  const volSlider = document.getElementById('volume'); if (!volSlider) return;
   const db = parseFloat(volSlider.value);
   nativeAudio.volume = Math.max(0, Math.min(1, Math.pow(10, db / 20)));
 }
 async function startNativeAudio(station) {
-  if (!station) {
-    setStatus('⚠️ Aucune station sélectionnée.');
-    return;
-  }
+  if (!station) { setStatus('⚠️ Aucune station sélectionnée.'); return; }
   currentStation = station;
   nativeAudio.src = station.u;
   nativeAudio.load();
@@ -1166,9 +1196,7 @@ async function startNativeAudio(station) {
       try {
         navigator.mediaSession.playbackState = 'playing';
         navigator.mediaSession.metadata = new MediaMetadata({
-          title: station.n || 'Tuner',
-          artist: station.g || 'Radio',
-          album: 'Tuner'
+          title: station.n || 'Tuner', artist: station.g || 'Radio', album: 'Tuner'
         });
         navigator.mediaSession.setActionHandler('play', () => nativeAudio.play());
         navigator.mediaSession.setActionHandler('pause', () => nativeAudio.pause());
@@ -1190,16 +1218,15 @@ function stopNativeAudio() {
   }
   render('⏹️ Arrêté.');
 }
+
 async function togglePlay(station) {
   if (audioEngine === 'screenoff') {
-    if (isPlaying) {
-      stopNativeAudio();
-      return;
-    }
+    if (isPlaying) { stopNativeAudio(); return; }
     return startNativeAudio(station || currentStation);
   }
   return studioTogglePlay(station || currentStation);
 }
+
 async function switchAudioEngine() {
   const station = currentStation;
   const wasPlaying = isPlaying;
@@ -1218,28 +1245,26 @@ async function switchAudioEngine() {
   }
 }
 nativeAudio.addEventListener('playing', () => {
-  if (audioEngine === 'screenoff') {
-    isPlaying = true;
-    render('▶️ SCREEN OFF — lecture native');
-  }
+  if (audioEngine === 'screenoff') { isPlaying = true; render('▶️ SCREEN OFF — lecture native'); }
 });
 nativeAudio.addEventListener('pause', () => {
   if (audioEngine === 'screenoff' && !nativeAudio.src) return;
-  if (audioEngine === 'screenoff') {
-    isPlaying = false;
-    render('⏸️ SCREEN OFF en pause');
-  }
+  if (audioEngine === 'screenoff') { isPlaying = false; render('⏸️ SCREEN OFF en pause'); }
 });
+
 function setStatus(msg) {
-  const state = document.getElementById('npState');
-  if (state) state.textContent = msg;
-  const sub = document.getElementById('barSub');
-  if (sub) sub.textContent = msg;
+  const state = document.getElementById('npState'); if (state) state.textContent = msg;
+  const sub = document.getElementById('barSub'); if (sub) sub.textContent = msg;
 }
+
+/* =========================================================
+   BOUTON STOP/PLAY PRINCIPAL
+   ========================================================= */
 async function studioTogglePlay(station) {
   if (isPlaying) {
-    await closeAudioContext();
     isPlaying = false;
+    sessionId++;
+    await closeAudioContext();
     const power = document.getElementById('power');
     const power2 = document.getElementById('power2');
     if (power) { power.textContent = '▶️ Lecture'; power.classList.remove('stop'); }
@@ -1247,43 +1272,25 @@ async function studioTogglePlay(station) {
     setStatus('⏹️ Arrêté.');
     bufferFill.style.width = '0%';
     bufferStatus.textContent = 'Buffer: --';
-    pendingChunks = [];
     return;
   }
-  if (!station) {
-    setStatus('⚠️ Aucune station sélectionnée.');
-    return;
-  }
+
+  if (!station) { setStatus('⚠️ Aucune station sélectionnée.'); return; }
+
   currentStation = station;
   isPlaying = true;
+  const mySession = ++sessionId;
+
   const power = document.getElementById('power');
   const power2 = document.getElementById('power2');
   if (power) { power.textContent = '⏹️ Stop'; power.classList.add('stop'); }
   if (power2) power2.textContent = '❚❚';
+
   try {
-    await startStream(station.u, station);
+    await streamSession(station, mySession);
   } catch (err) {
-    const isAbort = err.name === 'AbortError';
-    const alreadyProxied = station.u.indexOf(SHOUTCAST_PROXY) === 0;
-    if (!isAbort && !alreadyProxied) {
-      try {
-        setStatus('🔄 Connexion directe impossible, nouvelle tentative via proxy...');
-        const proxiedUrl = SHOUTCAST_PROXY + encodeURIComponent(station.u);
-        await startStream(proxiedUrl, station);
-        return;
-      } catch (err2) {
-        if (err2.name !== 'AbortError') {
-          setStatus('❌ ' + err2.message);
-          console.error(err2);
-        }
-        isPlaying = false;
-        if (power) { power.textContent = '▶️ Lecture'; power.classList.remove('stop'); }
-        if (power2) power2.textContent = '▶';
-        bufferFill.style.width = '0%';
-        return;
-      }
-    }
-    if (!isAbort) {
+    if (sessionId !== mySession) return;
+    if (err.name !== 'AbortError') {
       setStatus('❌ ' + err.message);
       console.error(err);
     }
@@ -1293,13 +1300,16 @@ async function studioTogglePlay(station) {
     bufferFill.style.width = '0%';
   }
 }
+
 setInterval(async () => {
   if (audioCtx && isPlaying) {
-    if (audioCtx.state === 'suspended') {
-      await audioCtx.resume();
-    }
+    if (audioCtx.state === 'suspended') await audioCtx.resume();
   }
 }, 1000);
+
+/* =========================================================
+   STATIONS
+   ========================================================= */
 function soma(id,n,c,g,q){ q=q||128;
   var m=function(h,b){ return 'https://'+h+'.somafm.com/'+id+'-'+b+'-mp3'; };
   return {n:n,g:g,c:c,q:q+' kbps',u:m('ice5',q),alts:[m('ice2',q),m('ice5',128),m('ice2',128)],somaId:id}; }
@@ -1311,6 +1321,7 @@ function rm(id,n,c,g){ return {n:n,g:g,c:c,q:'192 kbps',u:'https://'+id+'-high.r
           alts:['https://'+id+'-2012-high.rautemusik.fm/']}; }
 function night(id,n,c,g){ return {n:n,g:g,c:c,q:'128 kbps',
   u:'https://stream.nightride.fm/'+id+'.m4a',alts:[]}; }
+
 var CORE=[
   soma('sonicuniverse','Sonic Universe','jazz','Jazz avant-garde',256),
   fip('fipjazz','FIP Jazz','jazz','Jazz, du classique au neuf'),
@@ -1389,8 +1400,7 @@ function renderTop5(){
   var card=document.getElementById('top5Card'), wrap=document.getElementById('top5List');
   if(!card||!wrap) return;
   var top=favs.filter(function(x){ return (plays[x.u]||0)>0; })
-              .sort(function(a,b){ return (plays[b.u]||0)-(plays[a.u]||0); })
-              .slice(0,5);
+              .sort(function(a,b){ return (plays[b.u]||0)-(plays[a.u]||0); }).slice(0,5);
   if(!top.length){ card.style.display='none'; return; }
   card.style.display=''; wrap.innerHTML='';
   top.forEach(function(st,i){
@@ -1434,6 +1444,15 @@ function playStation(st){
   if(trackEl){ trackEl.textContent=''; trackEl.classList.remove('show'); }
   render('Connexion…');
   bump(st);
+  if (isPlaying) {
+    isPlaying = false;
+    sessionId++;
+    closeAudioContext().then(() => {
+      isPlaying = true;
+      togglePlay(st);
+    });
+    return;
+  }
   togglePlay(st);
 }
 if (power) power.addEventListener('click', function(){ togglePlay(currentStation); });
@@ -1441,6 +1460,7 @@ if (power2) power2.addEventListener('click', function(){ togglePlay(currentStati
 const engineSwitch = document.getElementById('engineSwitch');
 if (engineSwitch) engineSwitch.addEventListener('click', switchAudioEngine);
 updateEngineButton();
+
 var tabsEl=document.getElementById('tabs'), listEl=document.getElementById('list');
 TABS.forEach(function(t){
   var b=document.createElement('button'); b.textContent=t.label;
@@ -1520,17 +1540,14 @@ function paint(){
   renderTop5();
 }
 function deleteCustomStation(st){
-  if(currentStation && currentStation.u===st.u && isPlaying){
-    togglePlay();
-  }
+  if(currentStation && currentStation.u===st.u && isPlaying) togglePlay();
   var idx=CORE.findIndex(function(x){ return x.u===st.u; });
   if(idx>=0) CORE.splice(idx,1);
   customStations=customStations.filter(function(x){ return x.u!==st.u; });
   try{ localStorage.setItem('tuner_custom_stations',JSON.stringify(customStations)); }catch(e){}
   favs=favs.filter(function(x){ return x.u!==st.u; });
   saveFavs();
-  delete plays[st.u];
-  savePlays();
+  delete plays[st.u]; savePlays();
   paint();
 }
 function drawPager(pages,total){
@@ -1607,44 +1624,24 @@ document.getElementById('addUrl').addEventListener('click',function(){
   var box=document.getElementById('url');
   var nameBox=document.getElementById('customName');
   var u=box.value.trim();
-  if(!u){
-    listMsg.className='msg bad';
-    listMsg.textContent='Colle le lien direct du flux radio.';
-    return;
-  }
+  if(!u){ listMsg.className='msg bad'; listMsg.textContent='Colle le lien direct du flux radio.'; return; }
   if(!/^https?:\/\//i.test(u)) u='https://'+u;
   var name=(nameBox.value.trim() || u.replace(/^https?:\/\//,'').split('/')[0]);
-  var station={
-    n:name,
-    g:'Radio ajoutée',
-    c:'all',
-    q:'Flux personnel',
-    u:u,
-    alts:[],
-    custom:true
-  };
+  var station={n:name,g:'Radio ajoutée',c:'all',q:'Flux personnel',u:u,alts:[],custom:true};
   var existing=CORE.find(function(x){ return x.u===u; });
-  if(existing){
-    listMsg.className='msg';
-    listMsg.textContent='Cette radio est déjà dans ta liste.';
-    playStation(existing);
-    return;
-  }
+  if(existing){ listMsg.className='msg'; listMsg.textContent='Cette radio est déjà dans ta liste.'; playStation(existing); return; }
   CORE.push(station);
   customStations.push(station);
-  try{
-    localStorage.setItem('tuner_custom_stations',JSON.stringify(customStations));
-  }catch(e){}
-  box.value='';
-  nameBox.value='';
-  box.blur();
-  nameBox.blur();
+  try{ localStorage.setItem('tuner_custom_stations',JSON.stringify(customStations)); }catch(e){}
+  box.value=''; nameBox.value=''; box.blur(); nameBox.blur();
   listMsg.className='msg';
   listMsg.innerHTML='<b>✓ Radio ajoutée à Tuner.</b> Elle sera conservée sur cet appareil.';
-  render();
-  paint();
-  playStation(station);
+  render(); paint(); playStation(station);
 });
+
+/* =========================================================
+   OSCILLOSCOPE
+   ========================================================= */
 var bars=[];
 for(var i=0;i<34;i++){ var e=document.createElement('i'); wave.appendChild(e); bars.push(e); }
 var cv=document.getElementById('scope'), cx=cv.getContext('2d'), dpr=1;
@@ -1667,24 +1664,12 @@ function traceBand(analyser, color, scale, alpha) {
     if (i === 0) path.moveTo(i, y);
     else path.lineTo(i, y);
   }
-  cx.lineJoin = 'round';
-  cx.lineCap = 'round';
-  cx.strokeStyle = color;
-  cx.shadowColor = color;
-  cx.globalAlpha = alpha * 0.22;
-  cx.lineWidth = 9 * dpr;
-  cx.shadowBlur = 34 * dpr;
-  cx.stroke(path);
-  cx.globalAlpha = alpha * 0.5;
-  cx.lineWidth = 4.5 * dpr;
-  cx.shadowBlur = 18 * dpr;
-  cx.stroke(path);
-  cx.globalAlpha = alpha;
-  cx.lineWidth = 2 * dpr;
-  cx.shadowBlur = 8 * dpr;
-  cx.stroke(path);
-  cx.globalAlpha = 1;
-  cx.shadowBlur = 0;
+  cx.lineJoin='round'; cx.lineCap='round';
+  cx.strokeStyle=color; cx.shadowColor=color;
+  cx.globalAlpha=alpha*0.22; cx.lineWidth=9*dpr;   cx.shadowBlur=34*dpr; cx.stroke(path);
+  cx.globalAlpha=alpha*0.5;  cx.lineWidth=4.5*dpr; cx.shadowBlur=18*dpr; cx.stroke(path);
+  cx.globalAlpha=alpha;      cx.lineWidth=2*dpr;   cx.shadowBlur=8*dpr;  cx.stroke(path);
+  cx.globalAlpha=1; cx.shadowBlur=0;
 }
 var idle = 0;
 (function loop(){
@@ -1703,21 +1688,14 @@ var idle = 0;
   } else {
     idle += 0.045;
     for (let j = 0; j < bars.length; j++) {
-      bars[j].style.height = playing ? 
-        (9 + Math.sin(idle + j * 0.38) * 7 + Math.sin(idle * 1.8 + j) * 3) + 'px' : 
-        '3px';
+      bars[j].style.height = playing ? (9 + Math.sin(idle + j*0.38)*7 + Math.sin(idle*1.8+j)*3) + 'px' : '3px';
     }
   }
   cx.clearRect(0, 0, cv.width, cv.height);
-  cx.strokeStyle = 'rgba(140,190,255,.16)';
-  cx.lineWidth = 1 * dpr;
-  cx.shadowColor = 'rgba(47,231,255,.7)';
-  cx.shadowBlur = 10 * dpr;
-  cx.beginPath();
-  cx.moveTo(0, cv.height / 2);
-  cx.lineTo(cv.width, cv.height / 2);
-  cx.stroke();
-  cx.shadowBlur = 0;
+  cx.strokeStyle='rgba(140,190,255,.16)'; cx.lineWidth=1*dpr;
+  cx.shadowColor='rgba(47,231,255,.7)'; cx.shadowBlur=10*dpr;
+  cx.beginPath(); cx.moveTo(0, cv.height/2); cx.lineTo(cv.width, cv.height/2); cx.stroke();
+  cx.shadowBlur=0;
   if (live) {
     traceBand(bassAnalyser, '#FF3D9E', 0.34, 0.95);
     traceBand(midAnalyser, '#2FE7FF', 0.30, 0.9);
@@ -1726,31 +1704,22 @@ var idle = 0;
     ['#FF3D9E', '#2FE7FF', '#B9FF45'].forEach(function(c, n) {
       const p = new Path2D();
       for (let x = 0; x < cv.width; x += 4) {
-        const yy = cv.height / 2 + Math.sin(x / (60 + n * 22) + idle * (1 + n * 0.35) + n * 2) * (playing ? 12 : 5) * dpr;
-        if (x === 0) p.moveTo(x, yy);
-        else p.lineTo(x, yy);
+        const yy = cv.height/2 + Math.sin(x/(60+n*22) + idle*(1+n*0.35) + n*2) * (playing?12:5) * dpr;
+        if (x === 0) p.moveTo(x, yy); else p.lineTo(x, yy);
       }
-      cx.lineJoin = 'round';
-      cx.lineCap = 'round';
-      cx.strokeStyle = c;
-      cx.shadowColor = c;
-      cx.globalAlpha = 0.16;
-      cx.lineWidth = 9 * dpr;
-      cx.shadowBlur = 30 * dpr;
-      cx.stroke(p);
-      cx.globalAlpha = 0.42;
-      cx.lineWidth = 4 * dpr;
-      cx.shadowBlur = 16 * dpr;
-      cx.stroke(p);
-      cx.globalAlpha = 0.85;
-      cx.lineWidth = 1.6 * dpr;
-      cx.shadowBlur = 7 * dpr;
-      cx.stroke(p);
-      cx.globalAlpha = 1;
-      cx.shadowBlur = 0;
+      cx.lineJoin='round'; cx.lineCap='round';
+      cx.strokeStyle=c; cx.shadowColor=c;
+      cx.globalAlpha=0.16; cx.lineWidth=9*dpr;   cx.shadowBlur=30*dpr; cx.stroke(p);
+      cx.globalAlpha=0.42; cx.lineWidth=4*dpr;   cx.shadowBlur=16*dpr; cx.stroke(p);
+      cx.globalAlpha=0.85; cx.lineWidth=1.6*dpr; cx.shadowBlur=7*dpr;  cx.stroke(p);
+      cx.globalAlpha=1; cx.shadowBlur=0;
     });
   }
 })();
+
+/* =========================================================
+   DRAWER, GRIP, FICHIER LOCAL
+   ========================================================= */
 var drawer=document.getElementById('drawer'), scrim=document.getElementById('scrim');
 function openDrawer(o){ drawer.classList.toggle('open',o); scrim.classList.toggle('open',o); }
 document.getElementById('openDrawer').addEventListener('click',function(){ openDrawer(true); });
@@ -1789,10 +1758,13 @@ picker.addEventListener('change',function(){
   playStation(st);
 });
 document.getElementById('openFile').addEventListener('click',function(){ picker.click(); });
+
+/* =========================================================
+   EQ STRIP VERTICAL
+   ========================================================= */
 var panel=document.getElementById('console');
 (function buildEqStrip(){
-  var strip = document.getElementById('eqStrip');
-  if (!strip) return;
+  var strip = document.getElementById('eqStrip'); if (!strip) return;
   var eqLabels = ['60','250','1k','4k','12k'];
   var leftHtml = '';
   eqLabels.forEach(function(lbl,i){
@@ -1812,20 +1784,19 @@ var panel=document.getElementById('console');
                + '</div>'
                + '<span class="vlbl">D '+lbl+'</span></div>';
   });
-  strip.innerHTML = '<div class="veq-group">' + leftHtml + '</div>'
-                  + '<div class="veq-group">' + rightHtml + '</div>';
+  strip.innerHTML = '<div class="veq-group">'+leftHtml+'</div><div class="veq-group">'+rightHtml+'</div>';
   var sliders = strip.querySelectorAll('[data-eqv]');
   function fillEqTrack(s){
-    var min = parseFloat(s.min), max = parseFloat(s.max), val = parseFloat(s.value);
-    if (isNaN(min) || isNaN(max) || isNaN(val) || max === min) return;
-    var p = ((val - min) / (max - min)) * 100;
-    var centerP = ((0 - min) / (max - min)) * 100;
-    var lo = Math.min(centerP, p), hi = Math.max(centerP, p);
-    s.style.setProperty('--fill-lo', lo + '%');
-    s.style.setProperty('--fill-hi', hi + '%');
+    var min=parseFloat(s.min), max=parseFloat(s.max), val=parseFloat(s.value);
+    if (isNaN(min)||isNaN(max)||isNaN(val)||max===min) return;
+    var p=((val-min)/(max-min))*100;
+    var centerP=((0-min)/(max-min))*100;
+    var lo=Math.min(centerP,p), hi=Math.max(centerP,p);
+    s.style.setProperty('--fill-lo', lo+'%');
+    s.style.setProperty('--fill-hi', hi+'%');
   }
   sliders.forEach(function(s){
-    s.setAttribute('data-center', '1');
+    s.setAttribute('data-center','1');
     fillEqTrack(s);
     s.addEventListener('input', function(){ updateEQ(); fillEqTrack(this); });
     var wrapper = s.closest('.veq-band');
@@ -1841,6 +1812,10 @@ var panel=document.getElementById('console');
   });
   updateEQ();
 })();
+
+/* =========================================================
+   CONSOLE UI
+   ========================================================= */
 (function buildConsole(){
   var h = `
   <div class="ctitle"><div class="brand-title"><span class="orb"></span>RADIO THE CORE <span style="opacity:.55;font-size:11px">• CONSOLE</span></div><div class="ctitle-actions"><button data-reset class="resetbtn">↺ Reset</button><button data-swap class="swapbtn">⇄</button></div></div>
@@ -1859,26 +1834,40 @@ var panel=document.getElementById('console');
   </div>`;
   panel.innerHTML=h;
   function wire(id, fn){ var e=document.getElementById(id); if(e){ e.addEventListener('input',fn); fn(); } }
-  wire('volume',updateVolume); wire('balance',updateBalance); wire('crossfeed',function(){ var e=this||document.getElementById('crossfeed'); var v=document.getElementById('crossfeedVal'); if(v) v.textContent=Math.round(+e.value*100)+'%'; if(typeof updateCrossfeed==='function') updateCrossfeed(); }); wire('limiter',updateLimiter);
-  wire('lowpass',updateLowpass); wire('highpass',updateHighpass); wire('bandpassFreq',updateBandpass); wire('feedback',updateFeedback); wire('drywet',updateDryWet);
+  wire('volume',updateVolume); wire('balance',updateBalance);
+  wire('crossfeed',function(){ var e=document.getElementById('crossfeed'); var v=document.getElementById('crossfeedVal'); if(v) v.textContent=Math.round(+e.value*100)+'%'; updateCrossfeed(); });
+  wire('limiter',updateLimiter);
+  wire('lowpass',updateLowpass); wire('highpass',updateHighpass);
+  wire('bandpassFreq',updateBandpass); wire('feedback',updateFeedback); wire('drywet',updateDryWet);
   panel.querySelector('[data-swap]').addEventListener('click',function(){ channelsSwapped=!channelsSwapped; this.classList.toggle('on',channelsSwapped); updateBalance(); });
   panel.querySelector('[data-reset]').addEventListener('click',function(){ location.reload(); });
-  panel.querySelectorAll('[data-toggle]').forEach(function(btn){ btn.addEventListener('click',function(){ var on=!btn.classList.contains('off'); btn.classList.toggle('off',on); btn.textContent=on?'OFF':'ON'; var k=btn.dataset.toggle; if(k==='lowpass'&&lowpassFilter) lowpassFilter.type=on?'allpass':'lowpass'; if(k==='highpass'&&highpassFilter) highpassFilter.type=on?'allpass':'highpass'; if(k==='bandpass'&&bandpassFilter) bandpassFilter.type=on?'allpass':'bandpass'; if(k==='reverb'){ if(wetGain) wetGain.gain.value=on?0:+document.getElementById('drywet').value; if(dryGain) dryGain.gain.value=on?1:1-document.getElementById('drywet').value; } }); });
-
+  panel.querySelectorAll('[data-toggle]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var on=!btn.classList.contains('off');
+      btn.classList.toggle('off',on); btn.textContent=on?'OFF':'ON';
+      var k=btn.dataset.toggle;
+      if(k==='lowpass'&&lowpassFilter) lowpassFilter.type=on?'allpass':'lowpass';
+      if(k==='highpass'&&highpassFilter) highpassFilter.type=on?'allpass':'highpass';
+      if(k==='bandpass'&&bandpassFilter) bandpassFilter.type=on?'allpass':'bandpass';
+      if(k==='reverb'){
+        var mix=parseFloat(document.getElementById('drywet').value);
+        if(wetGain) wetGain.gain.value=on?0:mix;
+        if(dryGain) dryGain.gain.value=on?1:1-mix;
+      }
+      updateBandpass();
+    });
+  });
   function fillTrack(s){
-    var min = parseFloat(s.min);
-    var max = parseFloat(s.max);
-    var val = parseFloat(s.value);
-    if (isNaN(min) || isNaN(max) || isNaN(val) || max === min) return;
-    var p = ((val - min) / (max - min)) * 100;
+    var min=parseFloat(s.min), max=parseFloat(s.max), val=parseFloat(s.value);
+    if (isNaN(min)||isNaN(max)||isNaN(val)||max===min) return;
+    var p=((val-min)/(max-min))*100;
     if (s.dataset.center) {
-      var centerP = ((0 - min) / (max - min)) * 100;
-      var lo = Math.min(centerP, p);
-      var hi = Math.max(centerP, p);
-      s.style.setProperty('--fill-lo', lo + '%');
-      s.style.setProperty('--fill-hi', hi + '%');
+      var centerP=((0-min)/(max-min))*100;
+      var lo=Math.min(centerP,p), hi=Math.max(centerP,p);
+      s.style.setProperty('--fill-lo', lo+'%');
+      s.style.setProperty('--fill-hi', hi+'%');
     } else {
-      s.style.setProperty('--p', p + '%');
+      s.style.setProperty('--p', p+'%');
     }
   }
   panel.querySelectorAll('input[type=range]').forEach(function(s){
@@ -1886,8 +1875,13 @@ var panel=document.getElementById('console');
     s.addEventListener('input', function(){ fillTrack(this); });
   });
 })();
+
+/* =========================================================
+   INIT
+   ========================================================= */
 render('Ouvre les stations pour choisir');
 paint();
+
 window.togglePlay = togglePlay;
 window.updateVolume = updateVolume;
 window.updateBalance = updateBalance;
@@ -1898,7 +1892,8 @@ window.updateBandpass = updateBandpass;
 window.updateFeedback = updateFeedback;
 window.updateDryWet = updateDryWet;
 window.updateLimiter = updateLimiter;
+
 })();
 </script>
-</body></html>
-<!-- TUNER_PRODUCTION_BUILD_2026 -->
+</body>
+</html>
