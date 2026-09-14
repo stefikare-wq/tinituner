@@ -64,7 +64,7 @@
   .top5-list::-webkit-scrollbar{display:none}
   .t5{flex:none;display:flex;align-items:center;gap:9px;border:1px solid var(--edge2);
       border-radius:14px;background:var(--mod);padding:9px 14px;min-width:150px;
-      transition:all .2s var(--e)}
+      transition:all .2s var(--e);position:relative}
   .t5:hover{border-color:var(--cyan);box-shadow:0 0 18px rgba(47,231,255,.18)}
   .t5.play{border-color:var(--cyan);box-shadow:0 0 18px rgba(47,231,255,.25)}
   .t5 .rk{font-size:15px;font-weight:800;color:var(--magenta);flex:none}
@@ -72,6 +72,14 @@
   .t5 .t5n{font-size:13.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;
            white-space:nowrap;max-width:130px}
   .t5 .t5c{font-size:11px;color:var(--muted)}
+  .t5 .t5remove{position:absolute;top:-6px;right:-6px;width:22px;height:22px;
+                border-radius:50%;background:var(--magenta);color:#fff;font-size:13px;
+                display:flex;align-items:center;justify-content:center;
+                box-shadow:0 0 10px rgba(255,61,158,.6);cursor:pointer;
+                opacity:0;transition:opacity .2s var(--e);font-weight:700;line-height:1}
+  .t5:hover .t5remove,.t5:active .t5remove{opacity:1}
+  @media(hover:none){.t5 .t5remove{opacity:.85}}
+  .top5-empty{padding:10px 4px;font-size:13px;color:var(--muted);text-align:center}
   .wave{display:flex;align-items:flex-end;gap:2px;height:34px;width:150px;flex:none}
   .wave i{flex:1;border-radius:3px;height:3px;background:linear-gradient(180deg,var(--cyan),rgba(47,231,255,.12));
           box-shadow:0 0 10px rgba(47,231,255,.45);opacity:.28;
@@ -594,12 +602,14 @@
     <div class="tb-btns">
       <button class="pill" id="power">Écouter</button>
       <button class="pill ghost" id="engineSwitch">🌙 SCREEN OFF</button>
-      <button class="pill ghost" id="openFile">Ouvrir un morceau</button>
       <button class="pill ghost" id="openDrawer">Stations</button>
     </div>
   </div>
   <div class="card top5" id="top5Card" style="display:none">
-    <div class="scope-head"><h2>TOP 5 FAVORIS</h2></div>
+    <div class="scope-head">
+      <h2>★ MES FAVORIS</h2>
+      <span id="favCount" style="font-size:11.5px;color:var(--muted)"></span>
+    </div>
     <div class="top5-list" id="top5List"></div>
   </div>
   <div class="card scope-card">
@@ -664,30 +674,16 @@
    ========================================================= */
 const CORS_PROXY = 'https://soft-brook-0e52.stefikare.workers.dev/?url=';
 
-/* Normalise une URL :
-   - https://...            → inchangée
-   - http://...             → passée par le proxy CORS (HTTPS)
-   - sans protocole         → préfixée par https:// puis re-vérifiée
-   - déjà passée par proxy  → inchangée
-*/
 function normalizeUrl(u)
 {
     if (!u) return u;
     u = u.trim();
-
-    // Déjà passée par notre proxy → on ne touche pas
     if (u.indexOf(CORS_PROXY) === 0) return u;
-
-    // Sans protocole → on suppose https://
     if (!/^https?:\/\//i.test(u)) u = 'https://' + u;
-
-    // HTTP simple → on passe par le proxy
     if (u.indexOf('http://') === 0)
     {
         return CORS_PROXY + encodeURIComponent(u);
     }
-
-    // HTTPS → tel quel
     return u;
 }
 
@@ -1059,14 +1055,9 @@ async function streamOnce(url, station, mySession) {
    BOUCLE DE RECONNEXION AUTOMATIQUE
    ========================================================= */
 async function streamSession(station, mySession) {
-  // Construit la liste d'URLs normalisées (proxy si nécessaire)
   const rawUrls = [station.u].concat(station.alts || []).filter(Boolean);
   const urls = rawUrls.map(normalizeUrl);
 
-  // Log pour diagnostic
-  if (urls.length !== rawUrls.length) {
-    console.warn('[Tuner] Erreur construction URLs');
-  }
   if (urls[0] !== rawUrls[0]) {
     console.info('[Tuner] Flux HTTP détecté → passage par le proxy CORS');
     console.info('[Tuner] URL finale :', urls[0]);
@@ -1222,7 +1213,6 @@ function updateNativeVolume() {
 async function startNativeAudio(station) {
   if (!station) { setStatus('⚠️ Aucune station sélectionnée.'); return; }
   currentStation = station;
-  // ⚠️ On normalise aussi pour SCREEN OFF (Safari bloque HTTP non sécurisé)
   nativeAudio.src = normalizeUrl(station.u);
   nativeAudio.load();
   updateNativeVolume();
@@ -1434,24 +1424,79 @@ try{ plays=JSON.parse(localStorage.getItem('tuner_plays')||'{}'); }catch(e){ pla
 function saveFavs(){ try{ localStorage.setItem('tuner_favs',JSON.stringify(favs)); }catch(e){} }
 function savePlays(){ try{ localStorage.setItem('tuner_plays',JSON.stringify(plays)); }catch(e){} }
 function bump(st){ plays[st.u]=(plays[st.u]||0)+1; savePlays(); renderTop5(); }
+
+/* =========================================================
+   MES FAVORIS — affiche TOUS les favoris sur la page principale
+   ========================================================= */
 function renderTop5(){
-  var card=document.getElementById('top5Card'), wrap=document.getElementById('top5List');
+  var card=document.getElementById('top5Card');
+  var wrap=document.getElementById('top5List');
+  var countEl=document.getElementById('favCount');
   if(!card||!wrap) return;
-  var top=favs.filter(function(x){ return (plays[x.u]||0)>0; })
-              .sort(function(a,b){ return (plays[b.u]||0)-(plays[a.u]||0); }).slice(0,5);
-  if(!top.length){ card.style.display='none'; return; }
-  card.style.display=''; wrap.innerHTML='';
-  top.forEach(function(st,i){
-    var b=document.createElement('button'); b.className='t5';
-    if(currentStation&&currentStation.u===st.u) b.className+=' play';
-    var n=(plays[st.u]||0);
-    b.innerHTML='<span class="rk">'+(i+1)+'</span><span class="t5t"><span class="t5n"></span>'
-               +'<span class="t5c">'+n+' écoute'+(n>1?'s':'')+'</span></span>';
-    b.querySelector('.t5n').textContent=st.n;
-    b.addEventListener('click',function(){ playStation(st); });
+
+  // Aucun favori → masquer la carte
+  if(!favs.length){
+    card.style.display='none';
+    return;
+  }
+
+  // Trier par nombre d'écoutes (les non-écoutés vont à la fin)
+  var sorted = favs.slice().sort(function(a,b){
+    return (plays[b.u]||0)-(plays[a.u]||0);
+  });
+
+  card.style.display='';
+  if(countEl){
+    countEl.textContent = favs.length + ' favori' + (favs.length>1?'s':'');
+  }
+
+  wrap.innerHTML='';
+  sorted.forEach(function(st, i){
+    var b=document.createElement('button');
+    b.className='t5';
+    if(currentStation && currentStation.u===st.u) b.className+=' play';
+
+    var n = plays[st.u]||0;
+    var listens = n===0 ? 'jamais écouté' : (n + ' écoute' + (n>1?'s':''));
+
+    // Contenu
+    var rk = document.createElement('span');
+    rk.className = 'rk';
+    rk.textContent = (i+1);
+    b.appendChild(rk);
+
+    var t = document.createElement('span');
+    t.className = 't5t';
+    var nn = document.createElement('span');
+    nn.className='t5n';
+    nn.textContent = st.n;
+    var cc = document.createElement('span');
+    cc.className='t5c';
+    cc.textContent = listens;
+    t.appendChild(nn); t.appendChild(cc);
+    b.appendChild(t);
+
+    // Bouton ✕ pour retirer des favoris
+    var x = document.createElement('span');
+    x.className='t5remove';
+    x.textContent='✕';
+    x.title='Retirer des favoris';
+    x.addEventListener('click', function(ev){
+      ev.stopPropagation();
+      ev.preventDefault();
+      toggleFav(st);
+    });
+    b.appendChild(x);
+
+    // Clic → lancer la station
+    b.addEventListener('click', function(){
+      playStation(st);
+    });
+
     wrap.appendChild(b);
   });
 }
+
 var npName=document.getElementById('npName'),npState=document.getElementById('npState'),
     barName=document.getElementById('barName'),barSub=document.getElementById('barSub'),
     eyebrow=document.getElementById('eyebrow'),wave=document.getElementById('wave'),
@@ -1664,7 +1709,6 @@ document.getElementById('addUrl').addEventListener('click',function(){
   var u=box.value.trim();
   if(!u){ listMsg.className='msg bad'; listMsg.textContent='Colle le lien direct du flux radio.'; return; }
 
-  // Détection HTTP → passage automatique par le proxy
   var wasHttp = /^http:\/\//i.test(u);
   if(!/^https?:\/\//i.test(u)) u='https://'+u;
 
@@ -1785,7 +1829,7 @@ var idle = 0;
 })();
 
 /* =========================================================
-   DRAWER, GRIP, FICHIER LOCAL
+   DRAWER, GRIP
    ========================================================= */
 var drawer=document.getElementById('drawer'), scrim=document.getElementById('scrim');
 function openDrawer(o){ drawer.classList.toggle('open',o); scrim.classList.toggle('open',o); }
@@ -1815,16 +1859,6 @@ document.addEventListener('keydown',function(e){ if(e.key==='Escape') openDrawer
     document.documentElement.style.setProperty('--scopeH','30vh'); sizeCanvas();
   });
 })();
-var picker=document.createElement('input');
-picker.type='file'; picker.accept='audio/*'; picker.style.display='none';
-document.body.appendChild(picker);
-picker.addEventListener('change',function(){
-  var f=picker.files&&picker.files[0]; if(!f) return;
-  var st = {n:f.name.replace(/\.[^.]+$/,''),g:'Fichier local',c:'local',
-            u:URL.createObjectURL(f),alts:[],local:true};
-  playStation(st);
-});
-document.getElementById('openFile').addEventListener('click',function(){ picker.click(); });
 
 /* =========================================================
    EQ STRIP VERTICAL
