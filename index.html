@@ -384,6 +384,20 @@
   .console-add-stream .pill{min-height:48px;padding:0 18px}
 }
 
+
+/* EFFECT ON/OFF - SAFE OVERLAY */
+#console .mod{position:relative}
+#console .fx-onoff{
+ position:absolute;top:8px;right:8px;z-index:50;
+ min-width:46px;height:28px;padding:0 8px;border-radius:8px;
+ border:1px solid var(--cyan,#2fe7ff);background:rgba(5,12,20,.92);
+ color:var(--cyan,#2fe7ff);font:800 10px/1 Arial,sans-serif;
+ letter-spacing:.08em;cursor:pointer;touch-action:manipulation;
+}
+#console .fx-onoff.is-on{color:#fff;box-shadow:0 0 12px rgba(47,231,255,.45)}
+#console .fx-onoff.is-off{color:#87909f;border-color:#59616c;opacity:.8}
+@media(max-width:899px){#console .fx-onoff{top:6px;right:6px;min-width:50px;height:30px}}
+
 </style>
 </head>
 <body>
@@ -1378,6 +1392,95 @@ document.addEventListener('keydown',function(e){ if(e.key==='Escape') openDrawer
 document.addEventListener('gesturestart',function(e){ e.preventDefault(); });
 syncUI(); paint(); render('Ouvre les stations pour choisir');
 })();
+
+/* SAFE EFFECT ON/OFF INJECTOR */
+(function(){
+  function addFxButtons(){
+    var consoleEl=document.getElementById('console');
+    if(!consoleEl) return;
+    var boxes=consoleEl.querySelectorAll('.mod');
+    for(var i=0;i<boxes.length;i++){
+      var box=boxes[i];
+      if(box.querySelector('.fx-onoff')) continue;
+      var controls=box.querySelectorAll('input[type="range"], select');
+      if(!controls.length) continue;
+
+      var b=document.createElement('button');
+      b.type='button';
+      b.className='fx-onoff is-off';
+      b.textContent='OFF';
+      b.setAttribute('aria-pressed','false');
+
+      (function(box,controls,b){
+        var initial=[];
+        for(var z=0;z<controls.length;z++){
+          initial.push(controls[z].value);
+          if(controls[z].tagName==='INPUT'){
+            controls[z].value=controls[z].min || '0';
+          }else{
+            var neutral=controls[z].querySelector('option[value="none"]');
+            if(neutral) controls[z].value='none';
+          }
+          controls[z].dispatchEvent(new Event('input',{bubbles:true}));
+          controls[z].dispatchEvent(new Event('change',{bubbles:true}));
+        }
+        box._fxSaved=initial;
+        box.style.opacity='.58';
+
+        b.addEventListener('click',function(){
+          var isOn=b.getAttribute('aria-pressed')==='true';
+          if(isOn){
+            var saved=[];
+            for(var j=0;j<controls.length;j++){
+              saved.push(controls[j].value);
+              if(controls[j].tagName==='INPUT'){
+                controls[j].value=controls[j].min || '0';
+              } else {
+                // Keep select value if there is no obvious neutral option.
+                var neutral=controls[j].querySelector('option[value="none"]');
+                if(neutral) controls[j].value='none';
+              }
+              controls[j].dispatchEvent(new Event('input',{bubbles:true}));
+              controls[j].dispatchEvent(new Event('change',{bubbles:true}));
+            }
+            box._fxSaved=saved;
+            b.setAttribute('aria-pressed','false');
+            b.textContent='OFF';
+            b.className='fx-onoff is-off';
+            box.style.opacity='.58';
+          }else{
+            if(box._fxSaved){
+              for(var k=0;k<controls.length;k++){
+                controls[k].value=box._fxSaved[k];
+                controls[k].dispatchEvent(new Event('input',{bubbles:true}));
+                controls[k].dispatchEvent(new Event('change',{bubbles:true}));
+              }
+            }
+            b.setAttribute('aria-pressed','true');
+            b.textContent='ON';
+            b.className='fx-onoff is-on';
+            box.style.opacity='';
+          }
+        });
+      })(box,controls,b);
+
+      box.appendChild(b);
+    }
+  }
+
+  function boot(){
+    addFxButtons();
+    var c=document.getElementById('console');
+    if(c && !c._fxObserver){
+      c._fxObserver=true;
+      new MutationObserver(addFxButtons).observe(c,{childList:true,subtree:true});
+    }
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
+  else boot();
+})();
+
 </script>
 </body>
 </html>
