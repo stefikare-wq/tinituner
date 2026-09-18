@@ -15,12 +15,7 @@
     --e:cubic-bezier(.32,.72,0,1);
   }
   *{box-sizing:border-box}
-  html,body{
-    margin:0;padding:0;
-    width:100%;height:100%;
-    overflow:hidden;
-    overscroll-behavior:none;
-  }
+  html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;overscroll-behavior:none}
   body{
     background:radial-gradient(70% 44% at 10% -6%,rgba(47,231,255,.13),transparent 62%),
                radial-gradient(64% 42% at 94% 2%,rgba(255,61,158,.11),transparent 60%),var(--void);
@@ -28,38 +23,23 @@
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,sans-serif;
     font-size:15px;line-height:1.45;letter-spacing:-.012em;
     -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
-    user-select:none;
-    -webkit-user-select:none;
+    user-select:none;-webkit-user-select:none;
   }
   button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;
          touch-action:manipulation;-webkit-user-select:none;user-select:none}
 
-  .app{
-    width:100%;
-    height:100vh;
-    height:100dvh;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    padding:calc(env(safe-area-inset-top) + 14px) 16px
-           calc(env(safe-area-inset-bottom) + 14px) 16px;
-    overflow:hidden;
-  }
+  .app{width:100%;height:100vh;height:100dvh;display:flex;flex-direction:column;gap:12px;
+       padding:calc(env(safe-area-inset-top) + 14px) 16px calc(env(safe-area-inset-bottom) + 14px) 16px;
+       overflow:hidden}
 
-  .card{
-    border:1px solid var(--edge);border-radius:16px;position:relative;
-    background:linear-gradient(180deg,rgba(47,231,255,.05),transparent 40%),
-               linear-gradient(180deg,var(--panel),var(--deep));
-    display:flex;
-    flex-direction:column;
-    overflow:hidden;
-  }
+  .card{border:1px solid var(--edge);border-radius:16px;position:relative;
+        background:linear-gradient(180deg,rgba(47,231,255,.05),transparent 40%),
+                   linear-gradient(180deg,var(--panel),var(--deep));
+        display:flex;flex-direction:column;overflow:hidden}
 
-  /* ---------- TOPBAR ---------- */
   .topbar{padding:16px 20px;flex:0 0 auto}
   .brand-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-  .orb{width:32px;height:32px;border-radius:50%;border:3px solid var(--cyan);
-       position:relative;flex:none}
+  .orb{width:32px;height:32px;border-radius:50%;border:3px solid var(--cyan);position:relative;flex:none}
   .orb::after{content:'';position:absolute;inset:7px;border-radius:50%;background:var(--cyan)}
   .brand{font-weight:900;letter-spacing:.12em;color:#bff8ff;font-size:17px}
   .brand small{opacity:.5;font-size:10px;letter-spacing:.1em;margin-left:4px}
@@ -69,361 +49,151 @@
   .sub.live{color:var(--lime)}
 
   .quick-add{display:flex;gap:8px;margin-top:14px}
-  .quick-add .txtin{flex:1;min-width:0;min-height:46px;font-size:15px;
-                    border-radius:12px;padding:0 16px}
-  .quick-add .pill{flex:0 0 auto;min-height:46px;padding:0 20px;
-                   font-size:22px;line-height:1;font-weight:700}
+  .quick-add .txtin{flex:1;min-width:0;min-height:46px;font-size:15px;border-radius:12px;padding:0 16px}
+  .quick-add .pill{flex:0 0 auto;min-height:46px;padding:0 20px;font-size:22px;line-height:1;font-weight:700}
 
   .tb-btns{display:flex;gap:8px;margin-top:10px}
-  .pill{display:inline-flex;align-items:center;justify-content:center;
-        border-radius:100px;min-height:48px;padding:0 24px;font-size:15px;font-weight:600;
+  .pill{display:inline-flex;align-items:center;justify-content:center;border-radius:100px;
+        min-height:48px;padding:0 24px;font-size:15px;font-weight:600;
         background:linear-gradient(135deg,var(--cyan),#0E8BDD);color:#03121A;
-        transition:transform .18s var(--e),filter .22s var(--e);flex:1}
+        transition:transform .18s var(--e);flex:1}
   .pill:active{transform:scale(.97)}
-  .pill.ghost{background:rgba(234,241,255,.06);color:var(--ice);
-              border:1px solid var(--edge2);flex:0 0 auto;padding:0 20px}
+  .pill.ghost{background:rgba(234,241,255,.06);color:var(--ice);border:1px solid var(--edge2);flex:0 0 auto;padding:0 20px}
   .pill.stop{background:linear-gradient(135deg,#FF3D9E,#B01E75);color:#fff}
 
-  /* ---------- WAVE ---------- */
   .wavewrap{padding:0 20px 14px;flex:0 0 auto}
   .wave{display:flex;align-items:flex-end;gap:2px;height:26px;width:100%}
   .wave i{flex:1;border-radius:2px;height:3px;background:var(--cyan);opacity:.22;
           transition:height .08s linear,opacity .4s var(--e)}
   .wave.on i{opacity:.9}
 
-  /* ---------- CONSOLE ---------- */
-  .console{
-    padding:16px 20px;
-    flex:1 1 auto;
-    min-height:0;
-    display:flex;
-    flex-direction:column;
-    overflow-y:auto;
-    -webkit-overflow-scrolling:touch;
-  }
+  .console{padding:16px 20px;flex:1 1 auto;min-height:0;display:flex;flex-direction:column;
+           overflow-y:auto;-webkit-overflow-scrolling:touch}
   .console::-webkit-scrollbar{width:6px}
   .console::-webkit-scrollbar-thumb{background:rgba(234,241,255,.13);border-radius:99px}
 
-  .ctitle{display:flex;align-items:center;justify-content:space-between;
-          margin-bottom:14px;flex:0 0 auto}
+  .ctitle{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex:0 0 auto}
   .ctitle h2{font-size:12px;letter-spacing:.18em;margin:0;color:var(--cyan);font-weight:800}
   .ctitle .val{font-size:12px;color:var(--muted)}
 
-  .row{display:grid;grid-template-columns:70px 1fr;gap:16px;align-items:center;
-       margin-bottom:12px;flex:0 0 auto}
+  .row{display:grid;grid-template-columns:70px 1fr;gap:16px;align-items:center;margin-bottom:12px;flex:0 0 auto}
   .row .lbl{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.08em}
-  .row .val{font-size:12px;color:var(--ice);text-align:right;
-            font-variant-numeric:tabular-nums;grid-column:2;
-            margin-top:-3px;margin-bottom:1px}
+  .row .val{font-size:12px;color:var(--ice);text-align:right;font-variant-numeric:tabular-nums;
+            grid-column:2;margin-top:-3px;margin-bottom:1px}
 
-  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:34px;
-                    background:transparent;margin:0;display:block;cursor:pointer}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:34px;background:transparent;
+                    margin:0;display:block;cursor:pointer}
   input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:99px;
-    background:linear-gradient(90deg,var(--c,var(--cyan)) var(--p,50%),
-               rgba(234,241,255,.1) var(--p,50%))}
+    background:linear-gradient(90deg,var(--c,var(--cyan)) var(--p,50%),rgba(234,241,255,.1) var(--p,50%))}
   input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
     width:22px;height:22px;border-radius:50%;margin-top:-8px;background:#fff;
     border:2px solid var(--c,var(--cyan));transition:transform .16s var(--e)}
   input[type=range]:active::-webkit-slider-thumb{transform:scale(1.15)}
   input[type=range].center::-webkit-slider-runnable-track{
-    background:linear-gradient(90deg,
-      rgba(234,241,255,.1) 0%, rgba(234,241,255,.1) var(--lo,50%),
-      var(--c,var(--cyan)) var(--lo,50%), var(--c,var(--cyan)) var(--hi,50%),
-      rgba(234,241,255,.1) var(--hi,50%), rgba(234,241,255,.1) 100%)}
+    background:linear-gradient(90deg,rgba(234,241,255,.1) 0%,rgba(234,241,255,.1) var(--lo,50%),
+      var(--c,var(--cyan)) var(--lo,50%),var(--c,var(--cyan)) var(--hi,50%),
+      rgba(234,241,255,.1) var(--hi,50%),rgba(234,241,255,.1) 100%)}
   input[type=range]::-moz-range-track{height:6px;border-radius:99px;background:rgba(234,241,255,.1)}
   input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;
     border:2px solid var(--c,var(--cyan))}
 
-  /* ============================================================
-     ⭐ BOUTONS ROTATIFS (knobs) POUR L'ÉGALISEUR ⭐
-     ============================================================ */
-  .eq{
-    margin-top:auto;
-    padding-top:14px;
-    border-top:1px solid var(--edge2);
-    flex:0 0 auto;
-  }
-  .eq-title{font-size:12px;letter-spacing:.16em;color:var(--muted);
-            font-weight:700;margin-bottom:14px;text-align:center}
+  .eq{margin-top:auto;padding-top:14px;border-top:1px solid var(--edge2);flex:0 0 auto}
+  .eq-title{font-size:12px;letter-spacing:.16em;color:var(--muted);font-weight:700;margin-bottom:14px;text-align:center}
+  .knob-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;justify-items:center}
 
-  .knob-row{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
-    justify-items:center;
-  }
-
-  .knob{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:8px;
-    cursor:grab;
-    touch-action:none;
-    width:100%;
-  }
+  .knob{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:grab;touch-action:none;width:100%}
   .knob:active{cursor:grabbing}
 
-  .knob-dial{
-    position:relative;
-    width:100%;
-    aspect-ratio:1 / 1;
-    max-width:110px;
-    max-height:110px;
+  .knob-dial{position:relative;width:100%;aspect-ratio:1 / 1;max-width:110px;max-height:110px;
     border-radius:50%;
-    background:
-      radial-gradient(circle at 50% 50%,
-        var(--deep) 0%,
-        var(--panel) 55%,
-        var(--mod) 75%,
-        #050810 100%);
+    background:radial-gradient(circle at 50% 50%,var(--deep) 0%,var(--panel) 55%,var(--mod) 75%,#050810 100%);
     border:2px solid var(--k-color,var(--cyan));
-    box-shadow:
-      inset 0 0 12px rgba(0,0,0,.7),
-      inset 0 0 0 1px rgba(255,255,255,.04);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    user-select:none;
-    -webkit-user-select:none;
-    transition:box-shadow .2s var(--e),border-color .2s var(--e);
-    overflow:hidden;
-  }
+    box-shadow:inset 0 0 12px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.04);
+    display:flex;align-items:center;justify-content:center;
+    user-select:none;-webkit-user-select:none;
+    transition:box-shadow .2s var(--e),border-color .2s var(--e);overflow:hidden}
   .knob.active .knob-dial{
-    box-shadow:
-      inset 0 0 12px rgba(0,0,0,.7),
-      inset 0 0 0 1px rgba(255,255,255,.08),
-      0 0 20px color-mix(in srgb,var(--k-color,var(--cyan)) 40%,transparent);
-  }
+    box-shadow:inset 0 0 12px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.08),
+      0 0 20px color-mix(in srgb,var(--k-color,var(--cyan)) 40%,transparent)}
+  .knob-dial::before{content:'';position:absolute;inset:4px;border-radius:50%;
+    background:repeating-conic-gradient(from -135deg,rgba(234,241,255,.28) 0deg 1deg,transparent 1deg 15deg);
+    -webkit-mask:radial-gradient(circle,transparent 0,transparent 68%,#000 69%,#000 78%,transparent 79%);
+    mask:radial-gradient(circle,transparent 0,transparent 68%,#000 69%,#000 78%,transparent 79%);
+    pointer-events:none;opacity:.55}
+  .knob-indicator{position:absolute;inset:0;pointer-events:none;transform-origin:50% 50%;
+                  transition:transform .05s linear}
+  .knob-indicator::before{content:'';position:absolute;left:50%;top:6%;width:4px;height:26%;
+    border-radius:2px;background:var(--k-color,var(--cyan));transform:translateX(-50%);
+    box-shadow:0 0 8px var(--k-color,var(--cyan))}
+  .knob-dial::after{content:'';position:absolute;inset:38%;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#4a5570 0%,#2a3248 55%,#1a2033 100%);
+    box-shadow:inset 0 1px 2px rgba(255,255,255,.1),inset 0 -1px 3px rgba(0,0,0,.6);pointer-events:none}
+  .knob-label{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+  .knob-value{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;
+              color:var(--k-color,var(--cyan));min-height:16px;transition:color .15s var(--e)}
+  .knob.active .knob-value{color:#fff;text-shadow:0 0 10px var(--k-color,var(--cyan))}
 
-  /* Graduations autour du bouton */
-  .knob-dial::before{
-    content:'';
-    position:absolute;
-    inset:4px;
-    border-radius:50%;
-    background:
-      repeating-conic-gradient(
-        from -135deg,
-        rgba(234,241,255,.28) 0deg 1deg,
-        transparent 1deg 15deg
-      );
-    -webkit-mask:
-      radial-gradient(circle,
-        transparent 0,
-        transparent 68%,
-        #000 69%,
-        #000 78%,
-        transparent 79%);
-    mask:
-      radial-gradient(circle,
-        transparent 0,
-        transparent 68%,
-        #000 69%,
-        #000 78%,
-        transparent 79%);
-    pointer-events:none;
-    opacity:.55;
-  }
-
-  /* Indicateur qui tourne */
-  .knob-indicator{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    transform-origin:50% 50%;
-    transition:transform .05s linear;
-  }
-  .knob-indicator::before{
-    content:'';
-    position:absolute;
-    left:50%;
-    top:6%;
-    width:4px;
-    height:26%;
-    border-radius:2px;
-    background:var(--k-color,var(--cyan));
-    transform:translateX(-50%);
-    box-shadow:0 0 8px var(--k-color,var(--cyan));
-  }
-
-  /* Bouton central (esthétique) */
-  .knob-dial::after{
-    content:'';
-    position:absolute;
-    inset:38%;
-    border-radius:50%;
-    background:
-      radial-gradient(circle at 35% 30%,
-        #4a5570 0%,
-        #2a3248 55%,
-        #1a2033 100%);
-    box-shadow:
-      inset 0 1px 2px rgba(255,255,255,.1),
-      inset 0 -1px 3px rgba(0,0,0,.6);
-    pointer-events:none;
-  }
-
-  .knob-label{
-    font-size:11px;
-    font-weight:700;
-    letter-spacing:.08em;
-    color:var(--muted);
-    text-transform:uppercase;
-  }
-
-  .knob-value{
-    font-size:13px;
-    font-weight:800;
-    font-variant-numeric:tabular-nums;
-    color:var(--k-color,var(--cyan));
-    min-height:16px;
-    transition:color .15s var(--e);
-  }
-  .knob.active .knob-value{
-    color:#fff;
-    text-shadow:0 0 10px var(--k-color,var(--cyan));
-  }
-
-  /* ============================================================
-     DRAWER PAR LE BAS
-     ============================================================ */
-  .drawer{
-    position:fixed;
-    left:0;right:0;bottom:0;top:auto;
-    height:88vh;height:88dvh;max-height:88vh;
-    width:100%;
-    z-index:40;
-    background:linear-gradient(180deg,#0B1020,#06080F);
-    border-top-left-radius:20px;
-    border-top-right-radius:20px;
-    border-top:1px solid var(--edge2);
-    transform:translateY(101%);
-    transition:transform .32s var(--e);
-    display:flex;
-    flex-direction:column;
-    overflow:hidden;
-    box-shadow:0 -20px 60px rgba(0,0,0,.6);
-  }
+  .drawer{position:fixed;left:0;right:0;bottom:0;top:auto;height:88vh;height:88dvh;max-height:88vh;
+    width:100%;z-index:40;background:linear-gradient(180deg,#0B1020,#06080F);
+    border-top-left-radius:20px;border-top-right-radius:20px;border-top:1px solid var(--edge2);
+    transform:translateY(101%);transition:transform .32s var(--e);
+    display:flex;flex-direction:column;overflow:hidden;
+    box-shadow:0 -20px 60px rgba(0,0,0,.6)}
   .drawer.open{transform:translateY(0)}
 
-  .drawer-handle{
-    display:flex;align-items:center;justify-content:center;
-    padding:10px 0 6px;flex:0 0 auto;cursor:grab;
-  }
-  .drawer-handle i{
-    width:48px;height:4px;border-radius:99px;
-    background:rgba(140,190,255,.35);
-  }
+  .drawer-handle{display:flex;align-items:center;justify-content:center;padding:10px 0 6px;flex:0 0 auto;cursor:grab}
+  .drawer-handle i{width:48px;height:4px;border-radius:99px;background:rgba(140,190,255,.35)}
 
-  .dhead{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:2px 20px 12px;flex:0 0 auto;gap:10px;
-  }
-  .dhead h2{
-    font-size:13px;letter-spacing:.2em;margin:0;
-    color:var(--cyan);font-weight:800;
-  }
-  .dhead button{
-    width:40px;height:40px;border-radius:50%;
-    border:1px solid var(--edge2);
-    background:rgba(234,241,255,.06);
-    font-size:18px;line-height:1;
-    display:flex;align-items:center;justify-content:center;
-  }
+  .dhead{display:flex;align-items:center;justify-content:space-between;padding:2px 20px 12px;flex:0 0 auto;gap:10px}
+  .dhead h2{font-size:13px;letter-spacing:.2em;margin:0;color:var(--cyan);font-weight:800}
+  .dhead button{width:40px;height:40px;border-radius:50%;border:1px solid var(--edge2);
+    background:rgba(234,241,255,.06);font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center}
   .dhead button:active{transform:scale(.92)}
 
-  .dcontent{
-    flex:1 1 auto;
-    display:flex;flex-direction:column;
-    padding:0 20px calc(env(safe-area-inset-bottom) + 20px) 20px;
-    min-height:0;overflow:hidden;
-  }
+  .dcontent{flex:1 1 auto;display:flex;flex-direction:column;
+    padding:0 20px calc(env(safe-area-inset-bottom) + 20px) 20px;min-height:0;overflow:hidden}
 
   .addtop{display:flex;gap:8px;margin-bottom:12px;flex:0 0 auto}
-  .addtop .txtin{flex:1;min-width:0;min-height:46px;font-size:15px;
-                 padding:0 16px;border-radius:12px}
-  .addtop .pill{
-    flex:0 0 auto;min-height:46px;padding:0 20px;
-    font-size:22px;line-height:1;font-weight:700;border-radius:12px;
-  }
+  .addtop .txtin{flex:1;min-width:0;min-height:46px;font-size:15px;padding:0 16px;border-radius:12px}
+  .addtop .pill{flex:0 0 auto;min-height:46px;padding:0 20px;font-size:22px;line-height:1;font-weight:700;border-radius:12px}
 
   .searchbox{margin-bottom:12px;flex:0 0 auto}
 
-  .txtin{width:100%;font:inherit;color:var(--ice);
-    background:rgba(234,241,255,.05);border:1px solid var(--edge2);
-    border-radius:12px;min-height:46px;padding:0 16px;font-size:15px;
+  .txtin{width:100%;font:inherit;color:var(--ice);background:rgba(234,241,255,.05);
+    border:1px solid var(--edge2);border-radius:12px;min-height:46px;padding:0 16px;font-size:15px;
     -webkit-appearance:none;appearance:none}
   .txtin:focus{outline:none;border-color:var(--cyan)}
 
-  .tabs{
-    display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;
-    margin:0 0 12px;padding-bottom:4px;flex:0 0 auto;
-  }
+  .tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 0 12px;padding-bottom:4px;flex:0 0 auto}
   .tabs::-webkit-scrollbar{display:none}
-  .tabs button{
-    flex:none;white-space:nowrap;font-size:13px;color:var(--muted);
-    background:rgba(234,241,255,.05);border:1px solid var(--edge);
-    border-radius:100px;min-height:36px;padding:0 16px;
-  }
-  .tabs button.sel{
-    background:linear-gradient(135deg,var(--cyan),#0E8BDD);
-    color:#03121A;border-color:transparent;font-weight:700;
-  }
+  .tabs button{flex:none;white-space:nowrap;font-size:13px;color:var(--muted);
+    background:rgba(234,241,255,.05);border:1px solid var(--edge);border-radius:100px;min-height:36px;padding:0 16px}
+  .tabs button.sel{background:linear-gradient(135deg,var(--cyan),#0E8BDD);color:#03121A;
+    border-color:transparent;font-weight:700}
 
-  .listwrap{
-    flex:1 1 auto;
-    overflow-y:auto;
-    min-height:0;
-    padding-right:2px;
-    -webkit-overflow-scrolling:touch;
-  }
+  .listwrap{flex:1 1 auto;overflow-y:auto;min-height:0;padding-right:2px;-webkit-overflow-scrolling:touch}
   .listwrap::-webkit-scrollbar{width:6px}
   .listwrap::-webkit-scrollbar-thumb{background:rgba(234,241,255,.13);border-radius:99px}
 
-  .rowlist{
-    display:flex;align-items:center;gap:12px;width:100%;text-align:left;
-    padding:14px;border-radius:12px;border:1px solid transparent;
-    transition:background .15s var(--e),border-color .15s var(--e);
-  }
+  .rowlist{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:14px;
+    border-radius:12px;border:1px solid transparent;transition:background .15s var(--e),border-color .15s var(--e)}
   .rowlist + .rowlist{margin-top:3px}
   .rowlist:hover{background:rgba(234,241,255,.05)}
-  .rowlist.play{
-    background:linear-gradient(90deg,rgba(47,231,255,.16),rgba(47,231,255,.02));
-    border-color:rgba(47,231,255,.45);
-  }
-  .rowlist .dot{
-    width:9px;height:9px;border-radius:50%;flex:none;
-    background:rgba(234,241,255,.14);
-  }
+  .rowlist.play{background:linear-gradient(90deg,rgba(47,231,255,.16),rgba(47,231,255,.02));border-color:rgba(47,231,255,.45)}
+  .rowlist .dot{width:9px;height:9px;border-radius:50%;flex:none;background:rgba(234,241,255,.14)}
   .rowlist.play .dot{background:var(--cyan)}
   .rowlist .info{flex:1;min-width:0}
-  .rowlist .nm{
-    font-weight:600;font-size:16px;display:block;
-    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-  }
+  .rowlist .nm{font-weight:600;font-size:16px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .rowlist.play .nm{color:var(--cyan)}
-  .rowlist .desc{
-    font-size:13px;color:var(--muted);display:block;
-    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-  }
-  .rowlist .star{
-    font-size:20px;color:rgba(234,241,255,.2);padding:6px;
-    flex:none;transition:all .18s var(--e);
-  }
+  .rowlist .desc{font-size:13px;color:var(--muted);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .rowlist .star{font-size:20px;color:rgba(234,241,255,.2);padding:6px;flex:none;transition:all .18s var(--e)}
   .rowlist .star:hover{color:var(--magenta);transform:scale(1.15)}
   .rowlist .star.is{color:var(--magenta)}
 
-  .msg{
-    font-size:13px;color:var(--muted);margin-top:10px;
-    line-height:1.5;flex:0 0 auto;
-  }
+  .msg{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.5;flex:0 0 auto}
   .msg b{color:var(--ice)}
 
-  .scrim{
-    position:fixed;inset:0;background:rgba(3,5,10,.6);z-index:39;
-    opacity:0;pointer-events:none;transition:opacity .25s var(--e);
-  }
+  .scrim{position:fixed;inset:0;background:rgba(3,5,10,.6);z-index:39;opacity:0;pointer-events:none;transition:opacity .25s var(--e)}
   .scrim.open{opacity:1;pointer-events:auto}
 
   @media (max-width:600px){
@@ -434,10 +204,7 @@
     .row{grid-template-columns:56px 1fr;gap:12px;margin-bottom:10px}
     .dcontent{padding:0 16px calc(env(safe-area-inset-bottom) + 16px) 16px}
   }
-
-  @media (max-height:520px){
-    .wavewrap{display:none}
-  }
+  @media (max-height:520px){.wavewrap{display:none}}
 </style>
 </head>
 <body>
@@ -452,8 +219,7 @@
 
     <div class="quick-add">
       <input type="text" class="txtin" id="quickUrl" inputmode="url"
-             autocapitalize="off" autocorrect="off"
-             placeholder="Coller un lien de flux…">
+             autocapitalize="off" autocorrect="off" placeholder="Coller un lien de flux…">
       <button class="pill" id="quickAdd">＋</button>
     </div>
 
@@ -488,34 +254,24 @@
     <div class="eq">
       <div class="eq-title">ÉGALISEUR</div>
       <div class="knob-row">
-
         <div class="knob" id="knobBass" style="--k-color:#FF3D9E"
              data-min="-15" data-max="15" data-step="1" data-value="0">
-          <div class="knob-dial">
-            <div class="knob-indicator"></div>
-          </div>
+          <div class="knob-dial"><div class="knob-indicator"></div></div>
           <div class="knob-value" id="bassVal">0</div>
           <div class="knob-label">Bass</div>
         </div>
-
         <div class="knob" id="knobMid" style="--k-color:#2FE7FF"
              data-min="-15" data-max="15" data-step="1" data-value="0">
-          <div class="knob-dial">
-            <div class="knob-indicator"></div>
-          </div>
+          <div class="knob-dial"><div class="knob-indicator"></div></div>
           <div class="knob-value" id="midVal">0</div>
           <div class="knob-label">Mid</div>
         </div>
-
         <div class="knob" id="knobTreble" style="--k-color:#B9FF45"
              data-min="-15" data-max="15" data-step="1" data-value="0">
-          <div class="knob-dial">
-            <div class="knob-indicator"></div>
-          </div>
+          <div class="knob-dial"><div class="knob-indicator"></div></div>
           <div class="knob-value" id="trelVal">0</div>
           <div class="knob-label">High</div>
         </div>
-
       </div>
     </div>
   </div>
@@ -525,27 +281,21 @@
 
 <aside class="drawer" id="drawer" aria-modal="true">
   <div class="drawer-handle" id="drawerHandle"><i></i></div>
-
   <div class="dhead">
     <h2>STATIONS</h2>
     <button id="closeDrawer" aria-label="Fermer">✕</button>
   </div>
-
   <div class="dcontent">
     <div class="addtop">
       <input type="text" class="txtin" id="url" inputmode="url"
-             autocapitalize="off" autocorrect="off"
-             placeholder="Coller un lien de flux…">
+             autocapitalize="off" autocorrect="off" placeholder="Coller un lien de flux…">
       <button class="pill" id="addUrl">＋</button>
     </div>
-
     <div class="searchbox">
       <input type="text" class="txtin" id="search" placeholder="Chercher une station…"
              autocapitalize="off" autocorrect="off">
     </div>
-
     <div class="tabs" id="tabs"></div>
-
     <div class="listwrap">
       <div id="list"></div>
       <div class="msg" id="listMsg"></div>
@@ -572,8 +322,8 @@ function proxify(u) {
    ÉTAT
    ========================================================= */
 let audioCtx = null;
-let mixEl = null;       // <audio> branché sur Web Audio (avec EQ)
-let cleanEl = null;     // <audio> simple, sans Web Audio (fallback)
+let mixEl = null;      /* <audio> branché sur Web Audio (avec EQ) */
+let player = null;     /* <audio> simple, sans Web Audio (fallback) */
 let srcNode = null;
 let pannerNode = null;
 let gainNode = null;
@@ -587,14 +337,14 @@ let graphBuilt = false;
 let isPlaying = false;
 let currentStation = null;
 let sessionId = 0;
-let usingMix = false;   // le flux actuel passe-t-il par Web Audio ?
+let usingMix = false;
 
 const RETRY_BASE = 800;
 const RETRY_MAX = 20000;
 const GOOD_PLAYBACK_MS = 15000;
 
 /* =========================================================
-   GRAPHE AUDIO
+   GRAPHE AUDIO — DEUX éléments <audio>
    ========================================================= */
 function buildGraph() {
   if (graphBuilt) return;
@@ -606,18 +356,14 @@ function buildGraph() {
     audioCtx = new AC();
   }
 
-  /* Élément MIX — branché sur Web Audio pour l'EQ */
+  /* --- Élément MIX (avec EQ) --- */
   mixEl = new Audio();
   mixEl.crossOrigin = 'anonymous';
   mixEl.setAttribute('playsinline', '');
   mixEl.preload = 'none';
 
-  /* Élément CLEAN — lecture brute sans Web Audio (fallback) */
-  cleanEl = new Audio();
-  cleanEl.setAttribute('playsinline', '');
-  cleanEl.preload = 'none';
-
   srcNode = audioCtx.createMediaElementSource(mixEl);
+
   pannerNode = audioCtx.createStereoPanner(); pannerNode.pan.value = 0;
   gainNode = audioCtx.createGain(); gainNode.gain.value = 1;
 
@@ -645,17 +391,22 @@ function buildGraph() {
   analyser.connect(audioCtx.destination);
 
   _waveData = new Uint8Array(analyser.fftSize);
+
+  /* --- Élément CLEAN (sans Web Audio) — c'est LUI qui joue les flux
+     HTTP fragiles que le CORS ou le routeur Web Audio casse --- */
+  player = new Audio();
+  player.setAttribute('playsinline', '');
+  player.preload = 'none';
+
   graphBuilt = true;
 }
 
 /* =========================================================
-   TENTATIVE DE LECTURE
-   useMix=true  → passe par Web Audio (mixEl)
-   useMix=false → lecture brute (cleanEl) - pas de CORS, pas d'EQ
+   LECTURE — un élément selon le mode
    ========================================================= */
 function tryPlay(url, useMix, mySession) {
   return new Promise((resolve) => {
-    const el = useMix ? mixEl : cleanEl;
+    const el = useMix ? mixEl : player;
     if (!el) { resolve(false); return; }
 
     let done = false;
@@ -685,8 +436,7 @@ function tryPlay(url, useMix, mySession) {
       if (done) return;
       if (sessionId !== mySession || !isPlaying) { finish(false); return; }
       const idle = Date.now() - lastProgress;
-      if (!startedPlaying && idle > 12000) { finish(false); }
-      else if (startedPlaying && idle > 12000) { finish(false); }
+      if (idle > 15000) { finish(false); }
     }, 1000);
 
     try {
@@ -699,35 +449,37 @@ function tryPlay(url, useMix, mySession) {
 }
 
 /* =========================================================
-   SESSION AVEC PLAN D'ESSAIS (comme la full)
-   Pour chaque URL : mix puis clean
+   SESSION — comme la full : pour chaque URL → mix puis clean
    ========================================================= */
 async function streamSession(station, mySession) {
   const rawUrls = [station.u].concat(station.alts || []).filter(Boolean);
 
-  /* Construire le plan : pour chaque URL → mix, puis clean
-     Si HTTP → on essaie aussi la version proxiée */
   const plan = [];
   rawUrls.forEach(u => {
+    /* Essai 1 : version proxiée (HTTP→HTTPS) via Web Audio */
     const proxied = proxify(u);
-    if (proxied !== u) {
-      /* URL HTTP → on tente d'abord via le proxy */
-      plan.push({ url: proxied, mix: true });
-      plan.push({ url: proxied, mix: false });
-    }
-    /* URL directe (peut être HTTPS ou HTTP) */
+    if (proxied !== u) plan.push({ url: proxied, mix: true });
+
+    /* Essai 2 : version directe via Web Audio */
     plan.push({ url: u, mix: true });
+
+    /* Essai 3 : version directe SANS Web Audio (fallback) */
     plan.push({ url: u, mix: false });
+
+    /* Essai 4 : version proxiée SANS Web Audio */
+    if (proxied !== u) plan.push({ url: proxied, mix: false });
   });
 
-  console.info('[Core Mini] Plan d\'essais :', plan.map(p => p.url + (p.mix ? ' [mix]' : ' [clean]')));
+  console.info('[Core Mini] Plan :', plan.map(p => p.url + ' [' + (p.mix ? 'mix' : 'clean') + ']'));
 
-  let attempt = 0;
   let idx = 0;
+  let attempt = 0;
 
   while (isPlaying && sessionId === mySession) {
     const step = plan[idx % plan.length];
-    setStatus('⏳ Tentative ' + (idx+1) + '/' + plan.length + '...');
+
+    setStatus('⏳ Essai ' + ((idx % plan.length) + 1) + '/' + plan.length +
+              (step.mix ? ' · EQ' : ' · direct'));
 
     const startTs = Date.now();
     const ok = await tryPlay(step.url, step.mix, mySession);
@@ -736,29 +488,34 @@ async function streamSession(station, mySession) {
     if (!isPlaying || sessionId !== mySession) return;
 
     if (ok && playedFor >= GOOD_PLAYBACK_MS) {
-      /* Bonne session — reset du plan */
+      /* Succès → on réordonne pour mettre ce mode en premier */
       attempt = 0;
+      const winner = plan[idx % plan.length];
+      plan.length = 0;
+      plan.push(winner);
+      rawUrls.forEach(u => {
+        const proxied = proxify(u);
+        if (proxied !== u) plan.push({ url: proxied, mix: winner.mix });
+        plan.push({ url: u, mix: winner.mix });
+      });
       idx = 0;
       setStatus('🔄 Reconnexion...');
     } else {
       attempt++;
       idx++;
-      if (attempt > plan.length * 2) {
-        /* Trop d'échecs → pause longue */
-        setStatus('❌ Station inaccessible. Nouvel essai dans 10s...');
+      if (attempt > plan.length * 3) {
+        setStatus('❌ Station inaccessible. Pause 10s...');
         await new Promise(r => setTimeout(r, 10000));
         attempt = 0;
         idx = 0;
-      } else {
-        setStatus('🔄 Essai ' + (idx) + '/' + plan.length + '...');
       }
     }
 
-    /* Nettoyage */
+    /* Nettoyage — on coupe les deux éléments */
     try { mixEl.pause(); } catch(e) {}
     try { mixEl.removeAttribute('src'); mixEl.load(); } catch(e) {}
-    try { cleanEl.pause(); } catch(e) {}
-    try { cleanEl.removeAttribute('src'); cleanEl.load(); } catch(e) {}
+    try { player.pause(); } catch(e) {}
+    try { player.removeAttribute('src'); player.load(); } catch(e) {}
 
     if (!isPlaying || sessionId !== mySession) return;
 
@@ -773,8 +530,8 @@ async function togglePlay(station) {
     sessionId++;
     try { mixEl.pause(); } catch(e) {}
     try { mixEl.removeAttribute('src'); mixEl.load(); } catch(e) {}
-    try { cleanEl.pause(); } catch(e) {}
-    try { cleanEl.removeAttribute('src'); cleanEl.load(); } catch(e) {}
+    try { player.pause(); } catch(e) {}
+    try { player.removeAttribute('src'); player.load(); } catch(e) {}
     render();
     setStatus('⏹️ Arrêté.');
     return;
@@ -843,16 +600,10 @@ const CORE = [
 ];
 
 const TABS = [
-  {id:'all',label:'Tout'},
-  {id:'fav',label:'Favoris'},
-  {id:'chill',label:'Chill'},
-  {id:'house',label:'House'},
-  {id:'jazz',label:'Jazz'},
-  {id:'rock',label:'Rock'},
-  {id:'retro',label:'Rétro'},
-  {id:'world',label:'Monde'},
-  {id:'urban',label:'Urbain'},
-  {id:'trance',label:'Trance'}
+  {id:'all',label:'Tout'},{id:'fav',label:'Favoris'},
+  {id:'chill',label:'Chill'},{id:'house',label:'House'},{id:'jazz',label:'Jazz'},
+  {id:'rock',label:'Rock'},{id:'retro',label:'Rétro'},{id:'world',label:'Monde'},
+  {id:'urban',label:'Urbain'},{id:'trance',label:'Trance'}
 ];
 
 let tab = 'all', query = '', online = [], favs = [], plays = {};
@@ -869,22 +620,14 @@ const listMsg = document.getElementById('listMsg');
 const listEl = document.getElementById('list');
 const tabsEl = document.getElementById('tabs');
 
-function setStatus(msg) {
-  npState.textContent = msg;
-  statusMini.textContent = msg;
-}
-function title(t) {
-  npName.textContent = t;
-}
+function setStatus(msg) { npState.textContent = msg; statusMini.textContent = msg; }
+function title(t) { npName.textContent = t; }
 function render() {
   const p = isPlaying;
   waveEl.classList.toggle('on', p);
   npState.classList.toggle('live', p);
   const btn = document.getElementById('power');
-  if (btn) {
-    btn.textContent = p ? '⏹ Stop' : '▶ Écouter';
-    btn.classList.toggle('stop', p);
-  }
+  if (btn) { btn.textContent = p ? '⏹ Stop' : '▶ Écouter'; btn.classList.toggle('stop', p); }
 }
 
 function playStation(st) {
@@ -899,17 +642,14 @@ function playStation(st) {
     sessionId++;
     try { mixEl.pause(); } catch(e) {}
     try { mixEl.removeAttribute('src'); mixEl.load(); } catch(e) {}
-    try { cleanEl.pause(); } catch(e) {}
-    try { cleanEl.removeAttribute('src'); cleanEl.load(); } catch(e) {}
+    try { player.pause(); } catch(e) {}
+    try { player.removeAttribute('src'); player.load(); } catch(e) {}
     setTimeout(() => { isPlaying = true; togglePlay(st); }, 100);
   } else {
     togglePlay(st);
   }
 }
 
-/* =========================================================
-   LISTE
-   ========================================================= */
 TABS.forEach(t => {
   const b = document.createElement('button');
   b.textContent = t.label;
@@ -927,8 +667,7 @@ function filterRows() {
   if (query) {
     const q = query.toLowerCase();
     return CORE.concat(online).filter(s =>
-      (s.n + ' ' + (s.g||'') + ' ' + (s.c||'')).toLowerCase().indexOf(q) >= 0
-    );
+      (s.n + ' ' + (s.g||'') + ' ' + (s.c||'')).toLowerCase().indexOf(q) >= 0);
   }
   if (tab === 'fav') return favs.slice();
   if (tab === 'all') return CORE.slice();
@@ -938,43 +677,28 @@ function filterRows() {
 function paintList() {
   const rows = filterRows();
   listEl.innerHTML = '';
-
-  if (!rows.length && tab === 'fav') {
-    listMsg.textContent = 'Aucun favori pour l\'instant.';
-    return;
-  }
-  if (!rows.length && query) {
-    listMsg.innerHTML = '<b>Rien trouvé.</b>';
-    return;
-  }
+  if (!rows.length && tab === 'fav') { listMsg.textContent = 'Aucun favori pour l\'instant.'; return; }
+  if (!rows.length && query) { listMsg.innerHTML = '<b>Rien trouvé.</b>'; return; }
   listMsg.textContent = '';
 
   rows.forEach(st => {
     const r = document.createElement('button');
     r.className = 'rowlist';
     if (currentStation && currentStation.u === st.u) r.className += ' play';
-
     const isFav = favs.some(x => x.u === st.u);
-
     r.innerHTML = '<i class="dot"></i>'
       + '<span class="info"><span class="nm"></span><span class="desc"></span></span>'
       + '<span class="star' + (isFav ? ' is' : '') + '">★</span>';
-
     r.querySelector('.nm').textContent = st.n;
     const descParts = [];
     if (st.g) descParts.push(st.g);
     if (st.q) descParts.push(st.q);
     r.querySelector('.desc').textContent = descParts.join(' · ');
-
-    r.addEventListener('click', () => {
-      playStation(st);
-      openDrawer(false);
-    });
+    r.addEventListener('click', () => { playStation(st); openDrawer(false); });
     r.querySelector('.star').addEventListener('click', ev => {
       ev.stopPropagation(); ev.preventDefault();
       toggleFav(st);
     });
-
     listEl.appendChild(r);
   });
 }
@@ -986,9 +710,6 @@ function toggleFav(st) {
   paintList();
 }
 
-/* =========================================================
-   RECHERCHE
-   ========================================================= */
 let searchTimer = null;
 document.getElementById('search').addEventListener('input', function() {
   query = this.value.trim();
@@ -1026,14 +747,9 @@ function searchLibrary(q) {
       ? '<b>' + out.length + ' stations trouvées.</b>'
       : '<b>Rien pour ce mot.</b>';
     paintList();
-  }).catch(() => {
-    listMsg.innerHTML = '<b>Bibliothèque injoignable.</b>';
-  });
+  }).catch(() => { listMsg.innerHTML = '<b>Bibliothèque injoignable.</b>'; });
 }
 
-/* =========================================================
-   AJOUT DE FLUX
-   ========================================================= */
 document.getElementById('addUrl').addEventListener('click', () => {
   const box = document.getElementById('url');
   addStreamFromValue(box.value, box);
@@ -1052,26 +768,16 @@ document.getElementById('url').addEventListener('keydown', function(e) {
 function addStreamFromValue(rawValue, box) {
   let u = (rawValue || '').trim();
   if (!u) { listMsg.textContent = 'Colle un lien de flux.'; return; }
-
   const wasHttp = /^http:\/\//i.test(u);
   if (!/^https?:\/\//i.test(u)) u = 'https://' + u;
 
   const st = {
     n: u.replace(/^https?:\/\//i, '').split('/')[0].slice(0, 30),
     g: wasHttp ? 'Flux rapide (proxy auto)' : 'Flux ajouté',
-    c: 'all',
-    q: '',
-    u: u,
-    alts: []
+    c: 'all', q: '', u: u, alts: []
   };
-
   const existing = CORE.find(x => x.u === u);
-  if (existing) {
-    if (box) box.value = '';
-    playStation(existing);
-    return;
-  }
-
+  if (existing) { if (box) box.value = ''; playStation(existing); return; }
   CORE.push(st);
   if (box) box.value = '';
   listMsg.innerHTML = wasHttp
@@ -1080,17 +786,12 @@ function addStreamFromValue(rawValue, box) {
   playStation(st);
 }
 
-/* =========================================================
-   DRAWER
-   ========================================================= */
 const drawer = document.getElementById('drawer');
 const scrim = document.getElementById('scrim');
-
 function openDrawer(o) {
   drawer.classList.toggle('open', o);
   scrim.classList.toggle('open', o);
 }
-
 document.getElementById('openDrawer').addEventListener('click', () => openDrawer(true));
 document.getElementById('closeDrawer').addEventListener('click', () => openDrawer(false));
 scrim.addEventListener('click', () => openDrawer(false));
@@ -1100,10 +801,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') openDrawer(f
   const handle = document.getElementById('drawerHandle');
   if (!handle) return;
   let startY = 0, dragging = false;
-  handle.addEventListener('touchstart', e => {
-    startY = e.touches[0].clientY;
-    dragging = true;
-  }, {passive:true});
+  handle.addEventListener('touchstart', e => { startY = e.touches[0].clientY; dragging = true; }, {passive:true});
   handle.addEventListener('touchmove', e => {
     if (!dragging) return;
     const dy = e.touches[0].clientY - startY;
@@ -1117,7 +815,7 @@ document.getElementById('power').addEventListener('click', () => {
 });
 
 /* =========================================================
-   SLIDERS VOL / BAL
+   Sliders VOL / BAL
    ========================================================= */
 function fillPct(slider, centered) {
   const min = +slider.min, max = +slider.max, v = +slider.value;
@@ -1154,7 +852,7 @@ balSlider.addEventListener('input', updateBalance);
 updateVolume(); updateBalance();
 
 /* =========================================================
-   ⭐ KNOBS ROTATIFS POUR L'ÉGALISEUR ⭐
+   Knobs
    ========================================================= */
 function createKnob(knobEl, onValueChange) {
   const dial = knobEl.querySelector('.knob-dial');
@@ -1167,49 +865,32 @@ function createKnob(knobEl, onValueChange) {
   const range = max - min;
 
   let value = parseFloat(knobEl.dataset.value) || 0;
-  let dragging = false;
-  let startY = 0;
-  let startValue = 0;
-
-  /* Angle : -135° (min) à +135° (max) */
-  function valueToAngle(v) {
-    const pct = (v - min) / range;
-    return -135 + pct * 270;
-  }
+  let dragging = false, startY = 0, startValue = 0;
 
   function update(v, notify) {
-    /* Quantifier */
     v = Math.round(v / step) * step;
     v = Math.max(min, Math.min(max, v));
     value = v;
     knobEl.dataset.value = v;
-
-    const angle = valueToAngle(v);
+    const angle = -135 + ((v - min) / range) * 270;
     indicator.style.transform = 'rotate(' + angle + 'deg)';
     valueEl.textContent = (v > 0 ? '+' : '') + v;
-
     if (notify && onValueChange) onValueChange(v);
   }
 
-  /* Drag vertical : up = augmenter, down = diminuer */
   dial.addEventListener('pointerdown', (e) => {
-    dragging = true;
-    startY = e.clientY;
-    startValue = value;
+    dragging = true; startY = e.clientY; startValue = value;
     knobEl.classList.add('active');
     try { dial.setPointerCapture(e.pointerId); } catch(err) {}
     e.preventDefault();
   });
-
   dial.addEventListener('pointermove', (e) => {
     if (!dragging) return;
-    const dy = startY - e.clientY;   // up = positif
-    /* 180px de course verticale = plage complète */
+    const dy = startY - e.clientY;
     const delta = (dy / 180) * range;
     update(startValue + delta, true);
     e.preventDefault();
   });
-
   function end(e) {
     if (!dragging) return;
     dragging = false;
@@ -1218,33 +899,17 @@ function createKnob(knobEl, onValueChange) {
   }
   dial.addEventListener('pointerup', end);
   dial.addEventListener('pointercancel', end);
+  dial.addEventListener('dblclick', () => { update(0, true); });
 
-  /* Double-clic : reset à 0 */
-  dial.addEventListener('dblclick', () => {
-    update(0, true);
-  });
-
-  /* Initialisation (sans notifier) */
   update(value, false);
-
-  return { setValue: (v) => update(v, true), getValue: () => value };
 }
 
-const bassKnob = createKnob(
-  document.getElementById('knobBass'),
-  (v) => { if (bassFilter) bassFilter.gain.value = v; }
-);
-const midKnob = createKnob(
-  document.getElementById('knobMid'),
-  (v) => { if (midFilter) midFilter.gain.value = v; }
-);
-const trebleKnob = createKnob(
-  document.getElementById('knobTreble'),
-  (v) => { if (trebleFilter) trebleFilter.gain.value = v; }
-);
+createKnob(document.getElementById('knobBass'), (v) => { if (bassFilter) bassFilter.gain.value = v; });
+createKnob(document.getElementById('knobMid'), (v) => { if (midFilter) midFilter.gain.value = v; });
+createKnob(document.getElementById('knobTreble'), (v) => { if (trebleFilter) trebleFilter.gain.value = v; });
 
 /* =========================================================
-   WAVE
+   Wave
    ========================================================= */
 const BARS = 28;
 const barEls = [];
@@ -1262,7 +927,6 @@ let idle = 0, lastFrame = 0;
   lastFrame = t;
 
   const playing = isPlaying;
-  /* La wave ne s'anime que si le flux passe par Web Audio (usingMix) */
   const live = playing && usingMix && analyser && _waveData;
 
   if (live) {
@@ -1286,9 +950,6 @@ let idle = 0, lastFrame = 0;
   }
 })();
 
-/* =========================================================
-   INIT
-   ========================================================= */
 paintList();
 render();
 setStatus('Ouvre les stations pour choisir');
