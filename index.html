@@ -132,7 +132,9 @@
   .gainhead.active .val{color:var(--cyan);text-shadow:0 0 24px rgba(47,231,255,.7)}
   .big{height:56px!important}
   .big::-webkit-slider-runnable-track{height:10px!important;border-radius:99px}
-  .big::-webkit-slider-thumb{width:40px!important;height:40px!important;margin-top:-15px!important}
+  .big::-webkit-slider-thumb{width:22px!important;height:46px!important;border-radius:7px!important;
+                             margin-top:-18px!important}
+  .big::-moz-range-thumb{width:20px;height:44px;border-radius:7px}
   .vu{display:flex;flex-direction:column;gap:7px}
   .vu2{display:flex;align-items:center;gap:9px;width:100%}
   .vu2lbl{font-size:11px;font-weight:700;color:var(--muted);width:13px;text-align:center;flex:none}
@@ -178,24 +180,43 @@
 
    .chvol .fader.active input[type=range]::-webkit-slider-thumb{
      box-shadow:0 0 26px var(--fader-c,var(--cyan)),0 0 48px color-mix(in srgb,var(--fader-c,var(--cyan)) 55%,transparent),0 3px 10px rgba(0,0,0,.5);
-     transform:scale(1.12)}
+     transform:scaleY(1.08)}
    .chvol .fader.active input[type=range]::-moz-range-thumb{
      box-shadow:0 0 24px var(--fader-c,var(--cyan)),0 0 44px color-mix(in srgb,var(--fader-c,var(--cyan)) 55%,transparent)}
   input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;
-                    background:transparent;margin:0;display:block}
+                    background:transparent;margin:0;display:block;
+                    --tick:rgba(234,241,255,.30);
+                    background-image:
+                      repeating-linear-gradient(90deg,var(--tick) 0 2px,transparent 2px calc(100%/12)),
+                      linear-gradient(90deg,var(--tick) 0 2px);
+                    background-repeat:no-repeat,no-repeat;
+                    background-size:calc(100% - 18px) 9px,2px 9px;
+                    background-position:9px calc(50% + 15px),calc(100% - 11px) calc(50% + 15px)}
   input[type=range]::-webkit-slider-runnable-track{height:7px;border-radius:99px;
     background:linear-gradient(90deg,var(--c,var(--cyan)) var(--p,50%),rgba(234,241,255,.1) var(--p,50%))}
   input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
-    width:32px;height:32px;border-radius:50%;margin-top:-13px;background:#fff;
+    width:18px;height:38px;border-radius:6px;margin-top:-15.5px;
+    background:linear-gradient(180deg,#fff,#cfd9e6);
     border:2px solid var(--c,var(--cyan));box-shadow:0 0 18px var(--c,var(--cyan)),0 3px 10px rgba(0,0,0,.5);
     transition:transform .16s var(--e)}
-  input[type=range]:active::-webkit-slider-thumb{transform:scale(1.14)}
+  input[type=range]:active::-webkit-slider-thumb{transform:scaleY(1.1)}
   input[type=range].mirror{direction:rtl}
   input[type=range].mirror::-webkit-slider-runnable-track{
     background:linear-gradient(270deg,var(--c,var(--cyan)) var(--p,50%),rgba(234,241,255,.1) var(--p,50%))}
   input[type=range]::-moz-range-track{height:7px;border-radius:99px;background:rgba(234,241,255,.1)}
-  input[type=range]::-moz-range-thumb{width:30px;height:30px;border-radius:50%;background:#fff;
+  input[type=range]::-moz-range-thumb{width:16px;height:36px;border-radius:6px;
+    background:linear-gradient(180deg,#fff,#cfd9e6);
     border:2px solid var(--c,var(--cyan));box-shadow:0 0 16px var(--c,var(--cyan))}
+  /* Graduation centrale plus marquée sur les volumes gauche/droite */
+  .chvol input[type=range]{
+    background-image:
+      repeating-linear-gradient(90deg,var(--tick) 0 2px,transparent 2px calc(100%/12)),
+      linear-gradient(90deg,var(--tick) 0 2px),
+      linear-gradient(90deg,rgba(234,241,255,.6) 0 2px);
+    background-repeat:no-repeat,no-repeat,no-repeat;
+    background-size:calc(100% - 18px) 9px,2px 9px,2px 15px;
+    background-position:9px calc(50% + 15px),calc(100% - 11px) calc(50% + 15px),
+                        calc(50% - 1px) calc(50% + 12px)}
   select,.txtin{width:100%;font:inherit;font-size:15px;color:var(--ice);
     background:rgba(234,241,255,.05);border:1px solid var(--edge2);border-radius:12px;
     min-height:48px;padding:0 14px;-webkit-appearance:none;appearance:none;
@@ -345,23 +366,39 @@
     transform:rotate(-90deg);
     transform-origin:center center;
     -webkit-appearance:none;appearance:none;
-    background:transparent;margin:0;padding:0;cursor:pointer;
+    margin:0;padding:0;cursor:pointer;
+    --tick:rgba(234,241,255,.30);
+    background-color:transparent;
+    background-image:
+      repeating-linear-gradient(90deg,var(--tick) 0 2px,transparent 2px calc(100%/12)),
+      linear-gradient(90deg,var(--tick) 0 2px);
+    background-repeat:no-repeat,no-repeat;
+    background-size:calc(100% - 18px) 11px,2px 11px;
+    background-position:9px calc(50% + 15px),calc(100% - 11px) calc(50% + 15px);
     left:calc(50% - 100px);top:calc(50% - 22px)}
   .eq-band .eq-slider-wrap input[type=range]::-webkit-slider-runnable-track{
     height:7px;border-radius:99px;
     background:linear-gradient(90deg,var(--c,var(--cyan)) var(--p,50%),rgba(234,241,255,.1) var(--p,50%))}
   .eq-band .eq-slider-wrap input[type=range]::-webkit-slider-thumb{
-    -webkit-appearance:none;width:32px;height:32px;border-radius:50%;background:#fff;
-    margin-top:-13px;
+    -webkit-appearance:none;width:16px;height:40px;border-radius:6px;
+    background:linear-gradient(180deg,#fff,#cfd9e6);
+    margin-top:-16.5px;
     border:2px solid var(--c,var(--cyan));
     box-shadow:0 0 18px var(--c,var(--cyan)),0 3px 10px rgba(0,0,0,.5);
     transition:transform .16s var(--e)}
-  .eq-band .eq-slider-wrap input[type=range]:active::-webkit-slider-thumb{transform:scale(1.14)}
+  .eq-band .eq-slider-wrap input[type=range]:active::-webkit-slider-thumb{transform:scaleY(1.1)}
   .eq-band .eq-slider-wrap input[type=range]::-moz-range-track{height:7px;border-radius:99px;background:rgba(234,241,255,.1)}
-  .eq-band .eq-slider-wrap input[type=range]::-moz-range-thumb{width:30px;height:30px;border-radius:50%;
-    background:#fff;border:2px solid var(--c,var(--cyan));box-shadow:0 0 16px var(--c,var(--cyan))}
-  /* Ligne zéro : trait horizontal à mi-hauteur du wrapper */
-  .eq-zero{position:absolute;left:4px;right:4px;height:1px;top:50%;
+  .eq-band .eq-slider-wrap input[type=range]::-moz-range-thumb{width:15px;height:38px;border-radius:6px;
+    background:linear-gradient(180deg,#fff,#cfd9e6);border:2px solid var(--c,var(--cyan));box-shadow:0 0 16px var(--c,var(--cyan))}
+  @media (max-width:899px){
+    .eq-band .eq-slider-wrap input[type=range]{
+      background-size:calc(100% - 16px) 8px,2px 8px;
+      background-position:8px calc(50% + 12px),calc(100% - 10px) calc(50% + 12px)}
+    .eq-band .eq-slider-wrap input[type=range]::-webkit-slider-thumb{
+      width:14px;height:32px;margin-top:-12.5px}
+    .eq-band .eq-slider-wrap input[type=range]::-moz-range-thumb{width:13px;height:30px}
+  }
+  /* Ligne zéro : trait horizontal à mi-hauteur du wrapper */  .eq-zero{position:absolute;left:4px;right:4px;height:1px;top:50%;
            background:rgba(234,241,255,.35);pointer-events:none;box-shadow:0 0 6px rgba(234,241,255,.2)}
 
   @media (min-width:900px){
@@ -421,18 +458,6 @@
     <div class="scope-head"><h2>TOP 5 FAVORIS</h2></div>
     <div class="top5-list" id="top5List"></div>
   </div>
-  <div class="card scope-card">
-    <div class="scope-head">
-      <h2>OSCILLOSCOPE</h2>
-      <div class="legend">
-        <span><i style="background:#FF3D9E;box-shadow:0 0 10px #FF3D9E"></i>Bass</span>
-        <span><i style="background:#2FE7FF;box-shadow:0 0 10px #2FE7FF"></i>Medium</span>
-        <span><i style="background:#B9FF45;box-shadow:0 0 10px #B9FF45"></i>High</span>
-      </div>
-    </div>
-    <canvas id="scope"></canvas>
-  </div>
-  <div class="grip" id="grip" title="Glisser pour partager l'espace"><i></i></div>
   <div class="card console" id="console"></div>
 </div>
 <div class="scrim" id="scrim"></div>
@@ -847,8 +872,7 @@ var panel=document.getElementById('console');
   var h='<div class="ctitle"><h2>CONSOLE</h2>'
        +'<button data-mixbtn class="on">Active</button></div>'
        +'<div class="warn" data-warn>Cette station n\'accepte pas le traitement du son : les '
-       +'réglages restent sans effet sur elle. Colle un relais ci-dessous, ou ouvre un de tes '
-       +'morceaux — tout y fonctionne.</div>'
+       +'réglages restent sans effet sur elle. Ouvre un de tes morceaux — tout y fonctionne.</div>'
        +'<div class="addrow console-add-stream">'
        +'<input type="text" class="txtin" id="url" inputmode="url" autocapitalize="off" '
        +'autocorrect="off" placeholder="Coller l\'adresse d\'un flux">'
@@ -893,34 +917,6 @@ var panel=document.getElementById('console');
     });
     h+='</div></div>';
   });
-  h+='</div>'
-    +'<div class="mods" data-ui2>';
-  /* Le reste des MODS (sans les EQ) */
-  MODS.filter(function(m){ return !m.side; }).forEach(function(m){
-    h+='<div class="mod"><h3>'+m.t+'</h3>';
-    m.items.forEach(function(s){
-      if(s.sel){
-        h+='<div class="fader"><div class="fhead"><span class="lbl">'+s.lbl+'</span></div>'
-          +'<div style="height:10px"></div><select data-k="'+s.k+'">';
-        s.sel.forEach(function(o){ h+='<option value="'+o[0]+'">'+o[1]+'</option>'; });
-        h+='</select></div>';
-      } else {
-        h+='<div class="fader"><div class="fhead"><span class="lbl">'+s.lbl+'</span>'
-          +'<span class="val" data-val="'+s.k+'"></span></div>'
-          +'<input type="range" data-k="'+s.k+'" min="'+s.min+'" max="'+s.max+'" step="'+s.stp
-          +'" style="--c:'+s.c+'">';
-        if(s.led) h+='<div class="led" data-led></div>';
-        h+='</div>';
-      }
-    });
-    h+='</div>';
-  });
-  h+='<div class="mod"><h3>RELAIS POUR LES STATIONS QUI REFUSENT</h3>'
-    +'<input type="text" class="txtin" data-proxy inputmode="url" autocapitalize="off" '
-    +'autocorrect="off" placeholder="https://mon-relais.workers.dev/?url="></div>'
-    +'</div><div class="modes">';
-  ['plat','club','basse','dub'].forEach(function(p){
-    h+='<button data-preset="'+p+'">'+p.charAt(0).toUpperCase()+p.slice(1)+'</button>'; });
   h+='</div>';
   panel.innerHTML=h;
 
@@ -1024,11 +1020,13 @@ var panel=document.getElementById('console');
   });
 
   var px=panel.querySelector('[data-proxy]');
-  px.addEventListener('change',function(){
-    proxy=px.value.trim();
-    if(proxy){ buildMix(); setMix(true); }
-    if(current) playStation(current);
-  });
+  if(px){
+    px.addEventListener('change',function(){
+      proxy=px.value.trim();
+      if(proxy){ buildMix(); setMix(true); }
+      if(current) playStation(current);
+    });
+  }
   panel.querySelector('[data-mixbtn]').addEventListener('click',function(){
     setMix(!mixWanted);
     if(current) playStation(current);
@@ -1273,28 +1271,10 @@ document.getElementById('url').addEventListener('keydown',function(e){
   if(e.key==='Enter'){e.preventDefault();addDirectStream();}
 });
 
-/* ===================== Onde, VU, oscilloscope ===================== */
+/* ===================== Onde et VU-mètres ===================== */
 var bars=[];
 for(var i=0;i<34;i++){ var e=document.createElement('i'); wave.appendChild(e); bars.push(e); }
-var cv=document.getElementById('scope'), cx=cv.getContext('2d'), dpr=1;
-function sizeCanvas(){ dpr=Math.min(window.devicePixelRatio||1,2);
-  cv.width=cv.clientWidth*dpr; cv.height=cv.clientHeight*dpr; }
-window.addEventListener('resize',sizeCanvas);
-setTimeout(sizeCanvas,0); sizeCanvas();
 
-function trace(buf,color,scale,alpha){
-  var W=cv.width,H=cv.height,n=buf.length,mid=H/2;
-  var path=new Path2D();
-  for(var i=0;i<n;i+=2){
-    var x=i/n*W, y=mid+((buf[i]-128)/128)*(H*scale);
-    if(i===0) path.moveTo(x,y); else path.lineTo(x,y);
-  }
-  cx.lineJoin='round'; cx.lineCap='round'; cx.strokeStyle=color; cx.shadowColor=color;
-  cx.globalAlpha=alpha*.22; cx.lineWidth=9*dpr;   cx.shadowBlur=34*dpr; cx.stroke(path);
-  cx.globalAlpha=alpha*.5;  cx.lineWidth=4.5*dpr; cx.shadowBlur=18*dpr; cx.stroke(path);
-  cx.globalAlpha=alpha;     cx.lineWidth=1.8*dpr; cx.shadowBlur=8*dpr;  cx.stroke(path);
-  cx.globalAlpha=1; cx.shadowBlur=0;
-}
 function rms(buf){
   var s=0; for(var i=0;i<buf.length;i+=2){ var d=(buf[i]-128)/128; s+=d*d; }
   return Math.sqrt(s/(buf.length/2));
@@ -1308,8 +1288,7 @@ var idle=0;
     anaLow.getByteTimeDomainData(bLow);
     anaMid.getByteTimeDomainData(bMid);
     anaHigh.getByteTimeDomainData(bHigh);
-    anaL.getByteTimeDomainData(dL); anaR.getByteTimeDomainData(dR);
-    for(var k=0;k<bars.length;k++){
+    anaL.getByteTimeDomainData(dL); anaR.getByteTimeDomainData(dR);    for(var k=0;k<bars.length;k++){
       bars[k].style.height=Math.max(3,Math.abs(bMid[k*26+40]-128)/128*44)+'px';
     }
     var lv=[rms(dL),rms(dR)];
@@ -1332,29 +1311,6 @@ var idle=0;
     }
   }
 
-  cx.clearRect(0,0,cv.width,cv.height);
-  cx.strokeStyle='rgba(140,190,255,.16)'; cx.lineWidth=1*dpr;
-  cx.shadowColor='rgba(47,231,255,.7)'; cx.shadowBlur=10*dpr;
-  cx.beginPath(); cx.moveTo(0,cv.height/2); cx.lineTo(cv.width,cv.height/2); cx.stroke();
-  cx.shadowBlur=0;
-  if(live){
-    trace(bLow ,'#FF3D9E',.34,.95);
-    trace(bMid ,'#2FE7FF',.30,.9);
-    trace(bHigh,'#B9FF45',.26,.85);
-  } else {
-    ['#FF3D9E','#2FE7FF','#B9FF45'].forEach(function(c,n){
-      var p=new Path2D();
-      for(var x=0;x<cv.width;x+=4){
-        var yy=cv.height/2+Math.sin(x/(60+n*22)+idle*(1+n*.35)+n*2)*(playing?12:5)*dpr;
-        if(x===0) p.moveTo(x,yy); else p.lineTo(x,yy);
-      }
-      cx.lineJoin='round'; cx.lineCap='round'; cx.strokeStyle=c; cx.shadowColor=c;
-      cx.globalAlpha=.16; cx.lineWidth=9*dpr;   cx.shadowBlur=30*dpr; cx.stroke(p);
-      cx.globalAlpha=.42; cx.lineWidth=4*dpr;   cx.shadowBlur=16*dpr; cx.stroke(p);
-      cx.globalAlpha=.85; cx.lineWidth=1.6*dpr; cx.shadowBlur=7*dpr;  cx.stroke(p);
-      cx.globalAlpha=1; cx.shadowBlur=0;
-    });
-  }
 })();
 
 /* ===================== Tiroir des stations ===================== */
@@ -1364,30 +1320,6 @@ document.getElementById('openDrawer').addEventListener('click',function(){ openD
 document.getElementById('closeDrawer').addEventListener('click',function(){ openDrawer(false); });
 scrim.addEventListener('click',function(){ openDrawer(false); });
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') openDrawer(false); });
-
-/* ===================== Partage de l'espace ===================== */
-(function(){
-  var grip=document.getElementById('grip'), dragging=false, startY=0, startH=0;
-  function height(){ return document.getElementById('scope').getBoundingClientRect().height; }
-  function begin(y){ dragging=true; startY=y; startH=height(); grip.classList.add('drag');
-                     document.body.style.userSelect='none'; }
-  function move(y){
-    if(!dragging) return;
-    var h=Math.max(120,Math.min(window.innerHeight*0.72,startH+(y-startY)));
-    document.documentElement.style.setProperty('--scopeH',h+'px');
-    sizeCanvas();
-  }
-  function end(){ dragging=false; grip.classList.remove('drag'); document.body.style.userSelect=''; }
-  grip.addEventListener('mousedown',function(e){ begin(e.clientY); e.preventDefault(); });
-  window.addEventListener('mousemove',function(e){ move(e.clientY); });
-  window.addEventListener('mouseup',end);
-  grip.addEventListener('touchstart',function(e){ begin(e.touches[0].clientY); },{passive:true});
-  grip.addEventListener('touchmove',function(e){ move(e.touches[0].clientY); e.preventDefault(); },{passive:false});
-  grip.addEventListener('touchend',end);
-  grip.addEventListener('dblclick',function(){
-    document.documentElement.style.setProperty('--scopeH','30vh'); sizeCanvas();
-  });
-})();
 
 document.addEventListener('gesturestart',function(e){ e.preventDefault(); });
 syncUI(); paint(); render('Ouvre les stations pour choisir');
