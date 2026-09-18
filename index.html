@@ -598,7 +598,13 @@ const GOOD_PLAYBACK_MS = 15000;
    ========================================================= */
 function buildGraph() {
   if (graphBuilt) return;
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  const AC = window.AudioContext || window.webkitAudioContext;
+  try {
+    audioCtx = new AC({ latencyHint: 'playback' });
+  } catch (e) {
+    audioCtx = new AC();
+  }
 
   /* Élément MIX — branché sur Web Audio pour l'EQ */
   mixEl = new Audio();
