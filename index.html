@@ -15,7 +15,10 @@
     --e:cubic-bezier(.32,.72,0,1);
   }
   *{box-sizing:border-box}
-  html,body{margin:0;padding:0;min-height:100%;height:100%}
+  html,body{
+    margin:0;padding:0;height:100%;
+    overscroll-behavior:none;
+  }
   body{
     background:radial-gradient(70% 44% at 10% -6%,rgba(47,231,255,.13),transparent 62%),
                radial-gradient(64% 42% at 94% 2%,rgba(255,61,158,.11),transparent 60%),var(--void);
@@ -29,18 +32,32 @@
          touch-action:manipulation;-webkit-user-select:none;user-select:none}
 
   /* ============================================================
-     LAYOUT PRINCIPAL COMPACT
+     LAYOUT PRINCIPAL PLEIN ÉCRAN
      ============================================================ */
-  .app{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:8px;
-       padding:calc(env(safe-area-inset-top) + 8px) 10px
-              calc(env(safe-area-inset-bottom) + 8px) 10px}
+  .app{
+    width:100%;
+    height:100vh;
+    height:100dvh;                    /* support dynamique iOS */
+    max-width:520px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    padding:calc(env(safe-area-inset-top) + 8px) 10px
+           calc(env(safe-area-inset-bottom) + 8px) 10px;
+    overflow:hidden;                  /* pas de scroll global */
+  }
 
-  .card{border:1px solid var(--edge);border-radius:16px;position:relative;
-        background:linear-gradient(180deg,rgba(47,231,255,.05),transparent 40%),
-                   linear-gradient(180deg,var(--panel),var(--deep))}
+  .card{
+    border:1px solid var(--edge);border-radius:16px;position:relative;
+    background:linear-gradient(180deg,rgba(47,231,255,.05),transparent 40%),
+               linear-gradient(180deg,var(--panel),var(--deep));
+    display:flex;
+    flex-direction:column;
+  }
 
-  /* ---------- TOPBAR ---------- */
-  .topbar{padding:12px 14px}
+  /* ---------- TOPBAR (hauteur naturelle) ---------- */
+  .topbar{padding:12px 14px;flex:0 0 auto}
   .brand-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
   .orb{width:26px;height:26px;border-radius:50%;border:2.5px solid var(--cyan);
        position:relative;flex:none}
@@ -69,20 +86,31 @@
   .pill.stop{background:linear-gradient(135deg,#FF3D9E,#B01E75);color:#fff}
 
   /* ---------- WAVE ---------- */
-  .wavewrap{padding:0 14px 10px}
+  .wavewrap{padding:0 14px 10px;flex:0 0 auto}
   .wave{display:flex;align-items:flex-end;gap:2px;height:22px;width:100%}
   .wave i{flex:1;border-radius:2px;height:3px;background:var(--cyan);opacity:.22;
           transition:height .08s linear,opacity .4s var(--e)}
   .wave.on i{opacity:.9}
 
-  /* ---------- CONSOLE ---------- */
-  .console{padding:12px 14px}
-  .ctitle{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  /* ---------- CONSOLE (prend l'espace restant) ---------- */
+  .console{
+    padding:12px 14px;
+    flex:1 1 auto;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    overflow-y:auto;                  /* scroll interne si trop petit */
+    -webkit-overflow-scrolling:touch;
+  }
+  .console::-webkit-scrollbar{width:5px}
+  .console::-webkit-scrollbar-thumb{background:rgba(234,241,255,.13);border-radius:99px}
+
+  .ctitle{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex:0 0 auto}
   .ctitle h2{font-size:10.5px;letter-spacing:.18em;margin:0;color:var(--cyan);font-weight:800}
   .ctitle .val{font-size:11px;color:var(--muted)}
 
   .row{display:grid;grid-template-columns:50px 1fr;gap:10px;align-items:center;
-       margin-bottom:8px}
+       margin-bottom:8px;flex:0 0 auto}
   .row .lbl{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em}
   .row .val{font-size:11px;color:var(--ice);text-align:right;
             font-variant-numeric:tabular-nums;grid-column:2;margin-top:-3px;margin-bottom:1px}
@@ -105,7 +133,13 @@
   input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;
     border:2px solid var(--c,var(--cyan))}
 
-  .eq{margin-top:10px;padding-top:10px;border-top:1px solid var(--edge2)}
+  /* EQ : pousse vers le bas si l'espace le permet */
+  .eq{
+    margin-top:auto;                  /* pousse en bas si espace dispo */
+    padding-top:10px;
+    border-top:1px solid var(--edge2);
+    flex:0 0 auto;
+  }
   .eq-title{font-size:10.5px;letter-spacing:.16em;color:var(--muted);font-weight:700;margin-bottom:8px}
   .eq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
   .eq-band{display:flex;flex-direction:column;gap:4px}
@@ -114,110 +148,185 @@
   .eq-band .bval{font-size:10.5px;font-variant-numeric:tabular-nums;color:var(--c)}
 
   /* ============================================================
-     DRAWER — COMPACT ET SCROLLABLE
+     DRAWER PAR LE BAS — PLEIN ÉCRAN
      ============================================================ */
-  .drawer{position:fixed;top:0;right:0;bottom:0;width:min(100vw,420px);z-index:40;
-    background:linear-gradient(180deg,#0B1020,#06080F);border-left:1px solid var(--edge2);
-    transform:translateX(101%);transition:transform .32s var(--e);
+  .drawer{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    top:auto;
+    height:90vh;
+    height:90dvh;
+    max-height:90vh;
+    width:100%;
+    z-index:40;
+    background:linear-gradient(180deg,#0B1020,#06080F);
+    border-top-left-radius:20px;
+    border-top-right-radius:20px;
+    border-top:1px solid var(--edge2);
+    transform:translateY(101%);
+    transition:transform .32s var(--e);
+    display:flex;
+    flex-direction:column;
+    padding:0;
+    overflow:hidden;
+    box-shadow:0 -20px 60px rgba(0,0,0,.6);
+  }
+  .drawer.open{transform:translateY(0)}
+
+  .drawer-handle{
+    display:flex;align-items:center;justify-content:center;
+    padding:8px 0 4px;flex:0 0 auto;
+    cursor:grab;
+  }
+  .drawer-handle i{
+    width:44px;height:4px;border-radius:99px;
+    background:rgba(140,190,255,.35);
+  }
+
+  .dhead{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:2px 14px 10px;flex:0 0 auto;
+    gap:10px;
+  }
+  .dhead h2{
+    font-size:12px;letter-spacing:.2em;margin:0;
+    color:var(--cyan);font-weight:800;
+  }
+  .dhead button{
+    width:36px;height:36px;border-radius:50%;
+    border:1px solid var(--edge2);
+    background:rgba(234,241,255,.06);
+    font-size:16px;line-height:1;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .dhead button:active{transform:scale(.92)}
+
+  .dcontent{
+    flex:1 1 auto;
     display:flex;flex-direction:column;
-    padding:calc(env(safe-area-inset-top) + 10px) 10px
-           calc(env(safe-area-inset-bottom) + 10px) 10px;
-    overflow:hidden}
-  .drawer.open{transform:translateX(0)}
+    padding:0 14px calc(env(safe-area-inset-bottom) + 14px) 14px;
+    min-height:0;
+    overflow:hidden;
+  }
 
-  .dhead{display:flex;align-items:center;justify-content:space-between;
-         margin-bottom:8px;flex:0 0 auto}
-  .dhead h2{font-size:11px;letter-spacing:.18em;margin:0;color:var(--cyan);font-weight:800}
-  .dhead button{width:34px;height:34px;border-radius:50%;border:1px solid var(--edge2);
-                background:rgba(234,241,255,.05);font-size:15px}
+  .addtop{
+    display:flex;gap:6px;margin-bottom:8px;flex:0 0 auto;
+  }
+  .addtop .txtin{flex:1;min-width:0;min-height:40px;font-size:13px;
+                 padding:0 12px;border-radius:10px}
+  .addtop .pill{
+    flex:0 0 auto;min-height:40px;padding:0 16px;
+    font-size:18px;line-height:1;font-weight:700;border-radius:10px;
+  }
 
-  .searchbox{margin-bottom:6px;flex:0 0 auto}
-  .searchbox .txtin{width:100%;min-height:38px;font-size:14px;padding:0 12px;
-                    border-radius:10px}
-
-  .addtop{margin-bottom:6px;display:flex;gap:6px;flex:0 0 auto}
-  .addtop .txtin{flex:1;min-width:0;min-height:38px;font-size:13px;padding:0 12px;
-                 border-radius:10px}
-  .addtop .pill{flex:0 0 auto;min-height:38px;padding:0 14px;font-size:18px;
-                line-height:1;font-weight:700;border-radius:10px}
+  .searchbox{margin-bottom:8px;flex:0 0 auto}
 
   .txtin{width:100%;font:inherit;color:var(--ice);
     background:rgba(234,241,255,.05);border:1px solid var(--edge2);
+    border-radius:10px;min-height:40px;padding:0 12px;font-size:14px;
     -webkit-appearance:none;appearance:none}
   .txtin:focus{outline:none;border-color:var(--cyan)}
 
-  .tabs{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;
-        margin:0 0 8px;padding-bottom:4px;flex:0 0 auto}
+  .tabs{
+    display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;
+    margin:0 0 10px;padding-bottom:4px;flex:0 0 auto;
+  }
   .tabs::-webkit-scrollbar{display:none}
-  .tabs button{flex:none;white-space:nowrap;font-size:12px;color:var(--muted);
-    background:rgba(234,241,255,.05);border:1px solid var(--edge);border-radius:100px;
-    min-height:32px;padding:0 12px}
-  .tabs button.sel{background:linear-gradient(135deg,var(--cyan),#0E8BDD);color:#03121A;
-    border-color:transparent;font-weight:700}
+  .tabs button{
+    flex:none;white-space:nowrap;font-size:12px;color:var(--muted);
+    background:rgba(234,241,255,.05);border:1px solid var(--edge);
+    border-radius:100px;min-height:32px;padding:0 12px;
+  }
+  .tabs button.sel{
+    background:linear-gradient(135deg,var(--cyan),#0E8BDD);
+    color:#03121A;border-color:transparent;font-weight:700;
+  }
 
-  .listwrap{flex:1 1 auto;overflow-y:auto;min-height:0;padding-right:2px;
-            -webkit-overflow-scrolling:touch}
+  .listwrap{
+    flex:1 1 auto;
+    overflow-y:auto;
+    min-height:0;
+    padding-right:2px;
+    -webkit-overflow-scrolling:touch;
+  }
   .listwrap::-webkit-scrollbar{width:5px}
   .listwrap::-webkit-scrollbar-thumb{background:rgba(234,241,255,.13);border-radius:99px}
 
-  .rowlist{display:flex;align-items:center;gap:8px;width:100%;text-align:left;
-           padding:10px 10px;border-radius:12px;border:1px solid transparent;
-           transition:background .15s var(--e),border-color .15s var(--e)}
+  .rowlist{
+    display:flex;align-items:center;gap:8px;width:100%;text-align:left;
+    padding:10px 10px;border-radius:12px;border:1px solid transparent;
+    transition:background .15s var(--e),border-color .15s var(--e);
+  }
   .rowlist + .rowlist{margin-top:2px}
   .rowlist:hover{background:rgba(234,241,255,.05)}
-  .rowlist.play{background:linear-gradient(90deg,rgba(47,231,255,.16),rgba(47,231,255,.02));
-    border-color:rgba(47,231,255,.45)}
-  .rowlist .dot{width:7px;height:7px;border-radius:50%;flex:none;background:rgba(234,241,255,.14)}
+  .rowlist.play{
+    background:linear-gradient(90deg,rgba(47,231,255,.16),rgba(47,231,255,.02));
+    border-color:rgba(47,231,255,.45);
+  }
+  .rowlist .dot{
+    width:7px;height:7px;border-radius:50%;flex:none;
+    background:rgba(234,241,255,.14);
+  }
   .rowlist.play .dot{background:var(--cyan)}
   .rowlist .info{flex:1;min-width:0}
-  .rowlist .nm{font-weight:600;font-size:14px;display:block;
-               overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .rowlist .nm{
+    font-weight:600;font-size:14px;display:block;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
   .rowlist.play .nm{color:var(--cyan)}
-  .rowlist .desc{font-size:11.5px;color:var(--muted);display:block;
-                 overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .rowlist .star{font-size:17px;color:rgba(234,241,255,.2);padding:6px;
-                 flex:none;transition:all .18s var(--e)}
+  .rowlist .desc{
+    font-size:11.5px;color:var(--muted);display:block;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .rowlist .star{
+    font-size:17px;color:rgba(234,241,255,.2);padding:6px;
+    flex:none;transition:all .18s var(--e);
+  }
   .rowlist .star:hover{color:var(--magenta);transform:scale(1.15)}
   .rowlist .star.is{color:var(--magenta)}
 
-  .msg{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.4;flex:0 0 auto}
+  .msg{
+    font-size:12px;color:var(--muted);margin-top:8px;
+    line-height:1.4;flex:0 0 auto;
+  }
   .msg b{color:var(--ice)}
 
-  .scrim{position:fixed;inset:0;background:rgba(3,5,10,.7);z-index:39;
-         opacity:0;pointer-events:none;transition:opacity .25s var(--e)}
+  .scrim{
+    position:fixed;inset:0;background:rgba(3,5,10,.6);z-index:39;
+    opacity:0;pointer-events:none;transition:opacity .25s var(--e);
+  }
   .scrim.open{opacity:1;pointer-events:auto}
 
   /* ============================================================
-     BARRE BASSE — mobile
+     BARRE BASSE — mobile (peut être masquée si pas assez de place)
      ============================================================ */
-  .bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(5,6,12,.98);
-       border-top:1px solid var(--edge)}
-  .bar-in{max-width:520px;margin:0 auto;display:flex;align-items:center;gap:8px;
-          padding:8px 12px calc(env(safe-area-inset-bottom) + 8px) 12px}
-  .bar .txt{flex:1;min-width:0}
-  .bar .txt b{display:block;font-size:13px;font-weight:600;
-              overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .bar .txt span{display:block;font-size:11px;color:var(--muted);
-                 overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .bar .pill{min-height:40px;padding:0 16px;font-size:14px}
+  .bar{
+    position:fixed;left:0;right:0;bottom:0;z-index:20;
+    background:rgba(5,6,12,.98);
+    border-top:1px solid var(--edge);
+    display:none;                     /* ⭐ masquée — la page est plein écran */
+  }
 
   /* ============================================================
-     MODE SL / PETIT ÉCRAN — compactage supplémentaire
+     PETIT ÉCRAN / SL — compactage
      ============================================================ */
   @media (max-width:520px), (max-height:600px){
-    .app{padding:6px 6px 6px 6px;gap:6px}
+    .app{padding:6px;gap:6px}
     .topbar{padding:10px 12px}
     .now{font-size:16px}
     .console{padding:10px 12px}
     .row{grid-template-columns:44px 1fr;gap:8px;margin-bottom:6px}
-    .drawer{padding:8px 8px 8px 8px}
+    .dcontent{padding:0 10px calc(env(safe-area-inset-bottom) + 10px) 10px}
     .rowlist{padding:9px 10px}
     .rowlist .nm{font-size:13.5px}
   }
 
-  @media (min-width:700px) and (min-height:700px){
-    .bar{display:none}
-    .app{padding-bottom:14px}
+  /* Très petit écran vertical : on masque la wave pour gagner de la place */
+  @media (max-height:520px){
+    .wavewrap{display:none}
+    .brand-row{margin-bottom:6px}
+    .quick-add{margin-top:6px}
+    .tb-btns{margin-top:6px}
   }
 </style>
 </head>
@@ -288,42 +397,35 @@
 
 <div class="scrim" id="scrim"></div>
 
-<aside class="drawer" id="drawer">
+<aside class="drawer" id="drawer" aria-modal="true">
+  <div class="drawer-handle" id="drawerHandle"><i></i></div>
+
   <div class="dhead">
     <h2>STATIONS</h2>
-    <button id="closeDrawer">✕</button>
+    <button id="closeDrawer" aria-label="Fermer">✕</button>
   </div>
 
-  <!-- ⭐ Ajout de flux EN HAUT, accessible immédiatement -->
-  <div class="addtop">
-    <input type="text" class="txtin" id="url" inputmode="url"
-           autocapitalize="off" autocorrect="off"
-           placeholder="Coller un lien de flux…">
-    <button class="pill" id="addUrl">＋</button>
-  </div>
+  <div class="dcontent">
+    <div class="addtop">
+      <input type="text" class="txtin" id="url" inputmode="url"
+             autocapitalize="off" autocorrect="off"
+             placeholder="Coller un lien de flux…">
+      <button class="pill" id="addUrl">＋</button>
+    </div>
 
-  <div class="searchbox">
-    <input type="text" class="txtin" id="search" placeholder="Chercher une station…"
-           autocapitalize="off" autocorrect="off">
-  </div>
+    <div class="searchbox">
+      <input type="text" class="txtin" id="search" placeholder="Chercher une station…"
+             autocapitalize="off" autocorrect="off">
+    </div>
 
-  <div class="tabs" id="tabs"></div>
+    <div class="tabs" id="tabs"></div>
 
-  <div class="listwrap">
-    <div id="list"></div>
-    <div class="msg" id="listMsg"></div>
+    <div class="listwrap">
+      <div id="list"></div>
+      <div class="msg" id="listMsg"></div>
+    </div>
   </div>
 </aside>
-
-<div class="bar">
-  <div class="bar-in">
-    <div class="txt">
-      <b id="barName">Tuner</b>
-      <span id="barSub">En veille</span>
-    </div>
-    <button class="pill" id="power2">▶</button>
-  </div>
-</div>
 
 <script>
 (function(){
@@ -505,7 +607,6 @@ async function togglePlay(station) {
   }
 }
 
-/* ---------- Stations ---------- */
 function soma(id,n,c,g,q){ q=q||128;
   const m = (h,b) => 'https://'+h+'.somafm.com/'+id+'-'+b+'-mp3';
   return {n, g, c, q:q+' kbps', u:m('ice5',q), alts:[m('ice2',q), m('ice5',128), m('ice2',128)]};
@@ -564,11 +665,8 @@ try { plays = JSON.parse(localStorage.getItem('core_plays') || '{}'); } catch(e)
 function saveFavs(){ try{ localStorage.setItem('core_favs', JSON.stringify(favs)); }catch(e){} }
 function savePlays(){ try{ localStorage.setItem('core_plays', JSON.stringify(plays)); }catch(e){} }
 
-/* ---------- UI refs ---------- */
 const npName = document.getElementById('npName');
 const npState = document.getElementById('npState');
-const barName = document.getElementById('barName');
-const barSub = document.getElementById('barSub');
 const statusMini = document.getElementById('statusMini');
 const waveEl = document.getElementById('wave');
 const listMsg = document.getElementById('listMsg');
@@ -577,24 +675,20 @@ const tabsEl = document.getElementById('tabs');
 
 function setStatus(msg) {
   npState.textContent = msg;
-  barSub.textContent = msg;
   statusMini.textContent = msg;
 }
 function title(t) {
   npName.textContent = t;
-  barName.textContent = t;
 }
 function render() {
   const p = isPlaying;
   waveEl.classList.toggle('on', p);
   npState.classList.toggle('live', p);
   const btn = document.getElementById('power');
-  const btn2 = document.getElementById('power2');
   if (btn) {
     btn.textContent = p ? '⏹ Stop' : '▶ Écouter';
     btn.classList.toggle('stop', p);
   }
-  if (btn2) btn2.textContent = p ? '❚❚' : '▶';
 }
 
 function playStation(st) {
@@ -673,7 +767,7 @@ function paintList() {
 
     r.addEventListener('click', () => {
       playStation(st);
-      if (window.innerWidth < 700) openDrawer(false);
+      openDrawer(false);
     });
     r.querySelector('.star').addEventListener('click', ev => {
       ev.stopPropagation(); ev.preventDefault();
@@ -691,7 +785,6 @@ function toggleFav(st) {
   paintList();
 }
 
-/* ---------- Recherche ---------- */
 let searchTimer = null;
 document.getElementById('search').addEventListener('input', function() {
   query = this.value.trim();
@@ -734,13 +827,10 @@ function searchLibrary(q) {
   });
 }
 
-/* ---------- Ajout de flux (dans le drawer) ---------- */
 document.getElementById('addUrl').addEventListener('click', () => {
   const box = document.getElementById('url');
   addStreamFromValue(box.value, box);
 });
-
-/* ---------- Ajout rapide (topbar) ---------- */
 document.getElementById('quickAdd').addEventListener('click', () => {
   const box = document.getElementById('quickUrl');
   addStreamFromValue(box.value, box);
@@ -783,27 +873,42 @@ function addStreamFromValue(rawValue, box) {
   playStation(st);
 }
 
-/* ---------- Drawer ---------- */
 const drawer = document.getElementById('drawer');
 const scrim = document.getElementById('scrim');
+
 function openDrawer(o) {
   drawer.classList.toggle('open', o);
   scrim.classList.toggle('open', o);
 }
+
 document.getElementById('openDrawer').addEventListener('click', () => openDrawer(true));
 document.getElementById('closeDrawer').addEventListener('click', () => openDrawer(false));
 scrim.addEventListener('click', () => openDrawer(false));
 document.addEventListener('keydown', e => { if (e.key === 'Escape') openDrawer(false); });
 
-/* ---------- Play buttons ---------- */
+(function(){
+  const handle = document.getElementById('drawerHandle');
+  if (!handle) return;
+  let startY = 0, dragging = false;
+  handle.addEventListener('touchstart', e => {
+    startY = e.touches[0].clientY;
+    dragging = true;
+  }, {passive:true});
+  handle.addEventListener('touchmove', e => {
+    if (!dragging) return;
+    const dy = e.touches[0].clientY - startY;
+    if (dy > 60) {
+      dragging = false;
+      openDrawer(false);
+    }
+  }, {passive:true});
+  handle.addEventListener('touchend', () => { dragging = false; });
+})();
+
 document.getElementById('power').addEventListener('click', () => {
   togglePlay(currentStation || CORE[0]);
 });
-document.getElementById('power2').addEventListener('click', () => {
-  togglePlay(currentStation || CORE[0]);
-});
 
-/* ---------- Volume / Balance / EQ ---------- */
 function fillPct(slider, centered) {
   const min = +slider.min, max = +slider.max, v = +slider.value;
   const pct = ((v - min) / (max - min)) * 100;
@@ -863,7 +968,6 @@ trebleSlider.addEventListener('input', updateTreble);
 
 updateVolume(); updateBalance(); updateBass(); updateMid(); updateTreble();
 
-/* ---------- Wave ---------- */
 const BARS = 28;
 const barEls = [];
 for (let i = 0; i < BARS; i++) {
