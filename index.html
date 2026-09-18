@@ -15,73 +15,85 @@
     --e:cubic-bezier(.32,.72,0,1);
   }
   *{box-sizing:border-box}
-  html,body{margin:0;padding:0;min-height:100%}
+  html,body{margin:0;padding:0;min-height:100%;height:100%}
   body{
     background:radial-gradient(70% 44% at 10% -6%,rgba(47,231,255,.13),transparent 62%),
                radial-gradient(64% 42% at 94% 2%,rgba(255,61,158,.11),transparent 60%),var(--void);
     color:var(--ice);
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,sans-serif;
-    font-size:16px;line-height:1.5;letter-spacing:-.012em;
+    font-size:15px;line-height:1.45;letter-spacing:-.012em;
     -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
+    overflow-x:hidden;
   }
   button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;
          touch-action:manipulation;-webkit-user-select:none;user-select:none}
-  :focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:10px}
 
-  .app{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:12px;
-       padding:calc(env(safe-area-inset-top) + 14px) 14px
-              calc(env(safe-area-inset-bottom) + 24px) 14px}
+  /* ============================================================
+     LAYOUT PRINCIPAL COMPACT
+     ============================================================ */
+  .app{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:8px;
+       padding:calc(env(safe-area-inset-top) + 8px) 10px
+              calc(env(safe-area-inset-bottom) + 8px) 10px}
 
-  .card{border:1px solid var(--edge);border-radius:20px;position:relative;
+  .card{border:1px solid var(--edge);border-radius:16px;position:relative;
         background:linear-gradient(180deg,rgba(47,231,255,.05),transparent 40%),
                    linear-gradient(180deg,var(--panel),var(--deep))}
 
-  .topbar{padding:16px 18px}
-  .brand-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-  .orb{width:34px;height:34px;border-radius:50%;border:3px solid var(--cyan);
+  /* ---------- TOPBAR ---------- */
+  .topbar{padding:12px 14px}
+  .brand-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .orb{width:26px;height:26px;border-radius:50%;border:2.5px solid var(--cyan);
        position:relative;flex:none}
-  .orb::after{content:'';position:absolute;inset:8px;border-radius:50%;background:var(--cyan)}
-  .brand{font-weight:900;letter-spacing:.14em;color:#bff8ff;font-size:18px}
-  .brand small{opacity:.5;font-size:10px;letter-spacing:.1em;margin-left:4px}
+  .orb::after{content:'';position:absolute;inset:6px;border-radius:50%;background:var(--cyan)}
+  .brand{font-weight:900;letter-spacing:.12em;color:#bff8ff;font-size:15px}
+  .brand small{opacity:.5;font-size:9px;letter-spacing:.1em;margin-left:3px}
 
-  .now{font-size:22px;font-weight:600;line-height:1.15;letter-spacing:-.035em;margin:0}
-  .sub{font-size:13px;color:var(--muted);min-height:19px;margin-top:3px}
+  .now{font-size:18px;font-weight:600;line-height:1.15;letter-spacing:-.03em;margin:0}
+  .sub{font-size:12px;color:var(--muted);min-height:16px;margin-top:2px}
   .sub.live{color:var(--lime)}
 
-  .tb-btns{display:flex;gap:9px;margin-top:16px}
+  .quick-add{display:flex;gap:6px;margin-top:10px}
+  .quick-add .txtin{flex:1;min-width:0;min-height:40px;font-size:13px;
+                    border-radius:10px;padding:0 12px}
+  .quick-add .pill{flex:0 0 auto;min-height:40px;padding:0 14px;
+                   font-size:18px;line-height:1;font-weight:700}
+
+  .tb-btns{display:flex;gap:6px;margin-top:8px}
   .pill{display:inline-flex;align-items:center;justify-content:center;
-        border-radius:100px;min-height:48px;padding:0 22px;font-size:15px;font-weight:600;
+        border-radius:100px;min-height:42px;padding:0 18px;font-size:14px;font-weight:600;
         background:linear-gradient(135deg,var(--cyan),#0E8BDD);color:#03121A;
         transition:transform .18s var(--e),filter .22s var(--e);flex:1}
   .pill:active{transform:scale(.97)}
   .pill.ghost{background:rgba(234,241,255,.06);color:var(--ice);
-              border:1px solid var(--edge2);flex:0 0 auto;padding:0 20px}
+              border:1px solid var(--edge2);flex:0 0 auto;padding:0 14px}
   .pill.stop{background:linear-gradient(135deg,#FF3D9E,#B01E75);color:#fff}
 
-  .wavewrap{padding:0 18px 12px}
-  .wave{display:flex;align-items:flex-end;gap:2px;height:28px;width:100%}
+  /* ---------- WAVE ---------- */
+  .wavewrap{padding:0 14px 10px}
+  .wave{display:flex;align-items:flex-end;gap:2px;height:22px;width:100%}
   .wave i{flex:1;border-radius:2px;height:3px;background:var(--cyan);opacity:.22;
           transition:height .08s linear,opacity .4s var(--e)}
   .wave.on i{opacity:.9}
 
-  .console{padding:16px 18px}
-  .ctitle{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-  .ctitle h2{font-size:11.5px;letter-spacing:.2em;margin:0;color:var(--cyan);font-weight:800}
-  .ctitle .val{font-size:12px;color:var(--muted)}
+  /* ---------- CONSOLE ---------- */
+  .console{padding:12px 14px}
+  .ctitle{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .ctitle h2{font-size:10.5px;letter-spacing:.18em;margin:0;color:var(--cyan);font-weight:800}
+  .ctitle .val{font-size:11px;color:var(--muted)}
 
-  .row{display:grid;grid-template-columns:60px 1fr;gap:12px;align-items:center;
-       margin-bottom:12px}
-  .row .lbl{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.08em}
-  .row .val{font-size:12px;color:var(--ice);text-align:right;
-            font-variant-numeric:tabular-nums;grid-column:2;margin-top:-4px;margin-bottom:2px}
+  .row{display:grid;grid-template-columns:50px 1fr;gap:10px;align-items:center;
+       margin-bottom:8px}
+  .row .lbl{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em}
+  .row .val{font-size:11px;color:var(--ice);text-align:right;
+            font-variant-numeric:tabular-nums;grid-column:2;margin-top:-3px;margin-bottom:1px}
 
-  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:34px;
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;
                     background:transparent;margin:0;display:block;cursor:pointer}
-  input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:99px;
+  input[type=range]::-webkit-slider-runnable-track{height:5px;border-radius:99px;
     background:linear-gradient(90deg,var(--c,var(--cyan)) var(--p,50%),
                rgba(234,241,255,.1) var(--p,50%))}
   input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
-    width:20px;height:20px;border-radius:50%;margin-top:-7px;background:#fff;
+    width:18px;height:18px;border-radius:50%;margin-top:-6.5px;background:#fff;
     border:2px solid var(--c,var(--cyan));transition:transform .16s var(--e)}
   input[type=range]:active::-webkit-slider-thumb{transform:scale(1.15)}
   input[type=range].center::-webkit-slider-runnable-track{
@@ -89,91 +101,123 @@
       rgba(234,241,255,.1) 0%, rgba(234,241,255,.1) var(--lo,50%),
       var(--c,var(--cyan)) var(--lo,50%), var(--c,var(--cyan)) var(--hi,50%),
       rgba(234,241,255,.1) var(--hi,50%), rgba(234,241,255,.1) 100%)}
-  input[type=range]::-moz-range-track{height:6px;border-radius:99px;background:rgba(234,241,255,.1)}
-  input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;
+  input[type=range]::-moz-range-track{height:5px;border-radius:99px;background:rgba(234,241,255,.1)}
+  input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;
     border:2px solid var(--c,var(--cyan))}
 
-  .eq{margin-top:16px;padding-top:14px;border-top:1px solid var(--edge2)}
-  .eq-title{font-size:11px;letter-spacing:.16em;color:var(--muted);font-weight:700;margin-bottom:10px}
-  .eq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  .eq-band{display:flex;flex-direction:column;gap:6px}
+  .eq{margin-top:10px;padding-top:10px;border-top:1px solid var(--edge2)}
+  .eq-title{font-size:10.5px;letter-spacing:.16em;color:var(--muted);font-weight:700;margin-bottom:8px}
+  .eq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .eq-band{display:flex;flex-direction:column;gap:4px}
   .eq-band .bhead{display:flex;justify-content:space-between;align-items:baseline}
-  .eq-band .blbl{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.06em}
-  .eq-band .bval{font-size:11px;font-variant-numeric:tabular-nums;color:var(--c)}
-  .eq-band input{--c:#2FE7FF}
+  .eq-band .blbl{font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.06em}
+  .eq-band .bval{font-size:10.5px;font-variant-numeric:tabular-nums;color:var(--c)}
 
-  .drawer{position:fixed;top:0;right:0;bottom:0;width:min(430px,92vw);z-index:40;
+  /* ============================================================
+     DRAWER — COMPACT ET SCROLLABLE
+     ============================================================ */
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:min(100vw,420px);z-index:40;
     background:linear-gradient(180deg,#0B1020,#06080F);border-left:1px solid var(--edge2);
-    transform:translateX(101%);transition:transform .38s var(--e);
+    transform:translateX(101%);transition:transform .32s var(--e);
     display:flex;flex-direction:column;
-    padding:calc(env(safe-area-inset-top) + 16px) 16px
-           calc(env(safe-area-inset-bottom) + 16px) 16px}
+    padding:calc(env(safe-area-inset-top) + 10px) 10px
+           calc(env(safe-area-inset-bottom) + 10px) 10px;
+    overflow:hidden}
   .drawer.open{transform:translateX(0)}
-  .dhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-  .dhead h2{font-size:12px;letter-spacing:.2em;margin:0;color:var(--cyan);font-weight:800}
-  .dhead button{width:42px;height:42px;border-radius:50%;border:1px solid var(--edge2);
-                background:rgba(234,241,255,.05);font-size:17px}
 
-  .txtin{width:100%;font:inherit;font-size:15px;color:var(--ice);
-    background:rgba(234,241,255,.05);border:1px solid var(--edge2);border-radius:12px;
-    min-height:48px;padding:0 14px;-webkit-appearance:none;appearance:none}
+  .dhead{display:flex;align-items:center;justify-content:space-between;
+         margin-bottom:8px;flex:0 0 auto}
+  .dhead h2{font-size:11px;letter-spacing:.18em;margin:0;color:var(--cyan);font-weight:800}
+  .dhead button{width:34px;height:34px;border-radius:50%;border:1px solid var(--edge2);
+                background:rgba(234,241,255,.05);font-size:15px}
+
+  .searchbox{margin-bottom:6px;flex:0 0 auto}
+  .searchbox .txtin{width:100%;min-height:38px;font-size:14px;padding:0 12px;
+                    border-radius:10px}
+
+  .addtop{margin-bottom:6px;display:flex;gap:6px;flex:0 0 auto}
+  .addtop .txtin{flex:1;min-width:0;min-height:38px;font-size:13px;padding:0 12px;
+                 border-radius:10px}
+  .addtop .pill{flex:0 0 auto;min-height:38px;padding:0 14px;font-size:18px;
+                line-height:1;font-weight:700;border-radius:10px}
+
+  .txtin{width:100%;font:inherit;color:var(--ice);
+    background:rgba(234,241,255,.05);border:1px solid var(--edge2);
+    -webkit-appearance:none;appearance:none}
   .txtin:focus{outline:none;border-color:var(--cyan)}
 
-  .tabs{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;margin:10px 0 10px;padding-bottom:6px}
+  .tabs{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;
+        margin:0 0 8px;padding-bottom:4px;flex:0 0 auto}
   .tabs::-webkit-scrollbar{display:none}
-  .tabs button{flex:none;white-space:nowrap;font-size:13px;color:var(--muted);
+  .tabs button{flex:none;white-space:nowrap;font-size:12px;color:var(--muted);
     background:rgba(234,241,255,.05);border:1px solid var(--edge);border-radius:100px;
-    min-height:38px;padding:0 15px}
+    min-height:32px;padding:0 12px}
   .tabs button.sel{background:linear-gradient(135deg,var(--cyan),#0E8BDD);color:#03121A;
     border-color:transparent;font-weight:700}
 
-  .listwrap{flex:1;overflow-y:auto;min-height:0;padding-right:4px}
-  .listwrap::-webkit-scrollbar{width:6px}
+  .listwrap{flex:1 1 auto;overflow-y:auto;min-height:0;padding-right:2px;
+            -webkit-overflow-scrolling:touch}
+  .listwrap::-webkit-scrollbar{width:5px}
   .listwrap::-webkit-scrollbar-thumb{background:rgba(234,241,255,.13);border-radius:99px}
 
-  .rowlist{display:flex;align-items:center;gap:10px;width:100%;text-align:left;
-           padding:12px 12px;border-radius:14px;border:1px solid transparent;
-           transition:background .2s var(--e),border-color .2s var(--e)}
+  .rowlist{display:flex;align-items:center;gap:8px;width:100%;text-align:left;
+           padding:10px 10px;border-radius:12px;border:1px solid transparent;
+           transition:background .15s var(--e),border-color .15s var(--e)}
   .rowlist + .rowlist{margin-top:2px}
   .rowlist:hover{background:rgba(234,241,255,.05)}
   .rowlist.play{background:linear-gradient(90deg,rgba(47,231,255,.16),rgba(47,231,255,.02));
     border-color:rgba(47,231,255,.45)}
-  .rowlist .dot{width:8px;height:8px;border-radius:50%;flex:none;background:rgba(234,241,255,.14)}
+  .rowlist .dot{width:7px;height:7px;border-radius:50%;flex:none;background:rgba(234,241,255,.14)}
   .rowlist.play .dot{background:var(--cyan)}
   .rowlist .info{flex:1;min-width:0}
-  .rowlist .nm{font-weight:600;font-size:15px;display:block;
+  .rowlist .nm{font-weight:600;font-size:14px;display:block;
                overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .rowlist.play .nm{color:var(--cyan)}
-  .rowlist .desc{font-size:12px;color:var(--muted);display:block;
+  .rowlist .desc{font-size:11.5px;color:var(--muted);display:block;
                  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .rowlist .star{font-size:19px;color:rgba(234,241,255,.2);padding:6px;
-                 transition:all .2s var(--e)}
+  .rowlist .star{font-size:17px;color:rgba(234,241,255,.2);padding:6px;
+                 flex:none;transition:all .18s var(--e)}
   .rowlist .star:hover{color:var(--magenta);transform:scale(1.15)}
   .rowlist .star.is{color:var(--magenta)}
 
-  .addbox{margin-top:14px;display:grid;gap:8px}
-  .addbox .pill{min-height:46px;font-size:14px}
-
-  .msg{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.5}
+  .msg{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.4;flex:0 0 auto}
   .msg b{color:var(--ice)}
 
   .scrim{position:fixed;inset:0;background:rgba(3,5,10,.7);z-index:39;
-         opacity:0;pointer-events:none;transition:opacity .3s var(--e)}
+         opacity:0;pointer-events:none;transition:opacity .25s var(--e)}
   .scrim.open{opacity:1;pointer-events:auto}
 
+  /* ============================================================
+     BARRE BASSE — mobile
+     ============================================================ */
   .bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(5,6,12,.98);
        border-top:1px solid var(--edge)}
-  .bar-in{max-width:520px;margin:0 auto;display:flex;align-items:center;gap:10px;
-          padding:10px 14px calc(env(safe-area-inset-bottom) + 10px) 14px}
+  .bar-in{max-width:520px;margin:0 auto;display:flex;align-items:center;gap:8px;
+          padding:8px 12px calc(env(safe-area-inset-bottom) + 8px) 12px}
   .bar .txt{flex:1;min-width:0}
-  .bar .txt b{display:block;font-size:14px;font-weight:600;
+  .bar .txt b{display:block;font-size:13px;font-weight:600;
               overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .bar .txt span{display:block;font-size:12px;color:var(--muted);
+  .bar .txt span{display:block;font-size:11px;color:var(--muted);
                  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .bar .pill{min-height:40px;padding:0 16px;font-size:14px}
 
-  @media (min-width:700px){
+  /* ============================================================
+     MODE SL / PETIT ÉCRAN — compactage supplémentaire
+     ============================================================ */
+  @media (max-width:520px), (max-height:600px){
+    .app{padding:6px 6px 6px 6px;gap:6px}
+    .topbar{padding:10px 12px}
+    .now{font-size:16px}
+    .console{padding:10px 12px}
+    .row{grid-template-columns:44px 1fr;gap:8px;margin-bottom:6px}
+    .drawer{padding:8px 8px 8px 8px}
+    .rowlist{padding:9px 10px}
+    .rowlist .nm{font-size:13.5px}
+  }
+
+  @media (min-width:700px) and (min-height:700px){
     .bar{display:none}
-    .app{padding-bottom:24px}
+    .app{padding-bottom:14px}
   }
 </style>
 </head>
@@ -186,6 +230,14 @@
     </div>
     <div class="now" id="npName">Rien en lecture</div>
     <div class="sub" id="npState">Ouvre les stations pour choisir</div>
+
+    <div class="quick-add">
+      <input type="text" class="txtin" id="quickUrl" inputmode="url"
+             autocapitalize="off" autocorrect="off"
+             placeholder="Coller un lien de flux…">
+      <button class="pill" id="quickAdd">＋</button>
+    </div>
+
     <div class="tb-btns">
       <button class="pill" id="power">▶ Écouter</button>
       <button class="pill ghost" id="openDrawer">☰ Stations</button>
@@ -203,19 +255,19 @@
     </div>
 
     <div class="row">
-      <span class="lbl">VOLUME</span>
+      <span class="lbl">VOL</span>
       <input type="range" id="volume" min="-24" max="12" step="0.5" value="0">
       <span class="val" id="volVal">0.0 dB</span>
     </div>
 
     <div class="row">
-      <span class="lbl">BALANCE</span>
+      <span class="lbl">BAL</span>
       <input type="range" class="center" id="balance" min="-1" max="1" step="0.01" value="0">
       <span class="val" id="balVal">Centre</span>
     </div>
 
     <div class="eq">
-      <div class="eq-title">ÉGALISEUR 3 BANDES</div>
+      <div class="eq-title">ÉGALISEUR</div>
       <div class="eq-grid">
         <div class="eq-band" style="--c:#FF3D9E">
           <div class="bhead"><span class="blbl">BASS</span><span class="bval" id="bassVal">0</span></div>
@@ -226,7 +278,7 @@
           <input type="range" id="mid" min="-15" max="15" step="1" value="0" style="--c:#2FE7FF">
         </div>
         <div class="eq-band" style="--c:#B9FF45">
-          <div class="bhead"><span class="blbl">TREBLE</span><span class="bval" id="trelVal">0</span></div>
+          <div class="bhead"><span class="blbl">HIGH</span><span class="bval" id="trelVal">0</span></div>
           <input type="range" id="treble" min="-15" max="15" step="1" value="0" style="--c:#B9FF45">
         </div>
       </div>
@@ -235,21 +287,30 @@
 </div>
 
 <div class="scrim" id="scrim"></div>
+
 <aside class="drawer" id="drawer">
   <div class="dhead">
     <h2>STATIONS</h2>
     <button id="closeDrawer">✕</button>
   </div>
-  <input type="text" class="txtin" id="search" placeholder="Chercher une station"
-         autocapitalize="off" autocorrect="off">
+
+  <!-- ⭐ Ajout de flux EN HAUT, accessible immédiatement -->
+  <div class="addtop">
+    <input type="text" class="txtin" id="url" inputmode="url"
+           autocapitalize="off" autocorrect="off"
+           placeholder="Coller un lien de flux…">
+    <button class="pill" id="addUrl">＋</button>
+  </div>
+
+  <div class="searchbox">
+    <input type="text" class="txtin" id="search" placeholder="Chercher une station…"
+           autocapitalize="off" autocorrect="off">
+  </div>
+
   <div class="tabs" id="tabs"></div>
+
   <div class="listwrap">
     <div id="list"></div>
-    <div class="addbox">
-      <input type="text" class="txtin" id="url" inputmode="url" autocapitalize="off"
-             autocorrect="off" placeholder="Coller un lien de flux (http ou https)">
-      <button class="pill" id="addUrl">＋ Ajouter ce flux</button>
-    </div>
     <div class="msg" id="listMsg"></div>
   </div>
 </aside>
@@ -268,9 +329,6 @@
 (function(){
 "use strict";
 
-/* =========================================================
-   PROXY CORS — HTTP → HTTPS automatique
-   ========================================================= */
 const CORS_PROXY = 'https://soft-brook-0e52.stefikare.workers.dev/?url=';
 
 function normalizeUrl(u) {
@@ -278,15 +336,10 @@ function normalizeUrl(u) {
   u = u.trim();
   if (u.indexOf(CORS_PROXY) === 0) return u;
   if (!/^https?:\/\//i.test(u)) u = 'https://' + u;
-  if (u.indexOf('http://') === 0) {
-    return CORS_PROXY + encodeURIComponent(u);
-  }
+  if (u.indexOf('http://') === 0) return CORS_PROXY + encodeURIComponent(u);
   return u;
 }
 
-/* =========================================================
-   ÉTAT GLOBAL
-   ========================================================= */
 let audioCtx = null;
 let mixEl = null;
 let srcNode = null;
@@ -307,52 +360,34 @@ const RETRY_BASE = 800;
 const RETRY_MAX = 20000;
 const GOOD_PLAYBACK_MS = 15000;
 
-/* =========================================================
-   GRAPHE AUDIO PERSISTANT — construit une seule fois
-   ========================================================= */
 function buildGraph() {
   if (graphBuilt) return;
-
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-  /* Élément <audio> — c'est LUI qui décode le flux,
-     exactement comme la version full qui fonctionne en SL */
   mixEl = new Audio();
   mixEl.crossOrigin = 'anonymous';
   mixEl.setAttribute('playsinline', '');
   mixEl.preload = 'none';
 
-  /* Source Web Audio branchée sur l'élément <audio> */
   srcNode = audioCtx.createMediaElementSource(mixEl);
-
-  /* Nœuds persistants */
-  pannerNode = audioCtx.createStereoPanner();
-  pannerNode.pan.value = 0;
-
-  gainNode = audioCtx.createGain();
-  gainNode.gain.value = 1;
+  pannerNode = audioCtx.createStereoPanner(); pannerNode.pan.value = 0;
+  gainNode = audioCtx.createGain(); gainNode.gain.value = 1;
 
   bassFilter = audioCtx.createBiquadFilter();
-  bassFilter.type = 'lowshelf';
-  bassFilter.frequency.value = 250;
-  bassFilter.gain.value = 0;
+  bassFilter.type = 'lowshelf'; bassFilter.frequency.value = 250; bassFilter.gain.value = 0;
 
   midFilter = audioCtx.createBiquadFilter();
-  midFilter.type = 'peaking';
-  midFilter.frequency.value = 1200;
-  midFilter.Q.value = 0.9;
-  midFilter.gain.value = 0;
+  midFilter.type = 'peaking'; midFilter.frequency.value = 1200;
+  midFilter.Q.value = 0.9; midFilter.gain.value = 0;
 
   trebleFilter = audioCtx.createBiquadFilter();
-  trebleFilter.type = 'highshelf';
-  trebleFilter.frequency.value = 4000;
+  trebleFilter.type = 'highshelf'; trebleFilter.frequency.value = 4000;
   trebleFilter.gain.value = 0;
 
   analyser = audioCtx.createAnalyser();
   analyser.fftSize = 512;
   analyser.smoothingTimeConstant = 0.4;
 
-  /* ⭐ CÂBLAGE UNIQUE — jamais refait ⭐ */
   srcNode.connect(pannerNode);
   pannerNode.connect(gainNode);
   gainNode.connect(bassFilter);
@@ -365,16 +400,10 @@ function buildGraph() {
   graphBuilt = true;
 }
 
-/* =========================================================
-   LECTURE — utilise l'élément <audio> natif
-   ========================================================= */
 function tryPlay(url, mySession) {
   return new Promise((resolve) => {
     if (!mixEl) { resolve(false); return; }
-
-    let done = false;
-    let startedPlaying = false;
-    let lastProgress = Date.now();
+    let done = false, startedPlaying = false, lastProgress = Date.now();
 
     const finish = (ok) => {
       if (done) return;
@@ -389,50 +418,25 @@ function tryPlay(url, mySession) {
       setStatus('▶ En direct');
       render();
     };
-    mixEl.onwaiting = () => {
-      if (startedPlaying) setStatus('⏳ Buffer...');
-    };
-    mixEl.onerror = () => {
-      setStatus('❌ Erreur réseau');
-      finish(false);
-    };
-    mixEl.onended = () => {
-      finish(startedPlaying);
-    };
-    mixEl.ontimeupdate = () => {
-      lastProgress = Date.now();
-    };
-    mixEl.onstalled = () => {
-      // attendre, le watchdog décidera
-    };
+    mixEl.onwaiting = () => { if (startedPlaying) setStatus('⏳ Buffer...'); };
+    mixEl.onerror = () => { setStatus('❌ Erreur'); finish(false); };
+    mixEl.onended = () => finish(startedPlaying);
+    mixEl.ontimeupdate = () => { lastProgress = Date.now(); };
 
-    /* Watchdog : 15s sans démarrer, ou 12s sans progrès = abandon */
     const watchdog = setInterval(() => {
       if (done) return;
-      if (sessionId !== mySession || !isPlaying) {
-        finish(false);
-        return;
-      }
+      if (sessionId !== mySession || !isPlaying) { finish(false); return; }
       const idle = Date.now() - lastProgress;
-      if (!startedPlaying && idle > 15000) {
-        setStatus('❌ Pas de réponse');
-        finish(false);
-      } else if (startedPlaying && idle > 12000) {
-        setStatus('❌ Flux interrompu');
-        finish(false);
-      }
+      if (!startedPlaying && idle > 15000) { setStatus('❌ Pas de réponse'); finish(false); }
+      else if (startedPlaying && idle > 12000) { setStatus('❌ Flux interrompu'); finish(false); }
     }, 1000);
 
     try {
       mixEl.src = url;
       mixEl.load();
       const p = mixEl.play();
-      if (p && p.catch) {
-        p.catch(() => finish(false));
-      }
-    } catch (e) {
-      finish(false);
-    }
+      if (p && p.catch) p.catch(() => finish(false));
+    } catch (e) { finish(false); }
   });
 }
 
@@ -441,33 +445,26 @@ async function streamSession(station, mySession) {
   const urls = rawUrls.map(normalizeUrl);
 
   if (urls[0] !== rawUrls[0]) {
-    console.info('[Core Mini] Flux HTTP → proxy auto :', urls[0]);
+    console.info('[Core Mini] HTTP → proxy :', urls[0]);
   }
 
-  let attempt = 0;
-  let urlIdx = 0;
-
+  let attempt = 0, urlIdx = 0;
   while (isPlaying && sessionId === mySession) {
     const url = urls[urlIdx % urls.length];
     setStatus('⏳ Connexion...');
-
     const startTs = Date.now();
     const ok = await tryPlay(url, mySession);
     const playedFor = Date.now() - startTs;
-
     if (!isPlaying || sessionId !== mySession) return;
 
     if (ok && playedFor >= GOOD_PLAYBACK_MS) {
-      attempt = 0;
-      urlIdx = 0;
+      attempt = 0; urlIdx = 0;
       setStatus('🔄 Reconnexion...');
     } else {
-      attempt++;
-      urlIdx++;
+      attempt++; urlIdx++;
       setStatus('🔄 Tentative ' + attempt + '...');
     }
 
-    /* Nettoyage avant nouvelle tentative */
     try { mixEl.pause(); } catch(e) {}
     try { mixEl.removeAttribute('src'); mixEl.load(); } catch(e) {}
 
@@ -477,9 +474,6 @@ async function streamSession(station, mySession) {
   }
 }
 
-/* =========================================================
-   BOUTON PLAY / STOP
-   ========================================================= */
 async function togglePlay(station) {
   if (isPlaying) {
     isPlaying = false;
@@ -490,7 +484,6 @@ async function togglePlay(station) {
     setStatus('⏹️ Arrêté.');
     return;
   }
-
   if (!station) { setStatus('⚠️ Aucune station.'); return; }
 
   currentStation = station;
@@ -503,9 +496,8 @@ async function togglePlay(station) {
   }
 
   render();
-  try {
-    await streamSession(station, mySession);
-  } catch (err) {
+  try { await streamSession(station, mySession); }
+  catch (err) {
     if (sessionId !== mySession) return;
     setStatus('❌ ' + err.message);
     isPlaying = false;
@@ -513,12 +505,10 @@ async function togglePlay(station) {
   }
 }
 
-/* =========================================================
-   STATIONS
-   ========================================================= */
+/* ---------- Stations ---------- */
 function soma(id,n,c,g,q){ q=q||128;
   const m = (h,b) => 'https://'+h+'.somafm.com/'+id+'-'+b+'-mp3';
-  return {n, g, c, q:q+' kbps', u:m('ice5',q), alts:[m('ice2',q), m('ice5',128), m('ice2',128)], somaId:id};
+  return {n, g, c, q:q+' kbps', u:m('ice5',q), alts:[m('ice2',q), m('ice5',128), m('ice2',128)]};
 }
 function fip(id,n,c,g){
   return {n, g, c, q:'128 kbps', u:'https://icecast.radiofrance.fr/'+id+'-midfi.mp3',
@@ -568,20 +558,13 @@ const TABS = [
   {id:'trance',label:'Trance'}
 ];
 
-let tab = 'all';
-let query = '';
-let online = [];
-let favs = [];
-let plays = {};
-
+let tab = 'all', query = '', online = [], favs = [], plays = {};
 try { favs = JSON.parse(localStorage.getItem('core_favs') || '[]'); } catch(e){ favs = []; }
 try { plays = JSON.parse(localStorage.getItem('core_plays') || '{}'); } catch(e){ plays = {}; }
 function saveFavs(){ try{ localStorage.setItem('core_favs', JSON.stringify(favs)); }catch(e){} }
 function savePlays(){ try{ localStorage.setItem('core_plays', JSON.stringify(plays)); }catch(e){} }
 
-/* =========================================================
-   UI
-   ========================================================= */
+/* ---------- UI refs ---------- */
 const npName = document.getElementById('npName');
 const npState = document.getElementById('npState');
 const barName = document.getElementById('barName');
@@ -597,12 +580,10 @@ function setStatus(msg) {
   barSub.textContent = msg;
   statusMini.textContent = msg;
 }
-
 function title(t) {
   npName.textContent = t;
   barName.textContent = t;
 }
-
 function render() {
   const p = isPlaying;
   waveEl.classList.toggle('on', p);
@@ -628,18 +609,12 @@ function playStation(st) {
     sessionId++;
     try { mixEl.pause(); } catch(e) {}
     try { mixEl.removeAttribute('src'); mixEl.load(); } catch(e) {}
-    setTimeout(() => {
-      isPlaying = true;
-      togglePlay(st);
-    }, 100);
+    setTimeout(() => { isPlaying = true; togglePlay(st); }, 100);
   } else {
     togglePlay(st);
   }
 }
 
-/* =========================================================
-   LISTE
-   ========================================================= */
 TABS.forEach(t => {
   const b = document.createElement('button');
   b.textContent = t.label;
@@ -674,7 +649,7 @@ function paintList() {
     return;
   }
   if (!rows.length && query) {
-    listMsg.innerHTML = '<b>Rien trouvé.</b> Essaie "jazz", "house", "rock"...';
+    listMsg.innerHTML = '<b>Rien trouvé.</b>';
     return;
   }
   listMsg.textContent = '';
@@ -716,9 +691,7 @@ function toggleFav(st) {
   paintList();
 }
 
-/* =========================================================
-   RECHERCHE (radio-browser)
-   ========================================================= */
+/* ---------- Recherche ---------- */
 let searchTimer = null;
 document.getElementById('search').addEventListener('input', function() {
   query = this.value.trim();
@@ -754,44 +727,63 @@ function searchLibrary(q) {
     online = out;
     listMsg.innerHTML = out.length
       ? '<b>' + out.length + ' stations trouvées.</b>'
-      : '<b>Rien pour ce mot.</b> Essaie "jazz", "techno", "rock"...';
+      : '<b>Rien pour ce mot.</b>';
     paintList();
   }).catch(() => {
     listMsg.innerHTML = '<b>Bibliothèque injoignable.</b>';
   });
 }
 
-/* =========================================================
-   AJOUT DE FLUX DIRECT
-   ========================================================= */
+/* ---------- Ajout de flux (dans le drawer) ---------- */
 document.getElementById('addUrl').addEventListener('click', () => {
   const box = document.getElementById('url');
-  let u = box.value.trim();
+  addStreamFromValue(box.value, box);
+});
+
+/* ---------- Ajout rapide (topbar) ---------- */
+document.getElementById('quickAdd').addEventListener('click', () => {
+  const box = document.getElementById('quickUrl');
+  addStreamFromValue(box.value, box);
+});
+document.getElementById('quickUrl').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') { e.preventDefault(); addStreamFromValue(this.value, this); }
+});
+document.getElementById('url').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') { e.preventDefault(); addStreamFromValue(this.value, this); }
+});
+
+function addStreamFromValue(rawValue, box) {
+  let u = (rawValue || '').trim();
   if (!u) { listMsg.textContent = 'Colle un lien de flux.'; return; }
+
   const wasHttp = /^http:\/\//i.test(u);
   if (!/^https?:\/\//i.test(u)) u = 'https://' + u;
 
   const st = {
     n: u.replace(/^https?:\/\//i, '').split('/')[0].slice(0, 30),
-    g: wasHttp ? 'Flux ajouté (proxy auto)' : 'Flux ajouté',
+    g: wasHttp ? 'Flux rapide (proxy auto)' : 'Flux ajouté',
     c: 'all',
     q: '',
     u: u,
     alts: []
   };
+
   const existing = CORE.find(x => x.u === u);
-  if (existing) { playStation(existing); return; }
+  if (existing) {
+    if (box) box.value = '';
+    playStation(existing);
+    return;
+  }
+
   CORE.push(st);
-  box.value = '';
+  if (box) box.value = '';
   listMsg.innerHTML = wasHttp
-    ? '<b>✓ Ajouté.</b> Flux HTTP → proxy HTTPS auto.'
+    ? '<b>✓ Ajouté.</b> HTTP → proxy HTTPS auto.'
     : '<b>✓ Ajouté.</b>';
   playStation(st);
-});
+}
 
-/* =========================================================
-   DRAWER
-   ========================================================= */
+/* ---------- Drawer ---------- */
 const drawer = document.getElementById('drawer');
 const scrim = document.getElementById('scrim');
 function openDrawer(o) {
@@ -803,9 +795,7 @@ document.getElementById('closeDrawer').addEventListener('click', () => openDrawe
 scrim.addEventListener('click', () => openDrawer(false));
 document.addEventListener('keydown', e => { if (e.key === 'Escape') openDrawer(false); });
 
-/* =========================================================
-   BOUTONS PLAY
-   ========================================================= */
+/* ---------- Play buttons ---------- */
 document.getElementById('power').addEventListener('click', () => {
   togglePlay(currentStation || CORE[0]);
 });
@@ -813,9 +803,7 @@ document.getElementById('power2').addEventListener('click', () => {
   togglePlay(currentStation || CORE[0]);
 });
 
-/* =========================================================
-   VOLUME + BALANCE + EQ
-   ========================================================= */
+/* ---------- Volume / Balance / EQ ---------- */
 function fillPct(slider, centered) {
   const min = +slider.min, max = +slider.max, v = +slider.value;
   const pct = ((v - min) / (max - min)) * 100;
@@ -836,14 +824,14 @@ const trebleSlider = document.getElementById('treble');
 
 function updateVolume() {
   const v = +volSlider.value;
-  document.getElementById('volVal').textContent = (v > 0 ? '+' : '') + v.toFixed(1) + ' dB';
+  document.getElementById('volVal').textContent = (v > 0 ? '+' : '') + v.toFixed(1);
   if (gainNode) gainNode.gain.value = Math.pow(10, v / 20);
   fillPct(volSlider, false);
 }
 function updateBalance() {
   const v = +balSlider.value;
   const txt = v === 0 ? 'Centre'
-    : (v < 0 ? 'Gauche ' + Math.abs(v).toFixed(2) : 'Droite ' + v.toFixed(2));
+    : (v < 0 ? 'G ' + Math.abs(v).toFixed(2) : 'D ' + v.toFixed(2));
   document.getElementById('balVal').textContent = txt;
   if (pannerNode) pannerNode.pan.value = v;
   fillPct(balSlider, true);
@@ -875,10 +863,8 @@ trebleSlider.addEventListener('input', updateTreble);
 
 updateVolume(); updateBalance(); updateBass(); updateMid(); updateTreble();
 
-/* =========================================================
-   WAVE ANIMÉE
-   ========================================================= */
-const BARS = 32;
+/* ---------- Wave ---------- */
+const BARS = 28;
 const barEls = [];
 for (let i = 0; i < BARS; i++) {
   const e = document.createElement('i');
@@ -890,7 +876,7 @@ let idle = 0, lastFrame = 0;
 (function loop(now) {
   requestAnimationFrame(loop);
   const t = now || performance.now();
-  if (t - lastFrame < 33) return;
+  if (t - lastFrame < 40) return;
   lastFrame = t;
 
   const playing = isPlaying;
@@ -902,7 +888,7 @@ let idle = 0, lastFrame = 0;
       const step = Math.floor(_waveData.length / BARS);
       for (let k = 0; k < BARS; k++) {
         const idx = Math.min(k * step + 20, _waveData.length - 1);
-        const h = Math.max(3, Math.abs(_waveData[idx] - 128) / 128 * 40);
+        const h = Math.max(3, Math.abs(_waveData[idx] - 128) / 128 * 34);
         barEls[k].style.height = h + 'px';
       }
     } catch(e){}
@@ -917,9 +903,6 @@ let idle = 0, lastFrame = 0;
   }
 })();
 
-/* =========================================================
-   INIT
-   ========================================================= */
 paintList();
 render();
 setStatus('Ouvre les stations pour choisir');
