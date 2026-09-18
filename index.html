@@ -28,13 +28,12 @@
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,sans-serif;
     font-size:15px;line-height:1.45;letter-spacing:-.012em;
     -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
+    user-select:none;
+    -webkit-user-select:none;
   }
   button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;
          touch-action:manipulation;-webkit-user-select:none;user-select:none}
 
-  /* ============================================================
-     ⭐ PAGE PLEINE LARGEUR — comme la version full ⭐
-     ============================================================ */
   .app{
     width:100%;
     height:100vh;
@@ -135,6 +134,9 @@
   input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;
     border:2px solid var(--c,var(--cyan))}
 
+  /* ============================================================
+     ⭐ BOUTONS ROTATIFS (knobs) POUR L'ÉGALISEUR ⭐
+     ============================================================ */
   .eq{
     margin-top:auto;
     padding-top:14px;
@@ -142,15 +144,149 @@
     flex:0 0 auto;
   }
   .eq-title{font-size:12px;letter-spacing:.16em;color:var(--muted);
-            font-weight:700;margin-bottom:12px}
-  .eq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .eq-band{display:flex;flex-direction:column;gap:6px}
-  .eq-band .bhead{display:flex;justify-content:space-between;align-items:baseline}
-  .eq-band .blbl{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.06em}
-  .eq-band .bval{font-size:12px;font-variant-numeric:tabular-nums;color:var(--c)}
+            font-weight:700;margin-bottom:14px;text-align:center}
+
+  .knob-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    justify-items:center;
+  }
+
+  .knob{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    cursor:grab;
+    touch-action:none;
+    width:100%;
+  }
+  .knob:active{cursor:grabbing}
+
+  .knob-dial{
+    position:relative;
+    width:100%;
+    aspect-ratio:1 / 1;
+    max-width:110px;
+    max-height:110px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 50% 50%,
+        var(--deep) 0%,
+        var(--panel) 55%,
+        var(--mod) 75%,
+        #050810 100%);
+    border:2px solid var(--k-color,var(--cyan));
+    box-shadow:
+      inset 0 0 12px rgba(0,0,0,.7),
+      inset 0 0 0 1px rgba(255,255,255,.04);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    user-select:none;
+    -webkit-user-select:none;
+    transition:box-shadow .2s var(--e),border-color .2s var(--e);
+    overflow:hidden;
+  }
+  .knob.active .knob-dial{
+    box-shadow:
+      inset 0 0 12px rgba(0,0,0,.7),
+      inset 0 0 0 1px rgba(255,255,255,.08),
+      0 0 20px color-mix(in srgb,var(--k-color,var(--cyan)) 40%,transparent);
+  }
+
+  /* Graduations autour du bouton */
+  .knob-dial::before{
+    content:'';
+    position:absolute;
+    inset:4px;
+    border-radius:50%;
+    background:
+      repeating-conic-gradient(
+        from -135deg,
+        rgba(234,241,255,.28) 0deg 1deg,
+        transparent 1deg 15deg
+      );
+    -webkit-mask:
+      radial-gradient(circle,
+        transparent 0,
+        transparent 68%,
+        #000 69%,
+        #000 78%,
+        transparent 79%);
+    mask:
+      radial-gradient(circle,
+        transparent 0,
+        transparent 68%,
+        #000 69%,
+        #000 78%,
+        transparent 79%);
+    pointer-events:none;
+    opacity:.55;
+  }
+
+  /* Indicateur qui tourne */
+  .knob-indicator{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    transform-origin:50% 50%;
+    transition:transform .05s linear;
+  }
+  .knob-indicator::before{
+    content:'';
+    position:absolute;
+    left:50%;
+    top:6%;
+    width:4px;
+    height:26%;
+    border-radius:2px;
+    background:var(--k-color,var(--cyan));
+    transform:translateX(-50%);
+    box-shadow:0 0 8px var(--k-color,var(--cyan));
+  }
+
+  /* Bouton central (esthétique) */
+  .knob-dial::after{
+    content:'';
+    position:absolute;
+    inset:38%;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 35% 30%,
+        #4a5570 0%,
+        #2a3248 55%,
+        #1a2033 100%);
+    box-shadow:
+      inset 0 1px 2px rgba(255,255,255,.1),
+      inset 0 -1px 3px rgba(0,0,0,.6);
+    pointer-events:none;
+  }
+
+  .knob-label{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.08em;
+    color:var(--muted);
+    text-transform:uppercase;
+  }
+
+  .knob-value{
+    font-size:13px;
+    font-weight:800;
+    font-variant-numeric:tabular-nums;
+    color:var(--k-color,var(--cyan));
+    min-height:16px;
+    transition:color .15s var(--e);
+  }
+  .knob.active .knob-value{
+    color:#fff;
+    text-shadow:0 0 10px var(--k-color,var(--cyan));
+  }
 
   /* ============================================================
-     DRAWER PAR LE BAS — PLEINE LARGEUR
+     DRAWER PAR LE BAS
      ============================================================ */
   .drawer{
     position:fixed;
@@ -290,9 +426,6 @@
   }
   .scrim.open{opacity:1;pointer-events:auto}
 
-  /* ============================================================
-     ADAPTATION PETITS ÉCRANS
-     ============================================================ */
   @media (max-width:600px){
     .app{padding:10px;gap:8px}
     .topbar{padding:14px 16px}
@@ -354,19 +487,35 @@
 
     <div class="eq">
       <div class="eq-title">ÉGALISEUR</div>
-      <div class="eq-grid">
-        <div class="eq-band" style="--c:#FF3D9E">
-          <div class="bhead"><span class="blbl">BASS</span><span class="bval" id="bassVal">0</span></div>
-          <input type="range" id="bass" min="-15" max="15" step="1" value="0" style="--c:#FF3D9E">
+      <div class="knob-row">
+
+        <div class="knob" id="knobBass" style="--k-color:#FF3D9E"
+             data-min="-15" data-max="15" data-step="1" data-value="0">
+          <div class="knob-dial">
+            <div class="knob-indicator"></div>
+          </div>
+          <div class="knob-value" id="bassVal">0</div>
+          <div class="knob-label">Bass</div>
         </div>
-        <div class="eq-band" style="--c:#2FE7FF">
-          <div class="bhead"><span class="blbl">MID</span><span class="bval" id="midVal">0</span></div>
-          <input type="range" id="mid" min="-15" max="15" step="1" value="0" style="--c:#2FE7FF">
+
+        <div class="knob" id="knobMid" style="--k-color:#2FE7FF"
+             data-min="-15" data-max="15" data-step="1" data-value="0">
+          <div class="knob-dial">
+            <div class="knob-indicator"></div>
+          </div>
+          <div class="knob-value" id="midVal">0</div>
+          <div class="knob-label">Mid</div>
         </div>
-        <div class="eq-band" style="--c:#B9FF45">
-          <div class="bhead"><span class="blbl">HIGH</span><span class="bval" id="trelVal">0</span></div>
-          <input type="range" id="treble" min="-15" max="15" step="1" value="0" style="--c:#B9FF45">
+
+        <div class="knob" id="knobTreble" style="--k-color:#B9FF45"
+             data-min="-15" data-max="15" data-step="1" data-value="0">
+          <div class="knob-dial">
+            <div class="knob-indicator"></div>
+          </div>
+          <div class="knob-value" id="trelVal">0</div>
+          <div class="knob-label">High</div>
         </div>
+
       </div>
     </div>
   </div>
@@ -410,7 +559,7 @@
 
 const CORS_PROXY = 'https://soft-brook-0e52.stefikare.workers.dev/?url=';
 
-function normalizeUrl(u) {
+function proxify(u) {
   if (!u) return u;
   u = u.trim();
   if (u.indexOf(CORS_PROXY) === 0) return u;
@@ -419,8 +568,12 @@ function normalizeUrl(u) {
   return u;
 }
 
+/* =========================================================
+   ÉTAT
+   ========================================================= */
 let audioCtx = null;
-let mixEl = null;
+let mixEl = null;       // <audio> branché sur Web Audio (avec EQ)
+let cleanEl = null;     // <audio> simple, sans Web Audio (fallback)
 let srcNode = null;
 let pannerNode = null;
 let gainNode = null;
@@ -434,19 +587,29 @@ let graphBuilt = false;
 let isPlaying = false;
 let currentStation = null;
 let sessionId = 0;
+let usingMix = false;   // le flux actuel passe-t-il par Web Audio ?
 
 const RETRY_BASE = 800;
 const RETRY_MAX = 20000;
 const GOOD_PLAYBACK_MS = 15000;
 
+/* =========================================================
+   GRAPHE AUDIO
+   ========================================================= */
 function buildGraph() {
   if (graphBuilt) return;
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
+  /* Élément MIX — branché sur Web Audio pour l'EQ */
   mixEl = new Audio();
   mixEl.crossOrigin = 'anonymous';
   mixEl.setAttribute('playsinline', '');
   mixEl.preload = 'none';
+
+  /* Élément CLEAN — lecture brute sans Web Audio (fallback) */
+  cleanEl = new Audio();
+  cleanEl.setAttribute('playsinline', '');
+  cleanEl.preload = 'none';
 
   srcNode = audioCtx.createMediaElementSource(mixEl);
   pannerNode = audioCtx.createStereoPanner(); pannerNode.pan.value = 0;
@@ -479,10 +642,19 @@ function buildGraph() {
   graphBuilt = true;
 }
 
-function tryPlay(url, mySession) {
+/* =========================================================
+   TENTATIVE DE LECTURE
+   useMix=true  → passe par Web Audio (mixEl)
+   useMix=false → lecture brute (cleanEl) - pas de CORS, pas d'EQ
+   ========================================================= */
+function tryPlay(url, useMix, mySession) {
   return new Promise((resolve) => {
-    if (!mixEl) { resolve(false); return; }
-    let done = false, startedPlaying = false, lastProgress = Date.now();
+    const el = useMix ? mixEl : cleanEl;
+    if (!el) { resolve(false); return; }
+
+    let done = false;
+    let startedPlaying = false;
+    let lastProgress = Date.now();
 
     const finish = (ok) => {
       if (done) return;
@@ -491,65 +663,101 @@ function tryPlay(url, mySession) {
       resolve(ok);
     };
 
-    mixEl.onplaying = () => {
+    el.onplaying = () => {
       startedPlaying = true;
       lastProgress = Date.now();
-      setStatus('▶ En direct');
+      usingMix = useMix;
+      setStatus(useMix ? '▶ En direct · EQ actif' : '▶ En direct · sans EQ');
       render();
     };
-    mixEl.onwaiting = () => { if (startedPlaying) setStatus('⏳ Buffer...'); };
-    mixEl.onerror = () => { setStatus('❌ Erreur'); finish(false); };
-    mixEl.onended = () => finish(startedPlaying);
-    mixEl.ontimeupdate = () => { lastProgress = Date.now(); };
+    el.onwaiting = () => { if (startedPlaying) setStatus('⏳ Buffer...'); };
+    el.onerror = () => { finish(false); };
+    el.onended = () => finish(startedPlaying);
+    el.ontimeupdate = () => { lastProgress = Date.now(); };
 
     const watchdog = setInterval(() => {
       if (done) return;
       if (sessionId !== mySession || !isPlaying) { finish(false); return; }
       const idle = Date.now() - lastProgress;
-      if (!startedPlaying && idle > 15000) { setStatus('❌ Pas de réponse'); finish(false); }
-      else if (startedPlaying && idle > 12000) { setStatus('❌ Flux interrompu'); finish(false); }
+      if (!startedPlaying && idle > 12000) { finish(false); }
+      else if (startedPlaying && idle > 12000) { finish(false); }
     }, 1000);
 
     try {
-      mixEl.src = url;
-      mixEl.load();
-      const p = mixEl.play();
+      el.src = url;
+      el.load();
+      const p = el.play();
       if (p && p.catch) p.catch(() => finish(false));
     } catch (e) { finish(false); }
   });
 }
 
+/* =========================================================
+   SESSION AVEC PLAN D'ESSAIS (comme la full)
+   Pour chaque URL : mix puis clean
+   ========================================================= */
 async function streamSession(station, mySession) {
   const rawUrls = [station.u].concat(station.alts || []).filter(Boolean);
-  const urls = rawUrls.map(normalizeUrl);
 
-  if (urls[0] !== rawUrls[0]) {
-    console.info('[Core Mini] HTTP → proxy :', urls[0]);
-  }
+  /* Construire le plan : pour chaque URL → mix, puis clean
+     Si HTTP → on essaie aussi la version proxiée */
+  const plan = [];
+  rawUrls.forEach(u => {
+    const proxied = proxify(u);
+    if (proxied !== u) {
+      /* URL HTTP → on tente d'abord via le proxy */
+      plan.push({ url: proxied, mix: true });
+      plan.push({ url: proxied, mix: false });
+    }
+    /* URL directe (peut être HTTPS ou HTTP) */
+    plan.push({ url: u, mix: true });
+    plan.push({ url: u, mix: false });
+  });
 
-  let attempt = 0, urlIdx = 0;
+  console.info('[Core Mini] Plan d\'essais :', plan.map(p => p.url + (p.mix ? ' [mix]' : ' [clean]')));
+
+  let attempt = 0;
+  let idx = 0;
+
   while (isPlaying && sessionId === mySession) {
-    const url = urls[urlIdx % urls.length];
-    setStatus('⏳ Connexion...');
+    const step = plan[idx % plan.length];
+    setStatus('⏳ Tentative ' + (idx+1) + '/' + plan.length + '...');
+
     const startTs = Date.now();
-    const ok = await tryPlay(url, mySession);
+    const ok = await tryPlay(step.url, step.mix, mySession);
     const playedFor = Date.now() - startTs;
+
     if (!isPlaying || sessionId !== mySession) return;
 
     if (ok && playedFor >= GOOD_PLAYBACK_MS) {
-      attempt = 0; urlIdx = 0;
+      /* Bonne session — reset du plan */
+      attempt = 0;
+      idx = 0;
       setStatus('🔄 Reconnexion...');
     } else {
-      attempt++; urlIdx++;
-      setStatus('🔄 Tentative ' + attempt + '...');
+      attempt++;
+      idx++;
+      if (attempt > plan.length * 2) {
+        /* Trop d'échecs → pause longue */
+        setStatus('❌ Station inaccessible. Nouvel essai dans 10s...');
+        await new Promise(r => setTimeout(r, 10000));
+        attempt = 0;
+        idx = 0;
+      } else {
+        setStatus('🔄 Essai ' + (idx) + '/' + plan.length + '...');
+      }
     }
 
+    /* Nettoyage */
     try { mixEl.pause(); } catch(e) {}
     try { mixEl.removeAttribute('src'); mixEl.load(); } catch(e) {}
+    try { cleanEl.pause(); } catch(e) {}
+    try { cleanEl.removeAttribute('src'); cleanEl.load(); } catch(e) {}
+
+    if (!isPlaying || sessionId !== mySession) return;
 
     const delay = Math.min(RETRY_BASE * Math.pow(1.6, Math.max(0, attempt - 1)), RETRY_MAX);
-    setStatus('🔄 Reconnexion dans ' + (delay/1000).toFixed(1) + 's...');
-    await new Promise(r => setTimeout(r, delay + Math.random() * 700));
+    await new Promise(r => setTimeout(r, delay + Math.random() * 500));
   }
 }
 
@@ -559,6 +767,8 @@ async function togglePlay(station) {
     sessionId++;
     try { mixEl.pause(); } catch(e) {}
     try { mixEl.removeAttribute('src'); mixEl.load(); } catch(e) {}
+    try { cleanEl.pause(); } catch(e) {}
+    try { cleanEl.removeAttribute('src'); cleanEl.load(); } catch(e) {}
     render();
     setStatus('⏹️ Arrêté.');
     return;
@@ -584,6 +794,9 @@ async function togglePlay(station) {
   }
 }
 
+/* =========================================================
+   STATIONS
+   ========================================================= */
 function soma(id,n,c,g,q){ q=q||128;
   const m = (h,b) => 'https://'+h+'.somafm.com/'+id+'-'+b+'-mp3';
   return {n, g, c, q:q+' kbps', u:m('ice5',q), alts:[m('ice2',q), m('ice5',128), m('ice2',128)]};
@@ -680,12 +893,17 @@ function playStation(st) {
     sessionId++;
     try { mixEl.pause(); } catch(e) {}
     try { mixEl.removeAttribute('src'); mixEl.load(); } catch(e) {}
+    try { cleanEl.pause(); } catch(e) {}
+    try { cleanEl.removeAttribute('src'); cleanEl.load(); } catch(e) {}
     setTimeout(() => { isPlaying = true; togglePlay(st); }, 100);
   } else {
     togglePlay(st);
   }
 }
 
+/* =========================================================
+   LISTE
+   ========================================================= */
 TABS.forEach(t => {
   const b = document.createElement('button');
   b.textContent = t.label;
@@ -762,6 +980,9 @@ function toggleFav(st) {
   paintList();
 }
 
+/* =========================================================
+   RECHERCHE
+   ========================================================= */
 let searchTimer = null;
 document.getElementById('search').addEventListener('input', function() {
   query = this.value.trim();
@@ -804,6 +1025,9 @@ function searchLibrary(q) {
   });
 }
 
+/* =========================================================
+   AJOUT DE FLUX
+   ========================================================= */
 document.getElementById('addUrl').addEventListener('click', () => {
   const box = document.getElementById('url');
   addStreamFromValue(box.value, box);
@@ -850,6 +1074,9 @@ function addStreamFromValue(rawValue, box) {
   playStation(st);
 }
 
+/* =========================================================
+   DRAWER
+   ========================================================= */
 const drawer = document.getElementById('drawer');
 const scrim = document.getElementById('scrim');
 
@@ -883,6 +1110,9 @@ document.getElementById('power').addEventListener('click', () => {
   togglePlay(currentStation || CORE[0]);
 });
 
+/* =========================================================
+   SLIDERS VOL / BAL
+   ========================================================= */
 function fillPct(slider, centered) {
   const min = +slider.min, max = +slider.max, v = +slider.value;
   const pct = ((v - min) / (max - min)) * 100;
@@ -897,9 +1127,6 @@ function fillPct(slider, centered) {
 
 const volSlider = document.getElementById('volume');
 const balSlider = document.getElementById('balance');
-const bassSlider = document.getElementById('bass');
-const midSlider = document.getElementById('mid');
-const trebleSlider = document.getElementById('treble');
 
 function updateVolume() {
   const v = +volSlider.value;
@@ -915,33 +1142,104 @@ function updateBalance() {
   if (pannerNode) pannerNode.pan.value = v;
   fillPct(balSlider, true);
 }
-function updateBass() {
-  const v = +bassSlider.value;
-  document.getElementById('bassVal').textContent = (v > 0 ? '+' : '') + v;
-  if (bassFilter) bassFilter.gain.value = v;
-  fillPct(bassSlider, false);
-}
-function updateMid() {
-  const v = +midSlider.value;
-  document.getElementById('midVal').textContent = (v > 0 ? '+' : '') + v;
-  if (midFilter) midFilter.gain.value = v;
-  fillPct(midSlider, false);
-}
-function updateTreble() {
-  const v = +trebleSlider.value;
-  document.getElementById('trelVal').textContent = (v > 0 ? '+' : '') + v;
-  if (trebleFilter) trebleFilter.gain.value = v;
-  fillPct(trebleSlider, false);
-}
 
 volSlider.addEventListener('input', updateVolume);
 balSlider.addEventListener('input', updateBalance);
-bassSlider.addEventListener('input', updateBass);
-midSlider.addEventListener('input', updateMid);
-trebleSlider.addEventListener('input', updateTreble);
+updateVolume(); updateBalance();
 
-updateVolume(); updateBalance(); updateBass(); updateMid(); updateTreble();
+/* =========================================================
+   ⭐ KNOBS ROTATIFS POUR L'ÉGALISEUR ⭐
+   ========================================================= */
+function createKnob(knobEl, onValueChange) {
+  const dial = knobEl.querySelector('.knob-dial');
+  const indicator = knobEl.querySelector('.knob-indicator');
+  const valueEl = knobEl.querySelector('.knob-value');
 
+  const min = parseFloat(knobEl.dataset.min);
+  const max = parseFloat(knobEl.dataset.max);
+  const step = parseFloat(knobEl.dataset.step) || 1;
+  const range = max - min;
+
+  let value = parseFloat(knobEl.dataset.value) || 0;
+  let dragging = false;
+  let startY = 0;
+  let startValue = 0;
+
+  /* Angle : -135° (min) à +135° (max) */
+  function valueToAngle(v) {
+    const pct = (v - min) / range;
+    return -135 + pct * 270;
+  }
+
+  function update(v, notify) {
+    /* Quantifier */
+    v = Math.round(v / step) * step;
+    v = Math.max(min, Math.min(max, v));
+    value = v;
+    knobEl.dataset.value = v;
+
+    const angle = valueToAngle(v);
+    indicator.style.transform = 'rotate(' + angle + 'deg)';
+    valueEl.textContent = (v > 0 ? '+' : '') + v;
+
+    if (notify && onValueChange) onValueChange(v);
+  }
+
+  /* Drag vertical : up = augmenter, down = diminuer */
+  dial.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    startY = e.clientY;
+    startValue = value;
+    knobEl.classList.add('active');
+    try { dial.setPointerCapture(e.pointerId); } catch(err) {}
+    e.preventDefault();
+  });
+
+  dial.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    const dy = startY - e.clientY;   // up = positif
+    /* 180px de course verticale = plage complète */
+    const delta = (dy / 180) * range;
+    update(startValue + delta, true);
+    e.preventDefault();
+  });
+
+  function end(e) {
+    if (!dragging) return;
+    dragging = false;
+    knobEl.classList.remove('active');
+    try { dial.releasePointerCapture(e.pointerId); } catch(err) {}
+  }
+  dial.addEventListener('pointerup', end);
+  dial.addEventListener('pointercancel', end);
+
+  /* Double-clic : reset à 0 */
+  dial.addEventListener('dblclick', () => {
+    update(0, true);
+  });
+
+  /* Initialisation (sans notifier) */
+  update(value, false);
+
+  return { setValue: (v) => update(v, true), getValue: () => value };
+}
+
+const bassKnob = createKnob(
+  document.getElementById('knobBass'),
+  (v) => { if (bassFilter) bassFilter.gain.value = v; }
+);
+const midKnob = createKnob(
+  document.getElementById('knobMid'),
+  (v) => { if (midFilter) midFilter.gain.value = v; }
+);
+const trebleKnob = createKnob(
+  document.getElementById('knobTreble'),
+  (v) => { if (trebleFilter) trebleFilter.gain.value = v; }
+);
+
+/* =========================================================
+   WAVE
+   ========================================================= */
 const BARS = 28;
 const barEls = [];
 for (let i = 0; i < BARS; i++) {
@@ -958,7 +1256,8 @@ let idle = 0, lastFrame = 0;
   lastFrame = t;
 
   const playing = isPlaying;
-  const live = playing && analyser && _waveData;
+  /* La wave ne s'anime que si le flux passe par Web Audio (usingMix) */
+  const live = playing && usingMix && analyser && _waveData;
 
   if (live) {
     try {
@@ -981,6 +1280,9 @@ let idle = 0, lastFrame = 0;
   }
 })();
 
+/* =========================================================
+   INIT
+   ========================================================= */
 paintList();
 render();
 setStatus('Ouvre les stations pour choisir');
