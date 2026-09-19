@@ -28,8 +28,8 @@
   button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;
          touch-action:manipulation;-webkit-user-select:none;user-select:none}
 
-  .app{width:100%;height:100vh;height:100dvh;display:flex;flex-direction:column;gap:12px;
-       padding:calc(env(safe-area-inset-top) + 14px) 16px calc(env(safe-area-inset-bottom) + 14px) 16px;
+  .app{width:100%;height:100vh;height:100dvh;display:flex;flex-direction:column;gap:10px;
+       padding:calc(env(safe-area-inset-top) + 12px) 14px calc(env(safe-area-inset-bottom) + 12px) 14px;
        overflow:hidden}
 
   .card{border:1px solid var(--edge);border-radius:16px;position:relative;
@@ -37,51 +37,54 @@
                    linear-gradient(180deg,var(--panel),var(--deep));
         display:flex;flex-direction:column;overflow:hidden}
 
-  .topbar{padding:16px 20px;flex:0 0 auto}
-  .brand-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-  .orb{width:32px;height:32px;border-radius:50%;border:3px solid var(--cyan);position:relative;flex:none}
-  .orb::after{content:'';position:absolute;inset:7px;border-radius:50%;background:var(--cyan)}
-  .brand{font-weight:900;letter-spacing:.12em;color:#bff8ff;font-size:17px}
+  .topbar{padding:14px 18px;flex:0 0 auto}
+  .brand-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .orb{width:28px;height:28px;border-radius:50%;border:3px solid var(--cyan);position:relative;flex:none}
+  .orb::after{content:'';position:absolute;inset:6px;border-radius:50%;background:var(--cyan)}
+  .brand{font-weight:900;letter-spacing:.12em;color:#bff8ff;font-size:16px}
   .brand small{opacity:.5;font-size:10px;letter-spacing:.1em;margin-left:4px}
 
-  .now{font-size:22px;font-weight:600;line-height:1.15;letter-spacing:-.03em;margin:0}
-  .sub{font-size:13px;color:var(--muted);min-height:17px;margin-top:3px}
+  .now{font-size:20px;font-weight:600;line-height:1.15;letter-spacing:-.03em;margin:0}
+  .sub{font-size:12.5px;color:var(--muted);min-height:17px;margin-top:3px}
   .sub.live{color:var(--lime)}
 
-  .quick-add{display:flex;gap:8px;margin-top:14px}
-  .quick-add .txtin{flex:1;min-width:0;min-height:46px;font-size:15px;border-radius:12px;padding:0 16px}
-  .quick-add .pill{flex:0 0 auto;min-height:46px;padding:0 20px;font-size:22px;line-height:1;font-weight:700}
+  /* Zone d'ajout compacte : nom + url sur 2 lignes */
+  .add-form{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+  .add-form .txtin{min-height:42px;font-size:14px;padding:0 14px}
+  .add-form .row2{display:flex;gap:6px}
+  .add-form .row2 .txtin{flex:1;min-width:0}
 
-  .tb-btns{display:flex;gap:8px;margin-top:10px}
   .pill{display:inline-flex;align-items:center;justify-content:center;border-radius:100px;
-        min-height:48px;padding:0 24px;font-size:15px;font-weight:600;
+        min-height:44px;padding:0 22px;font-size:14px;font-weight:600;
         background:linear-gradient(135deg,var(--cyan),#0E8BDD);color:#03121A;
         transition:transform .18s var(--e);flex:1}
   .pill:active{transform:scale(.97)}
-  .pill.ghost{background:rgba(234,241,255,.06);color:var(--ice);border:1px solid var(--edge2);flex:0 0 auto;padding:0 20px}
+  .pill.ghost{background:rgba(234,241,255,.06);color:var(--ice);border:1px solid var(--edge2);flex:0 0 auto;padding:0 18px}
   .pill.stop{background:linear-gradient(135deg,#FF3D9E,#B01E75);color:#fff}
 
-  .wavewrap{padding:0 20px 14px;flex:0 0 auto}
-  .wave{display:flex;align-items:flex-end;gap:2px;height:26px;width:100%}
+  .tb-btns{display:flex;gap:8px;margin-top:10px}
+
+  .wavewrap{padding:0 18px 12px;flex:0 0 auto}
+  .wave{display:flex;align-items:flex-end;gap:2px;height:24px;width:100%}
   .wave i{flex:1;border-radius:2px;height:3px;background:var(--cyan);opacity:.22;
           transition:height .08s linear,opacity .4s var(--e)}
   .wave.on i{opacity:.9}
 
-  .console{padding:16px 20px;flex:1 1 auto;min-height:0;display:flex;flex-direction:column;
+  .console{padding:14px 18px;flex:1 1 auto;min-height:0;display:flex;flex-direction:column;
            overflow-y:auto;-webkit-overflow-scrolling:touch}
   .console::-webkit-scrollbar{width:6px}
   .console::-webkit-scrollbar-thumb{background:rgba(234,241,255,.13);border-radius:99px}
 
-  .ctitle{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex:0 0 auto}
+  .ctitle{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex:0 0 auto}
   .ctitle h2{font-size:12px;letter-spacing:.18em;margin:0;color:var(--cyan);font-weight:800}
   .ctitle .val{font-size:12px;color:var(--muted)}
 
-  .row{display:grid;grid-template-columns:70px 1fr;gap:16px;align-items:center;margin-bottom:12px;flex:0 0 auto}
+  .row{display:grid;grid-template-columns:70px 1fr;gap:14px;align-items:center;margin-bottom:10px;flex:0 0 auto}
   .row .lbl{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.08em}
   .row .val{font-size:12px;color:var(--ice);text-align:right;font-variant-numeric:tabular-nums;
             grid-column:2;margin-top:-3px;margin-bottom:1px}
 
-  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:34px;background:transparent;
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:32px;background:transparent;
                     margin:0;display:block;cursor:pointer}
   input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:99px;
     background:linear-gradient(90deg,var(--c,var(--cyan)) var(--p,50%),rgba(234,241,255,.1) var(--p,50%))}
@@ -97,14 +100,14 @@
   input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;
     border:2px solid var(--c,var(--cyan))}
 
-  .eq{margin-top:auto;padding-top:14px;border-top:1px solid var(--edge2);flex:0 0 auto}
-  .eq-title{font-size:12px;letter-spacing:.16em;color:var(--muted);font-weight:700;margin-bottom:14px;text-align:center}
-  .knob-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;justify-items:center}
+  .eq{margin-top:auto;padding-top:12px;border-top:1px solid var(--edge2);flex:0 0 auto}
+  .eq-title{font-size:12px;letter-spacing:.16em;color:var(--muted);font-weight:700;margin-bottom:12px;text-align:center}
+  .knob-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;justify-items:center}
 
-  .knob{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:grab;touch-action:none;width:100%}
+  .knob{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:grab;touch-action:none;width:100%}
   .knob:active{cursor:grabbing}
 
-  .knob-dial{position:relative;width:100%;aspect-ratio:1 / 1;max-width:110px;max-height:110px;
+  .knob-dial{position:relative;width:100%;aspect-ratio:1 / 1;max-width:100px;max-height:100px;
     border-radius:50%;
     background:radial-gradient(circle at 50% 50%,var(--deep) 0%,var(--panel) 55%,var(--mod) 75%,#050810 100%);
     border:2px solid var(--k-color,var(--cyan));
@@ -133,6 +136,9 @@
               color:var(--k-color,var(--cyan));min-height:16px;transition:color .15s var(--e)}
   .knob.active .knob-value{color:#fff;text-shadow:0 0 10px var(--k-color,var(--cyan))}
 
+  /* ============================================================
+     DRAWER
+     ============================================================ */
   .drawer{position:fixed;left:0;right:0;bottom:0;top:auto;height:88vh;height:88dvh;max-height:88vh;
     width:100%;z-index:40;background:linear-gradient(180deg,#0B1020,#06080F);
     border-top-left-radius:20px;border-top-right-radius:20px;border-top:1px solid var(--edge2);
@@ -153,23 +159,30 @@
   .dcontent{flex:1 1 auto;display:flex;flex-direction:column;
     padding:0 20px calc(env(safe-area-inset-bottom) + 20px) 20px;min-height:0;overflow:hidden}
 
-  .addtop{display:flex;gap:8px;margin-bottom:12px;flex:0 0 auto}
-  .addtop .txtin{flex:1;min-width:0;min-height:46px;font-size:15px;padding:0 16px;border-radius:12px}
-  .addtop .pill{flex:0 0 auto;min-height:46px;padding:0 20px;font-size:22px;line-height:1;font-weight:700;border-radius:12px}
+  /* Formulaire d'ajout dans le drawer : nom + url */
+  .addtop{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;flex:0 0 auto}
+  .addtop .row2{display:flex;gap:6px}
+  .addtop .txtin{min-height:44px;font-size:14px;padding:0 14px}
+  .addtop .row2 .txtin{flex:1;min-width:0}
+  .addtop .pill{min-height:44px;font-size:14px}
 
-  .searchbox{margin-bottom:12px;flex:0 0 auto}
+  .searchbox{margin-bottom:10px;flex:0 0 auto}
 
   .txtin{width:100%;font:inherit;color:var(--ice);background:rgba(234,241,255,.05);
-    border:1px solid var(--edge2);border-radius:12px;min-height:46px;padding:0 16px;font-size:15px;
+    border:1px solid var(--edge2);border-radius:12px;min-height:44px;padding:0 14px;font-size:14px;
     -webkit-appearance:none;appearance:none}
   .txtin:focus{outline:none;border-color:var(--cyan)}
 
-  .tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 0 12px;padding-bottom:4px;flex:0 0 auto}
+  .tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 0 10px;padding-bottom:4px;flex:0 0 auto}
   .tabs::-webkit-scrollbar{display:none}
   .tabs button{flex:none;white-space:nowrap;font-size:13px;color:var(--muted);
-    background:rgba(234,241,255,.05);border:1px solid var(--edge);border-radius:100px;min-height:36px;padding:0 16px}
+    background:rgba(234,241,255,.05);border:1px solid var(--edge);
+    border-radius:100px;min-height:36px;padding:0 16px}
   .tabs button.sel{background:linear-gradient(135deg,var(--cyan),#0E8BDD);color:#03121A;
     border-color:transparent;font-weight:700}
+  .tabs button.fav-tab.sel{
+    background:linear-gradient(135deg,var(--magenta),#B01E75);color:#fff;
+    box-shadow:0 0 12px rgba(255,61,158,.4)}
 
   .listwrap{flex:1 1 auto;overflow-y:auto;min-height:0;padding-right:2px;-webkit-overflow-scrolling:touch}
   .listwrap::-webkit-scrollbar{width:6px}
@@ -186,9 +199,41 @@
   .rowlist .nm{font-weight:600;font-size:16px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .rowlist.play .nm{color:var(--cyan)}
   .rowlist .desc{font-size:13px;color:var(--muted);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .rowlist .star{font-size:20px;color:rgba(234,241,255,.2);padding:6px;flex:none;transition:all .18s var(--e)}
-  .rowlist .star:hover{color:var(--magenta);transform:scale(1.15)}
-  .rowlist .star.is{color:var(--magenta)}
+
+  /* Étoile plus visible */
+  .rowlist .star{
+    font-size:22px;
+    color:rgba(234,241,255,.25);
+    padding:8px 10px;
+    flex:none;
+    transition:all .18s var(--e);
+    border-radius:10px;
+    background:rgba(234,241,255,.03);
+  }
+  .rowlist .star:hover{
+    color:var(--magenta);
+    transform:scale(1.15);
+    background:rgba(255,61,158,.1);
+  }
+  .rowlist .star.is{
+    color:var(--magenta);
+    background:rgba(255,61,158,.15);
+    text-shadow:0 0 10px var(--magenta);
+  }
+
+  /* Bouton de suppression sur les flux ajoutés */
+  .rowlist .del{
+    font-size:18px;
+    color:rgba(234,241,255,.2);
+    padding:6px 8px;
+    flex:none;
+    transition:all .18s var(--e);
+    border-radius:8px;
+  }
+  .rowlist .del:hover{
+    color:#FF3D9E;
+    background:rgba(255,61,158,.12);
+  }
 
   .msg{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.5;flex:0 0 auto}
   .msg b{color:var(--ice)}
@@ -197,12 +242,12 @@
   .scrim.open{opacity:1;pointer-events:auto}
 
   @media (max-width:600px){
-    .app{padding:10px;gap:8px}
-    .topbar{padding:14px 16px}
-    .now{font-size:19px}
-    .console{padding:14px 16px}
-    .row{grid-template-columns:56px 1fr;gap:12px;margin-bottom:10px}
-    .dcontent{padding:0 16px calc(env(safe-area-inset-bottom) + 16px) 16px}
+    .app{padding:8px;gap:6px}
+    .topbar{padding:12px 14px}
+    .now{font-size:18px}
+    .console{padding:12px 14px}
+    .row{grid-template-columns:56px 1fr;gap:10px;margin-bottom:8px}
+    .dcontent{padding:0 14px calc(env(safe-area-inset-bottom) + 14px) 14px}
   }
   @media (max-height:520px){.wavewrap{display:none}}
 </style>
@@ -217,10 +262,14 @@
     <div class="now" id="npName">Rien en lecture</div>
     <div class="sub" id="npState">Ouvre les stations pour choisir</div>
 
-    <div class="quick-add">
-      <input type="text" class="txtin" id="quickUrl" inputmode="url"
-             autocapitalize="off" autocorrect="off" placeholder="Coller un lien de flux…">
-      <button class="pill" id="quickAdd">＋</button>
+    <div class="add-form">
+      <input type="text" class="txtin" id="quickName" autocapitalize="words"
+             autocorrect="off" placeholder="Nom (facultatif)">
+      <div class="row2">
+        <input type="text" class="txtin" id="quickUrl" inputmode="url"
+               autocapitalize="off" autocorrect="off" placeholder="Coller un lien de flux…">
+        <button class="pill" id="quickAdd" style="flex:0 0 auto;padding:0 18px;font-size:20px;font-weight:700">＋</button>
+      </div>
     </div>
 
     <div class="tb-btns">
@@ -289,13 +338,20 @@
     <div class="addtop">
       <input type="text" class="txtin" id="url" inputmode="url"
              autocapitalize="off" autocorrect="off" placeholder="Coller un lien de flux…">
-      <button class="pill" id="addUrl">＋</button>
+      <div class="row2">
+        <input type="text" class="txtin" id="customName" autocapitalize="words"
+               autocorrect="off" placeholder="Nom (facultatif)">
+        <button class="pill" id="addUrl" style="flex:0 0 auto;padding:0 20px">＋ Ajouter</button>
+      </div>
     </div>
+
     <div class="searchbox">
       <input type="text" class="txtin" id="search" placeholder="Chercher une station…"
              autocapitalize="off" autocorrect="off">
     </div>
+
     <div class="tabs" id="tabs"></div>
+
     <div class="listwrap">
       <div id="list"></div>
       <div class="msg" id="listMsg"></div>
@@ -322,15 +378,15 @@ function proxify(u) {
    ÉTAT
    ========================================================= */
 let audioCtx = null;
-let mixEl = null;      /* <audio> branché sur Web Audio (avec EQ) */
-let player = null;     /* <audio> simple, sans Web Audio (fallback) */
+let mixEl = null;
+let player = null;
 let srcNode = null;
 let pannerNode = null;
 let gainNode = null;
 let bassFilter = null;
 let midFilter = null;
 let trebleFilter = null;
-let softLimiter = null;  /* ⭐ Limiteur anti-artefacts */
+let softLimiter = null;
 let analyser = null;
 let _waveData = null;
 let graphBuilt = false;
@@ -346,29 +402,18 @@ const GOOD_PLAYBACK_MS = 15000;
 
 /* =========================================================
    GRAPHE AUDIO
-   - sampleRate 44100 forcé → pas de rééchantillonnage
-   - softLimiter en sortie → absorbe les micro-artefacts
    ========================================================= */
 function buildGraph() {
   if (graphBuilt) return;
 
   const AC = window.AudioContext || window.webkitAudioContext;
-
-  /* ⭐ FIX 1 : forcer 44100 Hz + latencyHint 'playback' */
   try {
-    audioCtx = new AC({
-      latencyHint: 'playback',
-      sampleRate: 44100
-    });
+    audioCtx = new AC({ latencyHint: 'playback', sampleRate: 44100 });
   } catch (e) {
-    try {
-      audioCtx = new AC({ latencyHint: 'playback' });
-    } catch (e2) {
-      audioCtx = new AC();
-    }
+    try { audioCtx = new AC({ latencyHint: 'playback' }); }
+    catch (e2) { audioCtx = new AC(); }
   }
 
-  /* ---- Élément MIX (avec EQ) ---- */
   mixEl = new Audio();
   mixEl.crossOrigin = 'anonymous';
   mixEl.setAttribute('playsinline', '');
@@ -390,7 +435,6 @@ function buildGraph() {
   trebleFilter.type = 'highshelf'; trebleFilter.frequency.value = 4000;
   trebleFilter.gain.value = 0;
 
-  /* ⭐ FIX 2 : limiteur doux qui absorbe les pics/artefacts */
   softLimiter = audioCtx.createDynamicsCompressor();
   softLimiter.threshold.value = -1.5;
   softLimiter.knee.value = 6;
@@ -402,7 +446,6 @@ function buildGraph() {
   analyser.fftSize = 512;
   analyser.smoothingTimeConstant = 0.4;
 
-  /* Chaîne : src → panner → gain → bass → mid → treble → analyser → limiter → destination */
   srcNode.connect(pannerNode);
   pannerNode.connect(gainNode);
   gainNode.connect(bassFilter);
@@ -414,7 +457,6 @@ function buildGraph() {
 
   _waveData = new Uint8Array(analyser.fftSize);
 
-  /* ---- Élément CLEAN (sans Web Audio) ---- */
   player = new Audio();
   player.setAttribute('playsinline', '');
   player.preload = 'none';
@@ -423,25 +465,19 @@ function buildGraph() {
 }
 
 /* =========================================================
-   LECTURE — un élément selon le mode
-   Un SEUL timer de démarrage, plus de watchdog pendant la lecture
+   LECTURE
    ========================================================= */
 function tryPlay(url, useMix, mySession) {
   return new Promise((resolve) => {
     const el = useMix ? mixEl : player;
     if (!el) { resolve(false); return; }
 
-    let done = false;
-    let started = false;
-    let startupTimer = null;
+    let done = false, started = false, startupTimer = null;
 
     const cleanup = () => {
-      el.onplaying = null;
-      el.onerror = null;
-      el.onended = null;
-      el.onstalled = null;
+      el.onplaying = null; el.onerror = null;
+      el.onended = null; el.onstalled = null;
     };
-
     const finish = (ok) => {
       if (done) return;
       done = true;
@@ -458,15 +494,10 @@ function tryPlay(url, useMix, mySession) {
       setStatus(useMix ? '▶ En direct · EQ actif' : '▶ En direct · sans EQ');
       render();
     };
-
     el.onerror = () => finish(false);
     el.onended = () => finish(started);
 
-    /* Un seul timer pour le démarrage.
-       Une fois lancé, on ne touche plus à rien. */
-    startupTimer = setTimeout(() => {
-      if (!started) finish(false);
-    }, 15000);
+    startupTimer = setTimeout(() => { if (!started) finish(false); }, 15000);
 
     try {
       el.src = url;
@@ -477,9 +508,6 @@ function tryPlay(url, useMix, mySession) {
   });
 }
 
-/* =========================================================
-   SESSION — plan d'essais avec verrouillage du mode gagnant
-   ========================================================= */
 async function streamSession(station, mySession) {
   const rawUrls = [station.u].concat(station.alts || []).filter(Boolean);
 
@@ -494,12 +522,10 @@ async function streamSession(station, mySession) {
 
   console.info('[Core Mini] Plan :', plan.map(p => p.url + ' [' + (p.mix ? 'mix' : 'clean') + ']'));
 
-  let idx = 0;
-  let attempt = 0;
+  let idx = 0, attempt = 0;
 
   while (isPlaying && sessionId === mySession) {
     const step = plan[idx % plan.length];
-
     setStatus('⏳ Essai ' + ((idx % plan.length) + 1) + '/' + plan.length +
               (step.mix ? ' · EQ' : ' · direct'));
 
@@ -510,7 +536,6 @@ async function streamSession(station, mySession) {
     if (!isPlaying || sessionId !== mySession) return;
 
     if (ok && playedFor >= GOOD_PLAYBACK_MS) {
-      /* Succès → on réordonne pour mettre ce mode en premier */
       attempt = 0;
       const winner = plan[idx % plan.length];
       plan.length = 0;
@@ -528,12 +553,10 @@ async function streamSession(station, mySession) {
       if (attempt > plan.length * 3) {
         setStatus('❌ Station inaccessible. Pause 10s...');
         await new Promise(r => setTimeout(r, 10000));
-        attempt = 0;
-        idx = 0;
+        attempt = 0; idx = 0;
       }
     }
 
-    /* Nettoyage */
     try { mixEl.pause(); } catch(e) {}
     try { mixEl.removeAttribute('src'); mixEl.load(); } catch(e) {}
     try { player.pause(); } catch(e) {}
@@ -580,7 +603,7 @@ async function togglePlay(station) {
 }
 
 /* =========================================================
-   STATIONS
+   STATIONS PRÉDÉFINIES
    ========================================================= */
 function soma(id,n,c,g,q){ q=q||128;
   const m = (h,b) => 'https://'+h+'.somafm.com/'+id+'-'+b+'-mp3';
@@ -621,19 +644,39 @@ const CORE = [
   rp('global-192','Radio Paradise','world','Monde, groove','192 kbps')
 ];
 
-const TABS = [
-  {id:'all',label:'Tout'},{id:'fav',label:'Favoris'},
-  {id:'chill',label:'Chill'},{id:'house',label:'House'},{id:'jazz',label:'Jazz'},
-  {id:'rock',label:'Rock'},{id:'retro',label:'Rétro'},{id:'world',label:'Monde'},
-  {id:'urban',label:'Urbain'},{id:'trance',label:'Trance'}
-];
+/* =========================================================
+   STATIONS PERSONNELLES (persistées)
+   ========================================================= */
+let customStations = [];
+try {
+  customStations = JSON.parse(localStorage.getItem('core_custom_stations') || '[]');
+  if (!Array.isArray(customStations)) customStations = [];
+} catch (e) { customStations = []; }
 
-let tab = 'all', query = '', online = [], favs = [], plays = {};
+/* Injection dans CORE */
+customStations.forEach(st => {
+  if (st && st.u && !CORE.some(x => x.u === st.u)) {
+    CORE.push(st);
+  }
+});
+
+/* =========================================================
+   FAVORIS + PLAYS (persistés)
+   ========================================================= */
+let favs = [];
+let plays = {};
 try { favs = JSON.parse(localStorage.getItem('core_favs') || '[]'); } catch(e){ favs = []; }
 try { plays = JSON.parse(localStorage.getItem('core_plays') || '{}'); } catch(e){ plays = {}; }
+
 function saveFavs(){ try{ localStorage.setItem('core_favs', JSON.stringify(favs)); }catch(e){} }
 function savePlays(){ try{ localStorage.setItem('core_plays', JSON.stringify(plays)); }catch(e){} }
+function saveCustomStations(){
+  try{ localStorage.setItem('core_custom_stations', JSON.stringify(customStations)); }catch(e){}
+}
 
+/* =========================================================
+   UI RÉFÉRENCES
+   ========================================================= */
 const npName = document.getElementById('npName');
 const npState = document.getElementById('npState');
 const statusMini = document.getElementById('statusMini');
@@ -672,9 +715,29 @@ function playStation(st) {
   }
 }
 
+/* =========================================================
+   TABS — Favoris mis en avant
+   ========================================================= */
+const TABS = [
+  {id:'all',label:'Tout'},
+  {id:'fav',label:'★ Favoris',  cls:'fav-tab'},
+  {id:'custom',label:'Mes ajouts'},
+  {id:'chill',label:'Chill'},
+  {id:'house',label:'House'},
+  {id:'jazz',label:'Jazz'},
+  {id:'rock',label:'Rock'},
+  {id:'retro',label:'Rétro'},
+  {id:'world',label:'Monde'},
+  {id:'urban',label:'Urbain'},
+  {id:'trance',label:'Trance'}
+];
+
+let tab = 'all', query = '', online = [];
+
 TABS.forEach(t => {
   const b = document.createElement('button');
   b.textContent = t.label;
+  if (t.cls) b.classList.add(t.cls);
   if (t.id === tab) b.classList.add('sel');
   b.addEventListener('click', () => {
     tab = t.id;
@@ -685,6 +748,9 @@ TABS.forEach(t => {
   tabsEl.appendChild(b);
 });
 
+/* =========================================================
+   FILTRAGE + AFFICHAGE
+   ========================================================= */
 function filterRows() {
   if (query) {
     const q = query.toLowerCase();
@@ -693,45 +759,109 @@ function filterRows() {
   }
   if (tab === 'fav') return favs.slice();
   if (tab === 'all') return CORE.slice();
+  if (tab === 'custom') {
+    return CORE.filter(s => s.custom === true);
+  }
   return CORE.filter(s => s.c === tab);
 }
 
 function paintList() {
   const rows = filterRows();
   listEl.innerHTML = '';
-  if (!rows.length && tab === 'fav') { listMsg.textContent = 'Aucun favori pour l\'instant.'; return; }
-  if (!rows.length && query) { listMsg.innerHTML = '<b>Rien trouvé.</b>'; return; }
+
+  if (!rows.length && tab === 'fav') {
+    listMsg.innerHTML = '<b>Aucun favori pour l\'instant.</b><br>Touche l\'étoile ★ d\'une station pour l\'ajouter.';
+    return;
+  }
+  if (!rows.length && tab === 'custom') {
+    listMsg.innerHTML = '<b>Aucune radio ajoutée.</b><br>Colle un lien de flux dans le champ ci-dessus.';
+    return;
+  }
+  if (!rows.length && query) {
+    listMsg.innerHTML = '<b>Rien trouvé.</b>';
+    return;
+  }
   listMsg.textContent = '';
 
   rows.forEach(st => {
     const r = document.createElement('button');
     r.className = 'rowlist';
     if (currentStation && currentStation.u === st.u) r.className += ' play';
+
     const isFav = favs.some(x => x.u === st.u);
+    const isCustom = st.custom === true;
+
     r.innerHTML = '<i class="dot"></i>'
       + '<span class="info"><span class="nm"></span><span class="desc"></span></span>'
-      + '<span class="star' + (isFav ? ' is' : '') + '">★</span>';
+      + (isCustom ? '<span class="del" title="Supprimer">✕</span>' : '')
+      + '<span class="star' + (isFav ? ' is' : '') + '" title="Favori">★</span>';
+
     r.querySelector('.nm').textContent = st.n;
     const descParts = [];
     if (st.g) descParts.push(st.g);
     if (st.q) descParts.push(st.q);
     r.querySelector('.desc').textContent = descParts.join(' · ');
-    r.addEventListener('click', () => { playStation(st); openDrawer(false); });
+
+    r.addEventListener('click', (ev) => {
+      /* Ignore si on a cliqué sur l'étoile ou la croix */
+      if (ev.target.closest('.star') || ev.target.closest('.del')) return;
+      playStation(st);
+      openDrawer(false);
+    });
+
+    /* Étoile : toggle favori */
     r.querySelector('.star').addEventListener('click', ev => {
       ev.stopPropagation(); ev.preventDefault();
       toggleFav(st);
     });
+
+    /* Croix : supprimer un flux ajouté */
+    const delBtn = r.querySelector('.del');
+    if (delBtn) {
+      delBtn.addEventListener('click', ev => {
+        ev.stopPropagation(); ev.preventDefault();
+        deleteCustomStation(st);
+      });
+    }
+
     listEl.appendChild(r);
   });
 }
 
 function toggleFav(st) {
   const i = favs.findIndex(x => x.u === st.u);
-  if (i >= 0) favs.splice(i, 1); else favs.push(st);
+  if (i >= 0) {
+    favs.splice(i, 1);
+  } else {
+    favs.push(st);
+  }
   saveFavs();
   paintList();
 }
 
+function deleteCustomStation(st) {
+  /* Arrêt si c'est en cours de lecture */
+  if (currentStation && currentStation.u === st.u && isPlaying) {
+    togglePlay();
+  }
+  /* Retrait de CORE */
+  const idx = CORE.findIndex(x => x.u === st.u);
+  if (idx >= 0) CORE.splice(idx, 1);
+  /* Retrait de customStations */
+  customStations = customStations.filter(x => x.u !== st.u);
+  saveCustomStations();
+  /* Retrait des favoris */
+  favs = favs.filter(x => x.u !== st.u);
+  saveFavs();
+  /* Retrait des plays */
+  delete plays[st.u];
+  savePlays();
+  paintList();
+}
+
+/* =========================================================
+   RECHERCHE
+   ========================================================= */
 let searchTimer = null;
 document.getElementById('search').addEventListener('input', function() {
   query = this.value.trim();
@@ -772,42 +902,99 @@ function searchLibrary(q) {
   }).catch(() => { listMsg.innerHTML = '<b>Bibliothèque injoignable.</b>'; });
 }
 
-document.getElementById('addUrl').addEventListener('click', () => {
-  const box = document.getElementById('url');
-  addStreamFromValue(box.value, box);
-});
-document.getElementById('quickAdd').addEventListener('click', () => {
-  const box = document.getElementById('quickUrl');
-  addStreamFromValue(box.value, box);
-});
-document.getElementById('quickUrl').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') { e.preventDefault(); addStreamFromValue(this.value, this); }
-});
-document.getElementById('url').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') { e.preventDefault(); addStreamFromValue(this.value, this); }
-});
-
-function addStreamFromValue(rawValue, box) {
-  let u = (rawValue || '').trim();
+/* =========================================================
+   AJOUT DE FLUX — avec nom personnalisé
+   ========================================================= */
+function addStream(urlValue, nameValue, urlBox, nameBox) {
+  let u = (urlValue || '').trim();
   if (!u) { listMsg.textContent = 'Colle un lien de flux.'; return; }
+
   const wasHttp = /^http:\/\//i.test(u);
   if (!/^https?:\/\//i.test(u)) u = 'https://' + u;
 
-  const st = {
-    n: u.replace(/^https?:\/\//i, '').split('/')[0].slice(0, 30),
-    g: wasHttp ? 'Flux rapide (proxy auto)' : 'Flux ajouté',
-    c: 'all', q: '', u: u, alts: []
-  };
+  /* Nom : celui fourni, sinon auto-généré */
+  const name = (nameValue || '').trim() ||
+               u.replace(/^https?:\/\//i, '').split('/')[0].slice(0, 30);
+
+  /* Vérifier si la station existe déjà */
   const existing = CORE.find(x => x.u === u);
-  if (existing) { if (box) box.value = ''; playStation(existing); return; }
+  if (existing) {
+    if (urlBox) urlBox.value = '';
+    if (nameBox) nameBox.value = '';
+    listMsg.innerHTML = '<b>Cette radio est déjà dans ta liste.</b>';
+    playStation(existing);
+    return;
+  }
+
+  const st = {
+    n: name,
+    g: wasHttp ? 'Flux ajouté (proxy auto)' : 'Flux ajouté',
+    c: 'all',
+    q: '',
+    u: u,
+    alts: [],
+    custom: true
+  };
+
+  /* Ajout à CORE + customStations + persistance */
   CORE.push(st);
-  if (box) box.value = '';
+  customStations.push(st);
+  saveCustomStations();
+
+  if (urlBox) urlBox.value = '';
+  if (nameBox) nameBox.value = '';
+
   listMsg.innerHTML = wasHttp
-    ? '<b>✓ Ajouté.</b> HTTP → proxy HTTPS auto.'
-    : '<b>✓ Ajouté.</b>';
+    ? '<b>✓ « ' + name + ' » ajoutée.</b> HTTP → proxy HTTPS auto.'
+    : '<b>✓ « ' + name + ' » ajoutée.</b>';
+
+  /* Rafraîchir l'onglet "Mes ajouts" et lancer */
+  tab = 'custom';
+  tabsEl.querySelectorAll('button').forEach(x => {
+    x.classList.toggle('sel', x.textContent === 'Mes ajouts');
+  });
+
+  paintList();
   playStation(st);
 }
 
+/* Bouton "Ajouter" dans le drawer */
+document.getElementById('addUrl').addEventListener('click', () => {
+  addStream(
+    document.getElementById('url').value,
+    document.getElementById('customName').value,
+    document.getElementById('url'),
+    document.getElementById('customName')
+  );
+});
+
+/* Bouton "＋" en haut */
+document.getElementById('quickAdd').addEventListener('click', () => {
+  addStream(
+    document.getElementById('quickUrl').value,
+    document.getElementById('quickName').value,
+    document.getElementById('quickUrl'),
+    document.getElementById('quickName')
+  );
+});
+
+/* Entrée = valider */
+document.getElementById('quickUrl').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') { e.preventDefault(); document.getElementById('quickAdd').click(); }
+});
+document.getElementById('url').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') { e.preventDefault(); document.getElementById('addUrl').click(); }
+});
+document.getElementById('quickName').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') { e.preventDefault(); document.getElementById('quickAdd').click(); }
+});
+document.getElementById('customName').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') { e.preventDefault(); document.getElementById('addUrl').click(); }
+});
+
+/* =========================================================
+   DRAWER
+   ========================================================= */
 const drawer = document.getElementById('drawer');
 const scrim = document.getElementById('scrim');
 function openDrawer(o) {
@@ -874,7 +1061,7 @@ balSlider.addEventListener('input', updateBalance);
 updateVolume(); updateBalance();
 
 /* =========================================================
-   Knobs rotatifs
+   Knobs
    ========================================================= */
 function createKnob(knobEl, onValueChange) {
   const dial = knobEl.querySelector('.knob-dial');
